@@ -88,6 +88,37 @@ class DatabaseHelper
         return $result->fetch_assoc();
     }
 
+    public function updateProductFromId($id, $nome, $prezzo, $qta, $visible, $foto, $desc)
+    {
+        $query = "UPDATE `prodotto` 
+                    SET `nome` = ?, 
+                    `prezzo` = ?,
+                    `quantita_disponibile` = ?,
+                    `visibile` = ?, `foto` = ?, 
+                    `descrizione` = ? 
+                    WHERE `prodotto`.`id` = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("sfiissi", $nome, $prezzo, $qta, $visible, $foto, $desc, $id);
+        $stmt->execute();
+    }
+
+    public function insertNewProduct($nome, $prezzo, $qta, $visible, $foto, $desc, $vendor_id)
+    {
+        $query = "INSERT INTO `prodotto` 
+        (`id`, `nome`, `prezzo`, `quantita_disponibile`, `visibile`, `foto`, `descrizione`, `id_venditore`) 
+        VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("sfiissi", $nome, $prezzo, $qta, $visible, $foto, $desc, $vendor_id);
+        $stmt->execute();
+    }
+
+    public function setProductVisibilityFromId($id, $isVisible)
+    {
+        $query = "UPDATE `prodotto` SET `visibile` = ? WHERE `prodotto`.`id` = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $isVisible, $id);
+        $stmt->execute();
+    }
 }
 
     /*public function getRandomPosts($n = 2)

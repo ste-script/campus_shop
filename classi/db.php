@@ -29,10 +29,8 @@ class DatabaseHelper
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
-        $result->fetch_all(MYSQLI_ASSOC);
-        foreach ($result as $row) {
-            return '<img src="'  . UPLOAD_DIR . $row["foto"] . '" alt= "' . $row["nome"] .  '" /> ';
-        }
+        $row = $result->fetch_assoc();
+        return '<img src="'  . UPLOAD_DIR . $row["foto"] . '" alt= "' . $row["nome"] .  '" /> ';
     }
 
     public function getCategoriesFromId($id)
@@ -50,6 +48,47 @@ class DatabaseHelper
         }
         return $categorie;
     }
+
+    public function getProductsFromCategories($categoryName)
+    {
+        $stmt = $this->db->prepare("SELECT  prodotto.id, prodotto.nome, prezzo, quantita_disponibile, visibile, foto, descrizione, id_venditore
+                                    FROM prodotto, appartenenza_categorie, categoria 
+                                    WHERE prodotto.visibile=1
+                                    AND categoria.nome = ?
+                                    AND categoria.id = appartenenza_categorie.id_categoria
+                                    AND prodotto.id = appartenenza_categorie.id_prodotto");
+        $stmt->bind_param("s", $categoryName);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getProductsFromVendor($id)
+    {
+        $stmt = $this->db->prepare("SELECT  *
+                                    FROM prodotto
+                                    WHERE prodotto.visibile=1
+                                    AND id_venditore = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getProductFromId($id)
+    {
+        $stmt = $this->db->prepare("SELECT  *
+                                    FROM prodotto
+                                    WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+}
 
     /*public function getRandomPosts($n = 2)
     {
@@ -100,4 +139,3 @@ class DatabaseHelper
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }*/
-}

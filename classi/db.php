@@ -14,13 +14,43 @@ class DatabaseHelper
 
     public function showProducts($n = 3)
     {
-        $stmt = $this->db->prepare("SELECT  nome  FROM prodotto  LIMIT ?");
+        $stmt = $this->db->prepare("SELECT  *  FROM prodotto WHERE visibile=1  LIMIT ?");
         $stmt->bind_param("i", $n);
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+
+    public function getImgFromId($id)
+    {
+        $stmt = $this->db->prepare("SELECT  nome, foto  FROM prodotto  WHERE id=?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $result->fetch_all(MYSQLI_ASSOC);
+        foreach ($result as $row) {
+            return '<img src="'  . UPLOAD_DIR . $row["foto"] . '" alt= "' . $row["nome"] .  '" /> ';
+        }
+    }
+
+    public function getCategoriesFromId($id)
+    {
+        $stmt = $this->db->prepare("SELECT nome 
+                                    FROM appartenenza_categorie, categoria 
+                                    WHERE id_prodotto=? AND id_categoria = categoria.id");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $result->fetch_all(MYSQLI_ASSOC);
+        $categorie = "";
+        foreach ($result as $row) {
+            $categorie .=  $row["nome"] . " ";
+        }
+        return $categorie;
+    }
+
     /*public function getRandomPosts($n = 2)
     {
         $stmt = $this->db->prepare("SELECT idarticolo, titoloarticolo, imgarticolo FROM articolo ORDER BY RAND() LIMIT ?");

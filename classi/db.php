@@ -22,7 +22,7 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-
+   
     public function getImgFromId($id)
     {
         $stmt = $this->db->prepare("SELECT  nome, foto  FROM prodotto  WHERE id=?");
@@ -119,6 +119,30 @@ class DatabaseHelper
         $stmt->bind_param("ii", $isVisible, $id);
         $stmt->execute();
     }
+
+    private function checkProductQuantity($id)
+    {
+        $stmt = $this->db->prepare("SELECT  quantita_disponibile
+                                    FROM prodotto
+                                    WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        //echo $result->fetch_assoc()["quantita_disponibile"];
+        return $result->fetch_assoc()["quantita_disponibile"] > 0 ? true : false;
+    }
+
+    public function orderProduct($id)
+    {
+        /*$query = "UPDATE `prodotto` SET `visibile` = ? WHERE `prodotto`.`id` = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $isVisible, $id);
+        $stmt->execute();*/
+        return $this->checkProductQuantity($id);
+    }
+
+    
+
 }
 
     /*public function getRandomPosts($n = 2)

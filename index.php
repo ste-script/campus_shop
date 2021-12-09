@@ -23,7 +23,7 @@ foreach ($dbh->getProductsFromCategories("uficio") as $nomeprodotto){
     echo $nomeprodotto["descrizione"];
 }
 
-//TEST
+
 foreach ($dbh->getProductsFromVendor(4) as $nomeprodotto){
     echo $nomeprodotto["nome"];
     
@@ -31,9 +31,9 @@ foreach ($dbh->getProductsFromVendor(4) as $nomeprodotto){
     echo $dbh->getImgFromId($nomeprodotto["id"]);
     echo $dbh->getCategoriesFromId($nomeprodotto["id"]);
     echo $nomeprodotto["descrizione"];
-}
-*/
+}*/
 
+echo $dbh->orderProduct(5) ? "true" : "false";
 //TEST
 /*
 echo $dbh->getProductFromId(3)["nome"];

@@ -218,54 +218,50 @@ class DatabaseHelper
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    private function checkOrderProducts($orderId)
+    {
+        //Check disponibilita di ogni collo
+        foreach ($this->getCollosFromOrder($orderId) as $orderElement) {
+            if (!$this->checkProductQuantity($orderElement["id"], $orderElement["quantita_prodotto"])) {
+                //Esito negativo il seguente prodotto e esaurito
+                return /*$orderElement["id"];*/ false;
+            }
+        }
+        return true;
+    }
+
+    //passi idOrdine e prendi costo totale ordine
+    public function getOrderCost($orderId)
+    {
+        $stmt = $this->db->prepare("SELECT SUM(prodotto.prezzo * collo.quantita_prodotto) 
+                                    as costo 
+                                    FROM `collo`, prodotto 
+                                    WHERE prodotto.id = collo.id_prodotto 
+                                    AND collo.id_ordine = 2");
+        $stmt->bind_param("i", $orderId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc()["costo"];
+    }
+
+    public function insertPayment($orderId, $orderCost, $cardCode)
+    {
+        $query = "INSERT INTO `pagamento` (`id`, `id_ordine`, `data`, `totale`, `codice_carta`) 
+                    VALUES (NULL, ? , ? , ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("iisdi", $orderId);
+        $stmt->execute();
+    }
+
+    //ritorna true se l'ordinazione è andata a buon fine false altrimenti
+    public function startOrder($orderId, $cardCode)
+    {
+        //Se manca qualche ordine
+        if (!$this->checkOrderProducts($orderId)) {
+            return false;
+        }
+        $orderCost = $this->getOrderCost($orderId);
+        $this->insertPayment($orderId, $orderCost, $cardCode);
+    }
 }
-
-    /*public function getRandomPosts($n = 2)
-    {
-        $stmt = $this->db->prepare("SELECT idarticolo, titoloarticolo, imgarticolo FROM articolo ORDER BY RAND() LIMIT ?");
-        $stmt->bind_param("i", $n);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-    public function getCategories()
-    {
-        $stmt = $this->db->prepare("SELECT idcategoria, nomecategoria FROM categoria");
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-    public function getPosts($n = -1)
-    {
-        $query = "SELECT idarticolo, titoloarticolo, imgarticolo, dataarticolo, anteprimaarticolo, nome  FROM articolo, autore WHERE autore=idautore ORDER BY dataarticolo DESC";
-        if ($n > 0) {
-            $query = $query . " LIMIT ?";
-        }
-        $stmt = $this->db->prepare($query);
-        if ($n > 0) {
-            $stmt->bind_param("i", $n);
-        }
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-    public function getAuthors()
-    {
-        $query = "SELECT username, nome, GROUP_CONCAT(DISTINCT
-        nomecategoria) as argomenti FROM categoria,
-        articolo, autore, articolo_ha_categoria WHERE
-        idarticolo=articolo AND categoria=idcategoria AND
-        autore=idautore AND attivo=1 GROUP BY username,
-        nome";
-
-        $stmt = $this->db->prepare($query);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }*/

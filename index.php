@@ -33,7 +33,15 @@ foreach ($dbh->getProductsFromVendor(4) as $nomeprodotto){
     echo $nomeprodotto["descrizione"];
 }*/
 
-echo $dbh->orderProduct(5) ? "true" : "false";
+$dbh->orderProduct(4,2,1);
+foreach ($dbh->getCollosFromOrder(2) as $nomeprodotto){
+    echo $nomeprodotto["nome"];
+    echo $nomeprodotto["quantita_prodotto"];
+    
+    //echo $nomeprodotto["foto"];
+    echo $dbh->getImgFromId($nomeprodotto["id"]);
+    echo $dbh->getCategoriesFromId($nomeprodotto["id"]);
+}
 //TEST
 /*
 echo $dbh->getProductFromId(3)["nome"];

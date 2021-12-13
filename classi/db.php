@@ -128,7 +128,18 @@ class DatabaseHelper
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
-        return $result->fetch_assoc()["quantita_disponibile"] > $quantity ? true : false;
+        return $result->fetch_assoc()["quantita_disponibile"] >= $quantity ? true : false;
+    }
+
+    private function getProductQuantity($id)
+    {
+        $stmt = $this->db->prepare("SELECT  quantita_disponibile
+                                    FROM prodotto
+                                    WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc()["quantita_disponibile"];
     }
 
     private function lastOrderIdByClientId($id)
@@ -175,6 +186,16 @@ class DatabaseHelper
                     AND collo.id_ordine = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("iii", $quantity, $productId, $orderId);
+        $stmt->execute();
+    }
+
+    public function setColloShipping($colloId, $shippingId)
+    {
+        $query = "UPDATE `collo` SET 
+                    `id_spedizione` = ? 
+                    WHERE `collo`.`id` = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $shippingId, $colloId);
         $stmt->execute();
     }
 
@@ -238,30 +259,143 @@ class DatabaseHelper
                                     as costo 
                                     FROM `collo`, prodotto 
                                     WHERE prodotto.id = collo.id_prodotto 
-                                    AND collo.id_ordine = 2");
+                                    AND collo.id_ordine = ?");
         $stmt->bind_param("i", $orderId);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_assoc()["costo"];
     }
 
+    //effettua un pagamento
     public function insertPayment($orderId, $orderCost, $cardCode)
     {
         $query = "INSERT INTO `pagamento` (`id`, `id_ordine`, `data`, `totale`, `codice_carta`) 
                     VALUES (NULL, ? , ? , ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("iisdi", $orderId);
+        $date = date('Y-m-d H:i:s');
+        $stmt->bind_param("isdi", $orderId, $date, $orderCost, $cardCode);
+        $stmt->execute();
+    }
+
+    //dato un id prodotto ne aggiorna la quantita dal magazzino
+    private function updateProdottoQuantity($idProdotto, $quantity)
+    {
+        $query = "UPDATE `prodotto` SET `quantita_disponibile` = ? WHERE `prodotto`.`id` = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $quantity, $idProdotto);
+        $stmt->execute();
+    }
+
+    //sottrae dal magazzino le quantita dei prodotti ordinati
+    public function decreaseOrderedProductQuantity($orderId)
+    {
+        $collos = $this->getCollosFromOrder($orderId);
+        foreach ($collos as $collo) {
+            $this->updateProdottoQuantity($collo["id"], $this->getProductQuantity($collo["id"]) - $collo["quantita_prodotto"]);
+        }
+    }
+
+    private function getVendorsFromOrder($orderId)
+    {
+        $stmt = $this->db->prepare("SELECT prodotto.id_venditore as id
+                                    FROM `collo`, prodotto 
+                                    WHERE collo.id_ordine = ? 
+                                    AND collo.id_prodotto = prodotto.id 
+                                    GROUP BY prodotto.id_venditore");
+        $stmt->bind_param("i", $orderId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc()) {
+            $r[] = $row["id"];
+        }
+        return $r;
+    }
+
+    public function getCollosFromVendorOrder($vendorId, $orderId)
+    {
+        $stmt = $this->db->prepare("SELECT collo.id,
+                                    collo.id_prodotto as id_prodotto, 
+                                    quantita_prodotto, 
+                                    prodotto.nome, 
+                                    prodotto.prezzo,
+                                    prodotto.id_venditore
+                                    FROM `collo`, prodotto 
+                                    WHERE id_ordine = ? 
+                                    AND prodotto.id_venditore = ?
+                                    AND collo.id_prodotto = prodotto.id");
+        $stmt->bind_param("ii", $orderId, $vendorId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    private function insertShipping($incasso, $vendorId, $clientId)
+    {
+        $query = "INSERT INTO `spedizione` (`id`, `data`, `stato`, `incasso`, `id_venditore`, `id_cliente`) 
+        VALUES (NULL, ?, 'preparazione', ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $date = date('Y-m-d H:i:s');
+        $stmt->bind_param("sdii", $date, $incasso, $vendorId, $clientId);
+        $stmt->execute();
+        return $this->db->insert_id;
+    }
+
+    private function newshipping($orderId, $clientId)
+    {
+        //TODO
+        //risalgo ai venditori
+        //Join collo-prodotto
+        //raggruppo per venditore
+        $vendorList = $this->getVendorsFromOrder($orderId);
+        //per ogni venditore sommo incasso e creo spedizione
+        foreach ($vendorList as $vendor) {
+            $collos = $this->getCollosFromVendorOrder($vendor, $orderId);
+            $incasso = 0;
+            foreach ($collos as $collo) {
+                $incasso += $collo["quantita_prodotto"] * $collo["prezzo"];
+            }
+            //nuova spedizione
+            $shippingId = $this->insertShipping($incasso, $vendor, $clientId);
+            foreach ($collos as $collo) {
+                $this -> setColloShipping($collo["id"],$shippingId);
+            }
+        }
+    }
+
+    private function checkPaid($orderId){
+        $query = "SELECT * FROM pagamento WHERE id_ordine = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $orderId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows > 0 ? true : false;
+    }
+
+    private function newOrder($clientId){
+        $query = "INSERT INTO `ordine` (`id`, `id_cliente`) VALUES (NULL, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $clientId);
         $stmt->execute();
     }
 
     //ritorna true se l'ordinazione è andata a buon fine false altrimenti
-    public function startOrder($orderId, $cardCode)
+    public function startOrder($orderId, $cardCode, $clientId)
     {
         //Se manca qualche ordine
-        if (!$this->checkOrderProducts($orderId)) {
+        if (!$this->checkOrderProducts($orderId) || $this->checkPaid($orderId)) {
             return false;
         }
+        //calcola il costo totale dell ordine
         $orderCost = $this->getOrderCost($orderId);
+        //effettua nuovo pagamento
         $this->insertPayment($orderId, $orderCost, $cardCode);
+        //elimina le quantita di prodotti dal magazzino
+        $this->decreaseOrderedProductQuantity($orderId);
+        //TODO
+        //crea le spedizioni
+        $this -> newshipping($orderId, $clientId);
+        //crea nuovo ordine
+        $this -> newOrder($clientId);
+        return true;
     }
 }

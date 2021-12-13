@@ -46,3 +46,6 @@ foreach ($dbh->getCollosFromOrder(2) as $nomeprodotto){
 /*
 echo $dbh->getProductFromId(3)["nome"];
 */
+
+//Test
+$dbh->startOrder(2,1231000000,1);

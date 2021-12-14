@@ -49,3 +49,5 @@ echo $dbh->getProductFromId(3)["nome"];
 
 //Test
 $dbh->startOrder(2,1231000000,1);
+//$dbh -> sendShipping(14);
+//var_dump($dbh->getCategories());

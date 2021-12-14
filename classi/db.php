@@ -13,6 +13,7 @@ class DatabaseHelper
     }
 
     //PRIVATE FUNCTIONS
+
     private function newOrder($clientId)
     {
         $query = "INSERT INTO `ordine` (`id`, `id_cliente`) VALUES (NULL, ?)";
@@ -160,6 +161,8 @@ class DatabaseHelper
             foreach ($collos as $collo) {
                 $this->setColloShipping($collo["id"], $shippingId);
             }
+            //notifico il venditore dei suoi ordini
+            $this->notifyVendor($clientId, $vendor);
         }
     }
 
@@ -173,9 +176,109 @@ class DatabaseHelper
         return $result->num_rows > 0 ? true : false;
     }
 
+    private function notifyVendor($clientId, $vendorId)
+    {
+        $query = "INSERT INTO `notifica_venditore` (`id`, `testo`, `data`, `id_venditore`) 
+        VALUES (NULL, ? , ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $date = date('Y-m-d H:i:s');
+        $text = "Hai un nuovo ordine dal cliente " . strval($clientId);
+        $stmt->bind_param("ssi", $text, $date, $vendorId);
+        $stmt->execute();
+    }
+
+    private function notifyClient($shippingId)
+    {
+        $query = "SELECT spedizione.id_cliente, ordine.id as numero_ordine, prodotto.nome as nome_prodotto, venditore.nome as nome_venditore 
+                FROM spedizione, collo, `ordine` , prodotto, venditore 
+                WHERE spedizione.id = collo.id_spedizione 
+                AND collo.id_ordine = ordine.id 
+                AND spedizione.id = ? 
+                AND collo.id_prodotto = prodotto.id 
+                AND prodotto.id_venditore = venditore.id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $shippingId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $prodotti = "";
+        foreach ($result as $row) {
+            $clientId = $row["id_cliente"];
+            $numeroOrdine = $row["numero_ordine"];
+            $prodotti .= $row["nome_prodotto"] . " ";
+            $nomeVenditore = $row["nome_venditore"];
+        }
+        $query = "INSERT INTO `notifica_cliente` (`id`, `testo`, `data`, `id_cliente`) 
+        VALUES (NULL, ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $date = date('Y-m-d H:i:s');
+        $text = "Il venditore " . $nomeVenditore . " ha spedito i seguenti prodotti: " . $prodotti . " appartenenti al tuo ordine " . strval($numeroOrdine);
+        $stmt->bind_param("ssi", $text, $date, $clientId);
+        $stmt->execute();
+    }
+
     //PUBLIC FUNCTIONS
 
     //GET OR SHOW
+
+    public function getNotifyFromVendor($vendorId)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM `notifica_venditore` WHERE id_venditore  = ?");
+        $stmt->bind_param("i", $vendorId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getProductsFromShipping($shippingId)
+    {
+        $stmt = $this->db->prepare("SELECT prodotto.id, 
+                                    prodotto.nome, 
+                                    prodotto.foto, 
+                                    prodotto.prezzo, 
+                                    collo.quantita_prodotto 
+                                    FROM `spedizione`, prodotto,collo 
+                                    WHERE spedizione.id = ? 
+                                    AND collo.id_prodotto = prodotto.id 
+                                    AND collo.id_spedizione = spedizione.id");
+        $stmt->bind_param("i", $shippingId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getProgressShippingFromVendorId($vendorId)
+    {
+        $stmt = $this->db->prepare("SELECT spedizione.id, incasso, 
+                                    data, stato, COUNT(prodotto.id) AS numero_prodotti 
+                                    FROM `spedizione`, collo, prodotto 
+                                    WHERE collo.id_prodotto = prodotto.id 
+                                    AND collo.id_spedizione = spedizione.id 
+                                    AND stato = 'preparazione' 
+                                    AND prodotto.id_venditore = ?");
+        $stmt->bind_param("i", $vendorId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getDeliveredShippingFromVendorId($vendorId)
+    {
+        $stmt = $this->db->prepare("SELECT spedizione.id, incasso, 
+                                    data, stato, COUNT(prodotto.id) AS numero_prodotti 
+                                    FROM `spedizione`, collo, prodotto 
+                                    WHERE collo.id_prodotto = prodotto.id 
+                                    AND collo.id_spedizione = spedizione.id 
+                                    AND stato = 'spedito' 
+                                    AND prodotto.id_venditore = ?");
+        $stmt->bind_param("i", $vendorId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 
     public function showProducts($n = 3)
     {
@@ -306,6 +409,15 @@ class DatabaseHelper
     }
 
     //UPDATE OR INSERT
+
+    public function sendShipping($shippingId)
+    {
+        $query = "UPDATE `spedizione` SET `stato` = 'spedito' WHERE `spedizione`.`id` = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i",  $shippingId);
+        $stmt->execute();
+        $this->notifyClient($shippingId);
+    }
 
     public function updateProductFromId($id, $nome, $prezzo, $qta, $visible, $foto, $desc)
     {

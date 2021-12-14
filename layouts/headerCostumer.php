@@ -22,12 +22,12 @@
 
 <body>
     <!-- BAR-->
-    <nav class="navbar navbar-expand-sm sticky-top bg-dark navbar-dark">
+    <nav class="navbar sticky-top bg-dark navbar-dark">
 
     <!-- Toggler/collapsibe Button -->
         <div class="dropdownMenu">
             <button class="btn btn-link dropdown" data-toggle="dropdown">
-                <img src="..\img\logo.png" alt="Logo" style="width:50px;">
+                <img src="..\img\logo.png" alt="Menu" style="width:50px;">
             </button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">Category 1</a>
@@ -45,7 +45,7 @@
 
         <div class="dropdownMenu">
             <button class="btn btn-link dropdown" data-toggle="dropdown">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon" alt="UserMenu" ></span>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">Cart</a>

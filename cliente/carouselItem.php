@@ -16,7 +16,7 @@
 </button>
 
 <?php
-    foreach ($dbh->getProductsFromCategories("uficio") as $nomeprodotto){
+    foreach ($dbh->getProductsFromCategories("ufficio") as $nomeprodotto){
         echo $nomeprodotto["nome"];
         
         //echo $nomeprodotto["foto"];

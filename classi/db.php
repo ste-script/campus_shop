@@ -219,13 +219,13 @@ class DatabaseHelper
     //PUBLIC FUNCTIONS
 
     //GET OR SHOW
-    public function getCategories(){
-        $stmt = $this->db->prepare("SELECT * FROM `categoria`");
+    public function getCategories()
+    {
+        $stmt = $this->db->prepare("SELECT id, nome FROM `categoria`, appartenenza_categorie WHERE appartenenza_categorie.id_categoria = categoria.id GROUP BY id");
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
-
     }
 
     public function getNotifyFromVendor($vendorId)
@@ -305,7 +305,7 @@ class DatabaseHelper
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
-        return '<img src="'  . UPLOAD_DIR . $row["foto"] . '" alt= "' . $row["nome"] . '"';
+        return '<img src="'  . UPLOAD_DIR . $row["foto"] . '" alt= "' . $row["nome"] .  '"  ';
     }
 
     public function getCategoriesFromId($id)

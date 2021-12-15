@@ -305,7 +305,7 @@ class DatabaseHelper
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
-        return '<img src="'  . UPLOAD_DIR . $row["foto"] . '" alt= "' . $row["nome"] .  '" /> ';
+        return '<img src="'  . UPLOAD_DIR . $row["foto"] . '" alt= "' . $row["nome"] . '"';
     }
 
     public function getCategoriesFromId($id)

@@ -1,9 +1,10 @@
-<?php 
-    include('..\layouts\headerCostumer.php');
+<?php
+    require_once("../bootstrap.php");
+    include('../layouts/headerCostumer.php');
     
-    
-    $name = 'Categoria';
-    include('..\cliente\category.php');
+    foreach($dbh->getCategories() as $category){
+        include('..\cliente\carousel.php');
+    }
 
 ?>   
 

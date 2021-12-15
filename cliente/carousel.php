@@ -1,4 +1,7 @@
-<?php require_once("../bootstrap.php"); ?>
+<?php
+    require_once("../bootstrap.php"); 
+    $index=0;
+?>
 <div class="row">
     <div class="col mx-3 mt-4" style="max-height: 20%; max-width: 20%;">
         <button type="button" class="btn btn-outline-primary">
@@ -7,45 +10,28 @@
     </div>
 </div>
 
-<div id="carouselControls" class="carousel slide" data-interval="false">
+<!-- CAROUSEL -->
+<?php $prod=$dbh->getProductsFromCategories($category["nome"]); ?>
+<div id="carouselControls<?php echo $category["nome"];?>" class="carousel slide" data-interval="false">
     <div class="carousel-inner mx-5 mt-1">
         <div class="carousel-item active">
-            <?php
-                $prod=$dbh->getProductsFromCategories($category["nome"]);
-                for($i=0; $i<count($prod) && $i<4; $i++):?>
-                    <button class="btn btn-default" style="max-height: 20%; max-width: 20%;">
-                        <img src=""width="70%"/>
-                        <?php echo $dbh->getImgFromId($prod[$i]["id"])."width='70%'/>"; ?>
-                        <h5> <?php echo  $prod[$i]["nome"]; ?></h5>
-                        <h5> <?php echo "€" . $prod[$i]["prezzo"]; ?></h5>
-                    </button> 
-                <?php endfor;?>
+            <?php include("carouselItems.php"); ?>
         </div>
-        <div class="carousel-item ">
-            <button class="btn btn-default" style="max-height: 20%; max-width: 20%;">
-                <img src="..\img\1.jpg"width="70%"/>
-                <h5>price</h5>
-            </button>         
-            <button class="btn btn-default" style="max-height: 20%; max-width: 20%;">
-                <img src="..\img\1.jpg"width="70%"/>
-                <h5>price</h5>
-            </button>
-            <button class="btn btn-default" style="max-height: 20%; max-width: 20%;">
-                <img src="..\img\1.jpg"width="70%"/>
-                <h5>price</h5>
-            </button> 
-            <button class="btn btn-default" style="max-height: 20%; max-width: 20%;">
-                <img src="..\img\1.jpg"width="70%"/>
-                <h5>price</h5>
-            </button> 
-        </div>
+        <?php 
+            for($x=4; $x<count($prod); $x+=4):?>
+                <div class="carousel-item ">
+                    <?php include("carouselItems.php");?>
+                </div>
+            <?php endfor;
+        ?>
     </div>
-    <a class="carousel-control-prev float-left" href="#carouselControls" role="button"  data-slide="prev" >
+    <a class="carousel-control-prev float-left" href="#carouselControls<?php echo $category["nome"];?>" role="button"  data-slide="prev" >
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
-    <a class="carousel-control-next float-right" href="#carouselControls" role="button" data-slide="next">
+    <a class="carousel-control-next float-right" href="#carouselControls<?php echo $category["nome"];?>" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true" ></span>
         <span class="sr-only">Next</span>
-    </a></div>
+    </a>
+</div>
     

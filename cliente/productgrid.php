@@ -1,5 +1,5 @@
-<?php require_once("../bootstrap.php");
-require_once("../layouts/headerCostumer.php");
+<?php require_once("./bootstrap.php");
+require_once("./layouts/headerCostumer.php");
 //mobile 6 col-xl-3 colonne, desktop 8
 $prod = $dbh->getProductsFromCategories("ufficio");
 $prod = array_merge($prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod);

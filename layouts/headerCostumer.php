@@ -42,18 +42,12 @@
                 </form>
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+                    <?php foreach($templateParams["headerMenu"] as $item):
+                    ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Cart</a>
+                        <a class="nav-link" href="<?php echo $item["link"];?>"><?php echo $item["nome"];?></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Card</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Settings</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Other</a>
-                    </li>
+                    <?php endforeach ?>
                 </ul>
 
             </div>

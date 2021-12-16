@@ -2,6 +2,12 @@
 require_once("./bootstrap.php");
 
 $templateParams["titolo"] = "Campus Shop";
+$templateParams["headerMenu"] = [
+    ['link' => '#', 'nome' => 'Cart'],
+    ['link' => '#', 'nome' => 'Card'],
+    ['link' => '#', 'nome' => 'Order'],
+    ['link' => 'login.php', 'nome' => 'Login']
+];
 include('./layouts/headerCostumer.php');
 
 $categories = $dbh->getCategories();

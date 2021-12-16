@@ -2,9 +2,11 @@
     require_once("./bootstrap.php"); 
     $index=0;
 ?>
+
+<!-- CAROUSEL BTN -->
 <div class="row mx-1">
     <div class="col mt-4" style="max-height: 20%; max-width: 20%;">
-        <button type="button" class="btn btn-outline-primary">
+        <button type="button" class="btn btn-outline-dark text-capitalize" style="font-size:2vmax">
             <?php echo $category["nome"];?>
         </button>
     </div>
@@ -20,7 +22,7 @@ $prod = array_merge($prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $pro
             <?php include("carouselItems.php"); ?>
         </div>
         <?php 
-            for($x=3; $x<count($prod); $x+=4):?>
+            for($carouselItemIndex=CAROUSEL_ITEM_NUMBER; $carouselItemIndex<count($prod); $carouselItemIndex+=CAROUSEL_ITEM_NUMBER):?>
                 <div class="carousel-item mt-1">
                     <?php include("carouselItems.php");?>
                 </div>

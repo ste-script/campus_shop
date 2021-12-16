@@ -1,53 +1,11 @@
 <?php
-require_once("bootstrap.php");
-
-/*
-//TEST
-foreach ($dbh->showProducts(3) as $nomeprodotto){
-    echo $nomeprodotto["nome"];
+    require_once("./bootstrap.php");
+    include('./layouts/headerCostumer.php');
     
-    //echo $nomeprodotto["foto"];
-    echo $dbh->getImgFromId($nomeprodotto["id"]);
-    echo $dbh->getCategoriesFromId($nomeprodotto["id"]);
-    echo $nomeprodotto["descrizione"];
-}
+    foreach($dbh->getCategories() as $category){
+        include('.\cliente\carousel.php');
+    }
 
-
-//TEST
-foreach ($dbh->getProductsFromCategories("uficio") as $nomeprodotto){
-    echo $nomeprodotto["nome"];
-    
-    //echo $nomeprodotto["foto"];
-    echo $dbh->getImgFromId($nomeprodotto["id"]);
-    echo $dbh->getCategoriesFromId($nomeprodotto["id"]);
-    echo $nomeprodotto["descrizione"];
-}
-
-
-foreach ($dbh->getProductsFromVendor(4) as $nomeprodotto){
-    echo $nomeprodotto["nome"];
-    
-    //echo $nomeprodotto["foto"];
-    echo $dbh->getImgFromId($nomeprodotto["id"]);
-    echo $dbh->getCategoriesFromId($nomeprodotto["id"]);
-    echo $nomeprodotto["descrizione"];
-}*/
-
-//$dbh->orderProduct(4,2,1);
-foreach ($dbh->getCollosFromOrder(2) as $nomeprodotto){
-    echo $nomeprodotto["nome"];
-    echo $nomeprodotto["quantita_prodotto"];
-    
-    //echo $nomeprodotto["foto"];
-    echo $dbh->getImgFromId($nomeprodotto["id"]);
-    echo $dbh->getCategoriesFromId($nomeprodotto["id"]);
-}
-//TEST
-/*
-echo $dbh->getProductFromId(3)["nome"];
-*/
-
-//Test
-$dbh->startOrder(2,1231000000,1);
-//$dbh -> sendShipping(14);
-//var_dump($dbh->getCategories());
+?>   
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>

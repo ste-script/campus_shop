@@ -1,5 +1,5 @@
 <?php
-    require_once("../bootstrap.php"); 
+    require_once("./bootstrap.php"); 
     $index=0;
 ?>
 <div class="row">

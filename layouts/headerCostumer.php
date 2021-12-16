@@ -6,7 +6,7 @@
             <!-- Toggler/collapsibe Button -->
             <div class="dropdown navbar-brand">
                 <a class="nav-link dropdown-toggle" href="#" id="navCategoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src=".\img\logo.png" alt="Menu" style="width:50px;">
+                    <img class="" src=".\img\logo.png" alt="Menu" style="width:50px;"> <!-- CSS -->
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Category 1</a>
@@ -19,15 +19,14 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
                 <form class="d-flex ms-auto" action="/action_page.php">
                     <input class="form-control me-2 w-auto" type="search" placeholder="Search">
                     <button class="btn " type="submit">
-                        <span class="fa fa-search" style="color:white"></span>
+                        <span class="fa fa-search text-white"></span> 
                     </button>
                 </form>
 
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Cart</a>
                     </li>

@@ -4,9 +4,9 @@
 ?>
 
 <!-- CAROUSEL BTN -->
-<div class="row mx-1">
-    <div class="col mt-4" style="max-height: 20%; max-width: 20%;">
-        <button type="button" class="btn btn-outline-dark text-capitalize" style="font-size:2vmax">
+<div class="row" style="max-width:50%;"> <!-- CSS -->
+    <div class="col mx-3 mt-4 mb-1 h-auto w-auto">
+        <button type="button" class="btn btn-outline-dark text-capitalize" style="font-size:2vmax"> <!-- CSS -->
             <?php echo $category["nome"];?>
         </button>
     </div>

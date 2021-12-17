@@ -219,6 +219,18 @@ class DatabaseHelper
     //PUBLIC FUNCTIONS
 
     //GET OR SHOW
+
+    public function checkClientLogin($email, $password)
+    {
+        $stmt = $this->db->prepare("SELECT email, password FROM `cliente` WHERE email = ? and password = ?");
+        $stmt->bind_param("ss", $email, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            return password_verify($password, $result->fetch_assoc()['password']);
+        }
+        return false;
+    }
     public function getCategories()
     {
         $stmt = $this->db->prepare("SELECT id, nome FROM `categoria`, appartenenza_categorie WHERE appartenenza_categorie.id_categoria = categoria.id GROUP BY id");

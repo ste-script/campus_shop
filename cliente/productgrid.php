@@ -1,48 +1,34 @@
 <?php require_once("./bootstrap.php");
-require_once("./layouts/headerCostumer.php");
-//mobile 6 col-xl-3 colonne, desktop 8
-$prod = $dbh->getProductsFromCategories("ufficio");
-$prod = array_merge($prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod, $prod);
 $index = 0;
+$prod = $templateParams["products"];
+$gridTitle = $templateParams["gridTitle"];
 ?>
-
 <div class="container-xl">
+  <div class="roq">
+    <div class="col">
+      <button type="button" class="btn btn-outline-dark text-capitalize my-3" style="font-size:2vmax">
+        <!-- CSS -->
+        <?php echo $gridTitle; ?>
+      </button>
+    </div>
+  </div>
   <?php while ($index < count($prod)) : ?>
-    <div class="row">
-      <div class="col-6">
-        <div class="row">
-          <?php
-          for ($i = $index; $i < count($prod) && $i < $index + 4; $i++) : ?>
-            <div class="col-xs-6 col-xl-3">
-              <button class="btn btn-default">
-                <?php echo $dbh->getImgFromId($prod[$i]["id"]) . "width='50%'/>"; ?>
-                <h5> <?php echo  $prod[$i]["nome"]; ?></h5>
-                <h5> <?php echo "€" . $prod[$i]["prezzo"]; ?></h5>
-              </button>
-            </div>
-          <?php
-          endfor;
-          $index = $i;
-          ?>
+    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4">
+      <?php
+      for ($i = $index; $i < count($prod) && $i < $index + 4; $i++) : ?>
+        <div class="col">
+          <a href="product.php?productId=<?php echo $prod[$i]["id"] ?>">
+            <button class="btn btn-default">
+              <?php echo $dbh->getImgFromId($prod[$i]["id"]) . "width='50%'/>"; ?>
+              <h5> <?php echo  $prod[$i]["nome"]; ?></h5>
+              <h5> <?php echo "€" . $prod[$i]["prezzo"]; ?></h5>
+            </button>
+          </a>
         </div>
-      </div>
-      <div class="col-6">
-        <div class="row">
-          <?php
-          for ($i = $index; $i < count($prod) && $i < $index + 4; $i++) : ?>
-            <div class="col-xs-6 col-xl-3">
-              <button class="btn btn-default">
-                <?php echo $dbh->getImgFromId($prod[$i]["id"]) . "width='50%'/>"; ?>
-                <h5> <?php echo  $prod[$i]["nome"]; ?></h5>
-                <h5> <?php echo "€" . $prod[$i]["prezzo"]; ?></h5>
-              </button>
-            </div>
-          <?php
-          endfor;
-          $index = $i;
-          ?>
-        </div>
-      </div>
+      <?php
+      endfor;
+      $index = $i;
+      ?>
     </div>
   <?php endwhile ?>
 </div>

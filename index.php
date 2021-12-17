@@ -30,7 +30,14 @@ for ($categoryIndex = 0; $categoryIndex < 4 && $categoryIndex < count($categorie
 if (isUserLoggedIn()) {
     $templateParams["carouselTitle"] = "Carrello";
     $templateParams["products"] = $dbh->getCartProductsByClientId($_SESSION["userId"]);
-    include('.\cliente\carousel.php');
+    if (!empty($templateParams["products"])) {
+        include('.\cliente\carousel.php');
+    }
+}
+$templateParams["gridTitle"] = "Tutti i prodotti";
+$templateParams["products"] = $dbh->showProducts(50);
+if (!empty($templateParams["products"])) {
+    include('.\cliente\productgrid.php');
 }
 
 include('./layouts/footer.php');

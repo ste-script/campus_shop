@@ -206,6 +206,15 @@ class DatabaseHelper
     //PUBLIC FUNCTIONS
 
     //GET OR SHOW
+    public function getVendorName($vendorId)
+    {
+        $stmt = $this->db->prepare("SELECT nome FROM `venditore`WHERE id = ?");
+        $stmt->bind_param("i", $vendorId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc()["nome"];
+    }
+
     public function getLastOrderIdByClientId($id)
     {
         $stmt = $this->db->prepare("SELECT id 
@@ -250,6 +259,19 @@ class DatabaseHelper
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    public function getProductCategories($idProdotto)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM appartenenza_categorie,categoria WHERE appartenenza_categorie.id_prodotto= ? AND appartenenza_categorie.id_categoria = categoria.id");
+        $stmt->bind_param("i", $idProdotto);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $result->fetch_all(MYSQLI_ASSOC);
+        $cat = [];
+        foreach ($result as $categoria) {
+            array_push($cat, $categoria["nome"]);
+        }
+        return implode(",", $cat);
     }
 
     public function getNotifyFromVendor($vendorId)
@@ -329,7 +351,7 @@ class DatabaseHelper
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
-        return '<img src="'  . UPLOAD_DIR . $row["foto"] . '" alt= "' . $row["nome"] .  '"  ';
+        return '<img class="img-fluid w-100" src="'  . UPLOAD_DIR . $row["foto"] . '" alt= "' . $row["nome"] .  '"  ';
     }
 
     public function getCategoriesFromId($id)
@@ -504,13 +526,12 @@ class DatabaseHelper
         $orderId = $this->getLastOrderIdByClientId($idCliente);
         if ($this->checkAlreadyInOrder($id, $orderId)) {
             $this->updateColloQuantity($quantity + $this->getColloQuantity($id, $orderId), $orderId, $id);
-            return true;
+            return;
         }
         $query = "INSERT INTO `collo` (`id`, `quantita_prodotto`, `id_prodotto`, `id_spedizione`, `id_ordine`) VALUES (NULL, ? , ? , NULL, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("iii", $quantity, $id, $orderId);
         $stmt->execute();
-        return true;
     }
 
     //effettua un pagamento

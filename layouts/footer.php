@@ -1,4 +1,4 @@
-<footer class="bg-dark text-center text-white fixed-bottom">
+<footer class="bg-dark text-center text-white ">
   <!-- Grid container -->
   <div class="container p-3 ">
     <!-- Section: Social media -->
@@ -28,7 +28,7 @@
   <!-- Copyright -->
   <div class="text-center p-3 bg-secondary">
     © 2021 Copyright:
-    <a class="text-white" href="https://mdbootstrap.com/"> CampusShop</a>
+    <a class="text-white" href='index.php'> CampusShop</a>
   </div>
   <!-- Copyright -->
 </footer>

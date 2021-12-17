@@ -43,19 +43,6 @@ class DatabaseHelper
         return $result->fetch_assoc()["quantita_disponibile"];
     }
 
-    private function getLastOrderIdByClientId($id)
-    {
-        $stmt = $this->db->prepare("SELECT id 
-                                    FROM `ordine` 
-                                    WHERE id_cliente = ?
-                                    ORDER BY `ordine`.`id` 
-                                    DESC LIMIT 1");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_assoc()["id"];
-    }
-
     private function checkAlreadyInOrder($productId, $orderId)
     {
 
@@ -219,17 +206,42 @@ class DatabaseHelper
     //PUBLIC FUNCTIONS
 
     //GET OR SHOW
+    public function getLastOrderIdByClientId($id)
+    {
+        $stmt = $this->db->prepare("SELECT id 
+                                    FROM `ordine` 
+                                    WHERE id_cliente = ?
+                                    ORDER BY `ordine`.`id` 
+                                    DESC LIMIT 1");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc()["id"];
+    }
+
+    public function getCartProductsByClientId($clientId)
+    {
+        return $this->getCollosFromOrder($this->getLastOrderIdByClientId($clientId));
+    }
 
     public function checkClientLogin($email, $password)
     {
-        $stmt = $this->db->prepare("SELECT email, password FROM `cliente` WHERE email = ? and password = ?");
-        $stmt->bind_param("ss", $email, $password);
+        $stmt = $this->db->prepare("SELECT email, password FROM `cliente` WHERE email = ?");
+        $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             return password_verify($password, $result->fetch_assoc()['password']);
         }
         return false;
+    }
+    public function getClientId($email)
+    {
+        $stmt = $this->db->prepare("SELECT id FROM `cliente` WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc()['id'];
     }
     public function getCategories()
     {

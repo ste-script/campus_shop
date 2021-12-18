@@ -2,7 +2,6 @@
 require_once("./bootstrap.php");
 
 $templateParams["titolo"] = "Campus Shop - Home";
-include("./isLogged.php");
 include("./layouts/headerCostumer.php");
 
 $categories = $dbh->getCategories();

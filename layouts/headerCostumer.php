@@ -1,4 +1,4 @@
-<?php require_once("./isLogged.php"); ?>
+<?php $templateParams["headerMenu"]=getHeaderElements(); ?>
 <!DOCTYPE html>
 <html lang="it">
 

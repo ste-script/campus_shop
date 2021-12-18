@@ -3,7 +3,7 @@
         <form action="#" method="POST">
             <div class="mb-3">
                 <label for="clientEmail" class="form-label">Email</label>
-                <input type="email" class="form-control"  id="clientEmail" name="clientEmail" aria-describedby="emailHelp">
+                <input type="email" class="form-control" id="clientEmail" name="clientEmail">
             </div>
             <div class="mb-3">
                 <label for="clientPassword" class="form-label">Password</label>
@@ -16,8 +16,8 @@
 
 <div class="row my-5">
     <div class="col-6 mx-auto">
-        <?php 
-        if(isset($templateParams["erroreLogin"])){
+        <?php
+        if (isset($templateParams["erroreLogin"])) {
             echo "<p class='text-danger'>" . $templateParams["erroreLogin"] . "</p>";
         }
         ?>

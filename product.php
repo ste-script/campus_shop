@@ -5,7 +5,7 @@ if (!isset($_GET["productId"]) || !is_numeric($_GET["productId"])) {
     exit;
 }
 $prod = $dbh->getProductFromId($_GET["productId"]);
-$templateParams["titolo"] = "Campus Shop - ". $prod["nome"];
+$templateParams["titolo"] = "Campus Shop - " . $prod["nome"];
 include("./isLogged.php");
 include('./layouts/headerCostumer.php');
 
@@ -41,6 +41,7 @@ include('./layouts/headerCostumer.php');
             </div>
         </div>
     </div>
-    <?php
-    include('./layouts/footer.php');
-    ?>
+</div>
+<?php
+include('./layouts/footer.php');
+?>

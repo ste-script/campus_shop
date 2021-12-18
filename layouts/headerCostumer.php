@@ -34,8 +34,11 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex ms-auto" action="search.php" method="GET">
-                    <input class="form-control me-2 w-auto" type="search" placeholder="Search" id="productName" name="productName">
+                <form class="d-flex ms-auto" action="search.php" method="GET" role='search'>
+                    <label for='productName'>
+                        <span class='visually-hidden'>Cerca prodotti</span>
+                    </label>
+                    <input class="form-control me-2 w-auto" aria-label="Cerca prodotti" type="search" placeholder="Cerca prodotti" id="productName" name="productName">
                     <button class="btn " type="submit">
                         <span class="fa fa-search text-white"></span>
                     </button>

@@ -9,9 +9,9 @@
 <!-- CAROUSEL BTN -->
 <div class="row">
     <div class="col mx-3 mt-4 mb-1 h-auto w-auto">
-        <button type="button" class="btn btn-outline-dark text-capitalize">
+        <a  type="button" class="btn btn-outline-dark text-capitalize" href="categoryGrid.php?categoryName=<?php echo $carouselTitle ?>">
             <?php echo $carouselTitle;?>
-        </button>
+        </a>
     </div>
 </div>
 

@@ -6,7 +6,6 @@ if (!isset($_GET["productId"]) || !is_numeric($_GET["productId"])) {
 }
 $prod = $dbh->getProductFromId($_GET["productId"]);
 $templateParams["titolo"] = "Campus Shop - " . $prod["nome"];
-include("./isLogged.php");
 include('./layouts/headerCostumer.php');
 
 ?>

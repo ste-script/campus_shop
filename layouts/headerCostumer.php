@@ -34,24 +34,23 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex ms-auto" action="/action_page.php">
-                    <input class="form-control me-2 w-auto" type="search" placeholder="Search">
+                <form class="d-flex ms-auto" action="search.php" method="GET">
+                    <input class="form-control me-2 w-auto" type="search" placeholder="Search" id="productName" name="productName">
                     <button class="btn " type="submit">
                         <span class="fa fa-search text-white"></span>
                     </button>
                 </form>
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
-                    <?php foreach($templateParams["headerMenu"] as $item):
+                    <?php foreach ($templateParams["headerMenu"] as $item) :
                     ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo $item["link"];?>"><?php echo $item["nome"];?></a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo $item["link"]; ?>"><?php echo $item["nome"]; ?></a>
+                        </li>
                     <?php endforeach ?>
                 </ul>
 
             </div>
-        </div>
         </div>
     </nav>
 

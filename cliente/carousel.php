@@ -7,9 +7,9 @@
 
 
 <!-- CAROUSEL BTN -->
-<div class="row" style="max-width:50%;"> <!-- CSS -->
+<div class="row">
     <div class="col mx-3 mt-4 mb-1 h-auto w-auto">
-        <button type="button" class="btn btn-outline-dark text-capitalize" style="font-size:2vmax"> <!-- CSS -->
+        <button type="button" class="btn btn-outline-dark text-capitalize">
             <?php echo $carouselTitle;?>
         </button>
     </div>

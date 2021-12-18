@@ -1,0 +1,16 @@
+#logoImg{
+    width:50px;
+}
+
+.btn.btn-default.align-top{
+    max-height: 20%;
+    max-width: 20%;
+}
+
+.btn.btn-default.align-top>img, .btn.btn-default>img{
+    width: 70%;
+}
+
+.btn.btn-outline-dark.text-capitalize{
+    font-size:2vmax;
+}

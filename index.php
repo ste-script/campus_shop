@@ -2,23 +2,7 @@
 require_once("./bootstrap.php");
 
 $templateParams["titolo"] = "Campus Shop - Home";
-if (isUserLoggedIn()) {
-
-    $templateParams["headerMenu"] = [
-        ['link' => '#', 'nome' => 'Cart'],
-        ['link' => '#', 'nome' => 'Card'],
-        ['link' => '#', 'nome' => 'Order'],
-        ['link' => 'client.php', 'nome' => 'Account'],
-        ['link' => 'logout.php', 'nome' => 'Logout']
-    ];
-} else {
-    $templateParams["headerMenu"] = [
-        ['link' => '#', 'nome' => 'Cart'],
-        ['link' => '#', 'nome' => 'Card'],
-        ['link' => '#', 'nome' => 'Order'],
-        ['link' => 'login.php', 'nome' => 'Login']
-    ];
-}
+include("./isLogged.php");
 include("./layouts/headerCostumer.php");
 
 $categories = $dbh->getCategories();
@@ -34,6 +18,8 @@ if (isUserLoggedIn()) {
         include('.\cliente\carousel.php');
     }
 }
+
+
 $templateParams['gridTitle'] = 'Tutti i prodotti';
 $templateParams['products'] = $dbh->showProducts(50);
 if (!empty($templateParams['products'])) {

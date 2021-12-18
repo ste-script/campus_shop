@@ -5,24 +5,8 @@ if (!isset($_GET["productId"]) || !is_numeric($_GET["productId"])) {
     exit;
 }
 $prod = $dbh->getProductFromId($_GET["productId"]);
-$templateParams["titolo"] = "Campus Shop - Prodotto";
-if (isUserLoggedIn()) {
-
-    $templateParams["headerMenu"] = [
-        ['link' => '#', 'nome' => 'Cart'],
-        ['link' => '#', 'nome' => 'Card'],
-        ['link' => '#', 'nome' => 'Order'],
-        ['link' => 'client.php', 'nome' => 'Account'],
-        ['link' => 'logout.php', 'nome' => 'Logout']
-    ];
-} else {
-    $templateParams["headerMenu"] = [
-        ['link' => '#', 'nome' => 'Cart'],
-        ['link' => '#', 'nome' => 'Card'],
-        ['link' => '#', 'nome' => 'Order'],
-        ['link' => 'login.php', 'nome' => 'Login']
-    ];
-}
+$templateParams["titolo"] = "Campus Shop - ". $prod["nome"];
+include("./isLogged.php");
 include('./layouts/headerCostumer.php');
 
 ?>

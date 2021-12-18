@@ -1,3 +1,4 @@
+<!-- CAROUSEL ITEMS -->
 <?php
 for ($i = $index; $i < count($prod) && $i < $index + CAROUSEL_ITEM_NUMBER; $i++) : ?>
     <a class=" btn btn-default align-top" href="product.php?productId=<?php echo $prod[$i]["id"] ?>">

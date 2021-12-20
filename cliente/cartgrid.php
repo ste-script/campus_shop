@@ -4,12 +4,19 @@ $prod = $templateParams["products"];
 $gridTitle = $templateParams["gridTitle"];
 ?>
 <div class="container-xl">
-  <div class="roq">
-    <div class="col">
+  <div class="row">
+    <div class="col text-center">
       <h1 class="text-capitalize p-5">
         <?php echo $gridTitle; ?>
       </h1>
     </div>
+    <div class="col text-center p-5">
+      <form action="#" method="POST">
+        <input type="submit" class="btn btn-success" value="Ordina Carrello"></input>
+        <input type="hidden" value="1" name="orderCart">
+      </form>
+    </div>
+
   </div>
   <?php foreach ($prod as $p) : ?>
     <div class="row mx-0">

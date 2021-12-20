@@ -214,6 +214,15 @@ class DatabaseHelper
         $result = $stmt->get_result();
         return $result->fetch_assoc()["nome"];
     }
+    
+    public function getVendorContacts($vendorName)
+    {
+        $stmt = $this->db->prepare("SELECT email FROM `venditore`WHERE nome = ?");
+        $stmt->bind_param("s", $vendorName);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc()["email"];
+    }
 
     public function getLastOrderIdByClientId($id)
     {

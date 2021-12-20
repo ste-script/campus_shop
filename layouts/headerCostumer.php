@@ -1,4 +1,4 @@
-<?php $templateParams["headerMenu"]=getHeaderElements(); ?>
+<?php $templateParams["headerMenu"]=getHeaderElements();?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -17,44 +17,48 @@
 <body>
     <!-- BAR-->
     <nav class="navbar navbar-expand-lg sticky-top bg-dark navbar-dark">
-        <div class="container-fluid">
+        <!-- Toggler/collapsibe Button -->
+        <a class="navbar-brand btn btn-default" href="index.php">
+            <img id="logoImg" src="./img/logo.png" alt="HomePage">
+        </a>
 
-            <!-- Toggler/collapsibe Button -->
-            <div class="dropdown navbar-brand">
-                <a class="nav-link dropdown-toggle" href="#" id="navCategoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img id="logoImg" src="./img/logo.png" alt="Menu">
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Category 1</a>
-                    <a class="dropdown-item" href="#">Category 2</a>
-                    <a class="dropdown-item" href="#">Category 3</a>
-                </div>
-            </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex ms-auto" action="search.php" method="GET" role='search'>
-                    <label for='productName'>
-                        <span class='visually-hidden'>Cerca prodotti</span>
-                    </label>
-                    <input class="form-control me-2 w-auto" aria-label="Cerca prodotti" type="search" placeholder="Cerca prodotti" id="productName" name="productName">
-                    <button class="btn " type="submit">
-                        <span class="fa fa-search text-white"></span>
-                    </button>
-                </form>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex ms-auto" action="search.php" method="GET" role='search'>
+                <label for='productName'>
+                    <span class='visually-hidden'>Cerca prodotto</span>
+                </label>
+                <input class="form-control me-2 w-auto" aria-label="Cerca prodotti" type="search" placeholder="Cerca prodotti" id="productName" name="productName">
+                <button class="btn " type="submit">
+                    <span class="fa fa-search text-white"></span>
+                </button>
+            </form>
 
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
-                    <?php foreach ($templateParams["headerMenu"] as $item) :
-                    ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo $item["link"]; ?>"><?php echo $item["nome"]; ?></a>
-                        </li>
-                    <?php endforeach ?>
-                </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+                <?php foreach ($templateParams["headerMenu"] as $item) :?>
+                    <?php if($item["nome"]=="Categories"):?>
+                            <li class="nav-item dropdown dropstart">
+                                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                                    <?php echo $item["nome"]?>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark ">
+                                    <?php 
+                                        foreach ($dbh->getCategories() as $category):?>
+                                            <li><a class="dropdown-item text-capitalize" href="categoryGrid.php?categoryName=<?php echo $category["nome"];?>"> <?php echo $category["nome"];?></a></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo $item["link"]; ?>"><?php echo $item["nome"]; ?></a>
+                            </li>
+                    <?php endif;?>
+                <?php endforeach ?>
+            </ul>
 
-            </div>
         </div>
     </nav>
 

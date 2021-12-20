@@ -11,16 +11,18 @@ function isUserLoggedIn(){
 function getHeaderElements(){
     if (isUserLoggedIn()) {
 
-        return [['link' => '#', 'nome' => 'Cart'],
+        return [['link' => '#', 'nome' => 'Categories'],
+                ['link' => '#', 'nome' => 'Cart'],
                 ['link' => '#', 'nome' => 'Card'],
-                ['link' => '#', 'nome' => 'Order'],
+                ['link' => '#', 'nome' => 'Orders'],
                 ['link' => 'client.php', 'nome' => 'Account'],
                 ['link' => 'logout.php', 'nome' => 'Logout']
             ];
     } else {
-        return [['link' => '#', 'nome' => 'Cart'],
+        return [['link' => '#', 'nome' => 'Categories'],
+                ['link' => '#', 'nome' => 'Cart'],
                 ['link' => '#', 'nome' => 'Card'],
-                ['link' => '#', 'nome' => 'Order'],
+                ['link' => '#', 'nome' => 'Orders'],
                 ['link' => 'login.php', 'nome' => 'Login']
             ];
     }

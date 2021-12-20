@@ -6,9 +6,9 @@ $gridTitle = $templateParams["gridTitle"];
 <div class="container-xl">
   <div class="roq">
     <div class="col">
-      <button type="button" class="btn btn-outline-dark text-capitalize my-3">
+      <h1 class="text-capitalize p-5">
         <?php echo $gridTitle; ?>
-      </button>
+      </h1>
     </div>
   </div>
   <?php while ($index < count($prod)) : ?>

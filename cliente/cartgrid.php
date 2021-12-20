@@ -40,7 +40,7 @@ $gridTitle = $templateParams["gridTitle"];
           </div>
           <div class="row my-1">
             <div class="col-3">
-              <input type="text" class="form-control" size="3" required placeholder="CVV"  name="cvv" id="cvv" pattern="[0-9]{3}">
+              <input type="text" class="form-control" size="3" required placeholder="CVV" name="cvv" id="cvv" pattern="[0-9]{3}">
             </div>
           </div>
         </div>
@@ -54,18 +54,19 @@ $gridTitle = $templateParams["gridTitle"];
   </div>
 
   <?php foreach ($prod as $p) : ?>
-    <div class="row mx-0">
-      <div class="col-6 text-center">
+    <div class="row mx-0 my-5">
+      <div class="col-md-3 col-6 text-center">
         <?php echo $dbh->getImgFromId($p["id"]) . "/>"; ?>
         <h5> <?php echo  $p["nome"]; ?></h5>
-        <h5> <?php echo "€" . $p["prezzo"]; ?></h5>
       </div>
-      <div class="col-6 text-center">
+      <div class="col-3 align-top text-end">
         <form action="#" method="POST">
-          <div class="my-3">
-            <span class="h3">Quantita: </span>
-            <input type="number" class="form-control" required="required" name="quantity" min="1" value="<?php echo $p["quantita_prodotto"] ?>">
-            <span class="h3 fw-bold ms-5">€ <?php echo $p['prezzo']; ?></span>
+          <div class="col">
+            <span class="h3">Quantità: </span>
+            <div class="col-xl-3 col-md-6 col-12 ms-auto">
+              <input type="number" class="form-control" required="required" name="quantity" min="1" value="<?php echo $p["quantita_prodotto"] ?>">
+            </div>
+            <span class="h3 fw-bold">€ <?php echo $p['prezzo']; ?></span>
           </div>
           <div class="col my-2">
             <input type="submit" class="btn btn-primary" value="Modifica Quantit&agrave"></input>

@@ -206,6 +206,32 @@ class DatabaseHelper
     //PUBLIC FUNCTIONS
 
     //GET OR SHOW
+
+    public function cechCardCvv($cardCode, $cvv)
+    {
+        $stmt = $this->db->prepare("SELECT cvv
+        FROM `carta`
+        WHERE codice = ?");
+        $stmt->bind_param("i", $cardCode);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            return password_verify($cvv, $result->fetch_assoc()['cvv']);
+        }
+        return false;;
+    }
+
+    public function getCardsFromIdClient($idCliente)
+    {
+        $stmt = $this->db->prepare("SELECT *
+                                    FROM `carta`
+                                    WHERE id_cliente = ?");
+        $stmt->bind_param("i", $idCliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getVendorName($vendorId)
     {
         $stmt = $this->db->prepare("SELECT nome FROM `venditore`WHERE id = ?");
@@ -572,7 +598,7 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $date = date('Y-m-d H:i:s');
         $stmt->bind_param("isdi", $orderId, $date, $orderCost, $cardCode);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     //ritorna true se l'ordinazione è andata a buon fine false altrimenti
@@ -585,29 +611,22 @@ class DatabaseHelper
         //calcola il costo totale dell ordine
         $orderCost = $this->getOrderCost($orderId);
         //effettua nuovo pagamento
-        $this->insertPayment($orderId, $orderCost, $cardCode);
-        //elimina le quantita di prodotti ordinati dal magazzino
-        $this->decreaseOrderedProductQuantity($orderId);
-        //crea le spedizioni
-        $this->newShipping($orderId, $clientId);
-        //crea nuovo ordine
-        $this->newOrder($clientId);
-        return true;
+        if ($this->insertPayment($orderId, $orderCost, $cardCode)) {
+            //elimina le quantita di prodotti ordinati dal magazzino
+            $this->decreaseOrderedProductQuantity($orderId);
+            //crea le spedizioni
+            $this->newShipping($orderId, $clientId);
+            //crea nuovo ordine
+            $this->newOrder($clientId);
+            return true;
+        }
+        return false;
     }
 
-    public function getCardsFromIdClient($idCliente){
-        $stmt = $this->db->prepare("SELECT *
-                                    FROM `carta`
-                                    WHERE id_cliente = ?");
-        $stmt->bind_param("i", $idCliente);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-    public function deleteCard($cardCode){
+    public function deleteCard($cardCode)
+    {
         $stmt = $this->db->prepare("DELETE FROM `carta` WHERE codice = ?");
         $stmt->bind_param("i", $cardCode);
-        $stmt->execute();        
+        $stmt->execute();
     }
 }

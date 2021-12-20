@@ -28,7 +28,7 @@ include('./layouts/headerCostumer.php');
             <form action="addorder.php" method="POST">
                 <div class="my-3">
                     <span class="h3">Quantita: </span> 
-                    <input type="number" required="required" name="quantity" min="1" max="<?php echo $prod["quantita_disponibile"]?>">
+                    <input type="number" required="required" name="quantity" min="1" value="1" max="<?php echo $prod["quantita_disponibile"]?>">
                     <span class="h3 fw-bold ms-5">€ <?php echo $prod['prezzo']; ?></span>
                 </div>
                 <div class="col-xs-2 my-2">

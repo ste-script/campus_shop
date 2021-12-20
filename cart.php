@@ -13,6 +13,12 @@ if (isset($_POST["removeProduct"]) && $_POST["removeProduct"] == 1) {
 } elseif (isset($_POST["removeProduct"]) && $_POST["removeProduct"] == 0) {
     $dbh->updateColloQuantity($_POST["quantity"], $dbh->getLastOrderIdByClientId($_SESSION['userId']), $_POST["productId"]);
 }
+
+if (isset($_POST["cards"]) && isset($_POST["cvv"])) {
+    //TODO check cvv
+    $dbh->startOrder($dbh->getLastOrderIdByClientId($_SESSION['userId']), $_POST["cards"], $_SESSION['userId']);
+}
+
 $templateParams['gridTitle'] = "Carrello";
 $templateParams['products'] = $dbh->getCartProductsByClientId($_SESSION['userId']);
 if (!empty($templateParams['products'])) {

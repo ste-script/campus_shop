@@ -9,36 +9,41 @@ $templateParams["titolo"] = "Campus Shop - " . $prod["nome"];
 include('./layouts/headerCostumer.php');
 
 ?>
-<div class="single_product">
-    <div class="row mx-0">
-        <div class="col">
-            <?php echo $dbh->getImgFromId($prod['id']) . ">"; ?>
+<div class="row mx-0">
+    <div class="col-md-5 m-5">
+        <?php echo $dbh->getImgFromId($prod['id']) . ">"; ?>
+    </div>
+    <div class="col-md-5 mt-5">
+        <h1 class="display-5 fw-bolder"><?php echo $prod["nome"]; ?></h1>
+        <div class="h3">
+        <?php foreach ($dbh->getProductCategories($prod['id']) as $category): ?>
+            <a class="text-capitalize text-decoration-none text-muted" href="categoryGrid.php?categoryName=<?php echo $category;?>"><?php echo $category;?>, <a>
+        <?php endforeach;?>
         </div>
-        <div class="col-lg-6 order-3">
-            <div class="product_description">
-                <div class="product_name"> <?php echo $prod["nome"]; ?></div>
-                <div> <span class="product_category"><?php echo $dbh->getProductCategories($prod['id']); ?></div>
-                <div> <?php echo $dbh->getVendorName($prod['id_venditore']); ?></div>
-                <hr class="singleline">
-                <div> <?php echo $prod['descrizione'] ?></div>
-
-                <hr class="singleline">
-                <div class="row">
-                    <form action="addorder.php" method="POST">
-                        <div class="col-xs-6">
-                            <div class="product_quantity"> <span>Quantita: </span> <input id="quantitaOrdinata" name="quantitaOrdinata" type="text" pattern="[0-9]*" value="1"></div>
-                        </div>
-                        <div class="col-xs-6 my-2"> <button type="submit" class="btn btn-primary shop-button">Aggiungi al carrello</button></div>
-                        <input type="hidden" value="<?php echo  $_GET["productId"]; ?>" name="productId">
-                    </form>
+        <a class="h3 text-capitalize text-decoration-none text-muted" href="vendorGrid.php?vendorName=<?php echo $dbh->getVendorName($prod['id_venditore']);?>"><?php echo $dbh->getVendorName($prod['id_venditore']);?><a>
+        
+        <p class="lead"><?php echo $prod['descrizione'] ?></p>
+        <hr class="singleline">
+        <div class="row">
+            <form action="addorder.php" method="POST">
+                <div class="mb-3">
+                    <span>Quantita: </span> 
+                    <input type="number" name="quantity" min="1" max="<?php echo $prod["quantita_disponibile"]?>">
+                    <span class="h3 fw-bold ms-5">€ <?php echo $prod['prezzo']; ?></span>
                 </div>
-                <?php
-                if (isset($_GET["ordered"])) {
-                    echo "<p class='text-success'> Prodotto aggiunto al carrello </p>";
-                }
-                ?>
-            </div>
+                <div class="col-xs-2 my-2">
+                    <input type="submit" class="btn btn-primary">
+                        Aggiungi al carrello
+                    </input>
+                </div>
+                <input type="hidden" value="<?php echo  $_GET["productId"]; ?>" name="productId">
+            </form>
         </div>
+        <?php
+        if (isset($_GET["ordered"])) {
+            echo "<p class='text-success'> Prodotto aggiunto al carrello </p>";
+        }
+        ?>
     </div>
 </div>
 <?php

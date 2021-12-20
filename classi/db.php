@@ -271,7 +271,7 @@ class DatabaseHelper
         foreach ($result as $categoria) {
             array_push($cat, $categoria["nome"]);
         }
-        return implode(",", $cat);
+        return $cat;
     }
 
     public function getNotifyFromVendor($vendorId)
@@ -396,13 +396,15 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getProductsFromVendor($id)
+    public function getProductsFromVendor($name)
     {
-        $stmt = $this->db->prepare("SELECT  *
-                                    FROM prodotto
+        $stmt = $this->db->prepare("SELECT *
+                                    FROM `prodotto`
                                     WHERE prodotto.visibile=1
-                                    AND id_venditore = ?");
-        $stmt->bind_param("i", $id);
+                                    AND id_venditore = (SELECT id 
+                                                        FROM venditore 
+                                                        WHERE nome=?)");
+        $stmt->bind_param("s", $name);
         $stmt->execute();
         $result = $stmt->get_result();
 

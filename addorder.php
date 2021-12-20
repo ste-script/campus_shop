@@ -1,6 +1,8 @@
 <?php
 require('bootstrap.php');
-if (isset($_POST["quantitaOrdinata"]) && is_numeric($_POST["quantitaOrdinata"])) {
-    $dbh->orderProduct($_POST["productId"], $_POST["quantitaOrdinata"], $_SESSION["userId"]);
+var_dump($_POST["quantity"]);
+if (isset($_POST["quantity"]) && is_numeric($_POST["quantity"])) {
+    $dbh->orderProduct($_POST["productId"], $_POST["quantity"], $_SESSION["userId"]);
+    
+header("Location: product.php?productId=" . $_POST["productId"]. "&ordered=" . $_POST["quantity"]);
 }
-header("Location: product.php?productId=" . $_POST["productId"]. "&ordered=1");

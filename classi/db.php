@@ -594,4 +594,14 @@ class DatabaseHelper
         $this->newOrder($clientId);
         return true;
     }
+
+    public function getCardsFromIdClient($idCliente){
+        $stmt = $this->db->prepare("SELECT *
+                                    FROM `carta`
+                                    WHERE id_cliente = ?");
+        $stmt->bind_param("i", $idCliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }

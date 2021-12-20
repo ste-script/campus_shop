@@ -604,4 +604,10 @@ class DatabaseHelper
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function deleteCard($cardCode){
+        $stmt = $this->db->prepare("DELETE FROM `carta` WHERE codice = ?");
+        $stmt->bind_param("i", $cardCode);
+        $stmt->execute();        
+    }
 }

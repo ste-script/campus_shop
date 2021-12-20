@@ -214,7 +214,7 @@ class DatabaseHelper
         $result = $stmt->get_result();
         return $result->fetch_assoc()["nome"];
     }
-    
+
     public function getVendorContacts($vendorName)
     {
         $stmt = $this->db->prepare("SELECT email FROM `venditore`WHERE nome = ?");
@@ -536,6 +536,14 @@ class DatabaseHelper
                     AND collo.id_ordine = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("iii", $quantity, $productId, $orderId);
+        $stmt->execute();
+    }
+
+    public function deleteCollo($orderId, $productId)
+    {
+        $query = "DELETE FROM `collo` WHERE `collo`.`id_ordine` = ? AND collo.id_prodotto = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $orderId, $productId);
         $stmt->execute();
     }
 

@@ -9,9 +9,9 @@ if (!isUserLoggedIn()) {
     exit;
 }
 if (isset($_POST["removeProduct"]) && $_POST["removeProduct"] == 1) {
-    
+    $dbh->deleteCollo($dbh->getLastOrderIdByClientId($_SESSION['userId']), $_POST["productId"]);
 } elseif (isset($_POST["removeProduct"]) && $_POST["removeProduct"] == 0) {
-
+    $dbh->updateColloQuantity($_POST["quantity"], $dbh->getLastOrderIdByClientId($_SESSION['userId']), $_POST["productId"]);
 }
 $templateParams['gridTitle'] = "Carrello";
 $templateParams['products'] = $dbh->getCartProductsByClientId($_SESSION['userId']);

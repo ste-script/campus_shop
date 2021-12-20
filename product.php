@@ -22,19 +22,17 @@ include('./layouts/headerCostumer.php');
         </div>
         <a class="h3 text-capitalize text-decoration-none text-muted" href="vendorGrid.php?vendorName=<?php echo $dbh->getVendorName($prod['id_venditore']);?>"><?php echo $dbh->getVendorName($prod['id_venditore']);?><a>
         
-        <p class="lead"><?php echo $prod['descrizione'] ?></p>
+        <p class="lead my-2"><?php echo $prod['descrizione'] ?></p>
         <hr class="singleline">
         <div class="row">
             <form action="addorder.php" method="POST">
-                <div class="mb-3">
-                    <span>Quantita: </span> 
-                    <input type="number" name="quantity" min="1" max="<?php echo $prod["quantita_disponibile"]?>">
+                <div class="my-3">
+                    <span class="h3">Quantita: </span> 
+                    <input type="number" required="required" name="quantity" min="1" max="<?php echo $prod["quantita_disponibile"]?>">
                     <span class="h3 fw-bold ms-5">€ <?php echo $prod['prezzo']; ?></span>
                 </div>
                 <div class="col-xs-2 my-2">
-                    <input type="submit" class="btn btn-primary">
-                        Aggiungi al carrello
-                    </input>
+                    <input type="submit" class="btn btn-primary" value="Aggiungi al carrello"></input>
                 </div>
                 <input type="hidden" value="<?php echo  $_GET["productId"]; ?>" name="productId">
             </form>

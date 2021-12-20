@@ -3,14 +3,12 @@ $index = 0;
 $prod = $templateParams["products"];
 $gridTitle = $templateParams["gridTitle"];
 ?>
-<div class="container-xl">
-  <div class="roq">
-    <div class="col">
-      <h1 class="text-capitalize p-5">
+
+<h2 class="text-capitalize my-4 mx-3">
         <?php echo $gridTitle; ?>
-      </h1>
-    </div>
-  </div>
+</h2>
+
+<div class="container-xl">
   <?php while ($index < count($prod)) : ?>
     <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4">
       <?php

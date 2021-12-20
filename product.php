@@ -9,8 +9,8 @@ $templateParams["titolo"] = "Campus Shop - " . $prod["nome"];
 include('./layouts/headerCostumer.php');
 
 ?>
-<div class="row mx-0">
-    <div class="col-md-5 m-5">
+<div class="row justify-content-center">
+    <div class="col-md-5 p-5">
         <?php echo $dbh->getImgFromId($prod['id']) . ">"; ?>
     </div>
     <div class="col-md-5 mt-5">

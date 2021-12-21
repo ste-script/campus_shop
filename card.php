@@ -17,7 +17,7 @@ $templateParams['gridTitle'] = "Carte";
 $templateParams['products'] = $dbh->getCardsFromIdClient($_SESSION["userId"]);
 
 if (!empty($templateParams['products'])) {
-    include('.\cardGrid.php');
+    include('./cliente/cardGrid.php');
 }
 
 include("./layouts/footer.php");

@@ -24,12 +24,12 @@ require_once("./bootstrap.php");
           <form action="#" method="POST">
             <div class="row">
               <div class="col-8">
-                <input type="text" class="form-control" size="10" required placeholder="Numero Carta" name="Card" id="card" pattern="[0-9]{3}">
+                <input type="text" class="form-control" size="10" required placeholder="Numero Carta" name="card" id="card" pattern="[0-9]{10}">
               </div>
             </div>
             <div class="row my-1">
               <div class="col-6">
-                <input placeholder="Date" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" id="date">
+                <input placeholder="Date" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" id="date" name="date">
               </div>
               <div class="col-3 text-end">
                 <input type="text" class="form-control" size="3" required placeholder="CVV" name="cvv" id="cvv" pattern="[0-9]{3}">
@@ -55,11 +55,11 @@ require_once("./bootstrap.php");
       <h3 class="date">Data di scadenza: <?php echo $card["scadenza"] ?></h3>
     </div>
     <div class="col col-lg-auto p-3 m-2">
-      <form action="<?php $dbh->deleteCard($card["codice"]) ?>" method="POST">
+      <form action="#" method="POST">
         <div class="col">
           <input type="submit" class="btn btn-danger" value="Rimuovi Carta"></input>
         </div>
-        <input type="hidden" value="<?php echo  $p["id"] ?>" name="productId">
+        <input type="hidden" value="<?php echo  $card["codice"] ?>" name="cardId">
         <input type="hidden" value="1" name="removeProduct">
       </form>
     </div>

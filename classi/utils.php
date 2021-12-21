@@ -25,9 +25,9 @@ function getHeaderElements()
     } else {
         return [
             ['link' => '#', 'nome' => 'Categories'],
-            ['link' => 'cart.php', 'nome' => 'Carrello'],
-            ['link' => '#', 'nome' => 'Card'],
-            ['link' => '#', 'nome' => 'Orders'],
+            ['link' => 'login.php', 'nome' => 'Carrello'],
+            ['link' => 'login.php', 'nome' => 'Card'],
+            ['link' => 'login.php', 'nome' => 'Orders'],
             ['link' => 'login.php', 'nome' => 'Login']
         ];
     }

@@ -632,9 +632,13 @@ class DatabaseHelper
 
     public function addNewCard($cardCode, $date, $id, $cvv)
     {
-        $stmt = $this->db->prepare("INSERT INTO `carta` (`codice`, `scadenza`, `id_cliente`) 
-                                    VALUES (?, ?, ?);");
-        $stmt->bind_param("idi", $cardCode, $date, $id);
-        $stmt->execute();
+        $stmt = $this->db->prepare("INSERT INTO `carta` (`codice`, cvv, `scadenza`, `id_cliente`) 
+                                    VALUES (?, ? ,?, ?);");
+        $cvv = password_hash($cvv, PASSWORD_DEFAULT);
+        if (is_string($cvv)) {
+            $stmt->bind_param("issi", $cardCode, $cvv, $date, $id);
+            return $stmt->execute();
+        }
+        return false;
     }
 }

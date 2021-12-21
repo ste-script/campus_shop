@@ -8,16 +8,19 @@ if (!isUserLoggedIn()) {
     header("Location: login.php");
     exit;
 }
-
-if (isset($_POST["card"]) && is_numeric($_POST["card"]) && isset($_POST["cvv"]) && is_numeric($_POST["cvv"]) && isset($_POST["date"]))  {
+if (isset($_POST["card"]) && is_numeric($_POST["card"]) && isset($_POST["cvv"]) && is_numeric($_POST["cvv"]) && isset($_POST["date"])) {
     $dbh->addNewCard($_POST["card"], $_POST["date"], $_SESSION["userId"], $_POST["cvv"]);
+}
+
+if (isset($_POST["removeProduct"]) && $_POST["removeProduct"] == 1) {
+    $dbh->deleteCard($_POST["cardId"]);
 }
 
 $templateParams['gridTitle'] = "Carte";
 $templateParams['products'] = $dbh->getCardsFromIdClient($_SESSION["userId"]);
 
-if (!empty($templateParams['products'])) {
-    include('./cliente/cardGrid.php');
-}
+
+include('./cliente/cardGrid.php');
+
 
 include("./layouts/footer.php");

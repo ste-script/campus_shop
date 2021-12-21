@@ -21,8 +21,7 @@ if (isset($_POST["cards"]) && is_numeric($_POST["cards"]) && isset($_POST["cvv"]
 
 $templateParams['gridTitle'] = "Carrello";
 $templateParams['products'] = $dbh->getCartProductsByClientId($_SESSION['userId']);
-if (!empty($templateParams['products'])) {
-    include('.\cliente\cartgrid.php');
-}
+include('.\cliente\cartgrid.php');
+
 
 include("./layouts/footer.php");

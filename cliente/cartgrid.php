@@ -10,10 +10,21 @@ $gridTitle = $templateParams["gridTitle"];
         <?php echo $gridTitle; ?>
       </h1>
     </div>
-    <div class="col text-center p-5">
-      <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success">Ordina Carrello</button>
-    </div>
+    <?php if (!empty($prod)) : ?>
+      <div class="col text-center p-5">
+        <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success">Ordina Carrello</button>
+      </div>
+    <?php endif ?>
   </div>
+  <?php if (empty($prod)) : ?>
+    <div class="row mx-0">
+      <div class="col text-center">
+        <h4 class="text-capitalize p-5">
+          Nessun prodotto nel carrello
+        </h4>
+      </div>
+    </div>
+  <?php endif ?>
 
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -23,21 +34,21 @@ $gridTitle = $templateParams["gridTitle"];
           <h5 class="modal-title" id="staticBackdropLabel">Scegli carta</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        
+
         <form action="#" method="POST">
           <div class="modal-body">
             <div class="row">
-                <label for="browser">Scegli la carta con cui pagare l'ordine:</label>
-                <div class="row">
-                  <div class="col-8">
-                    <input list="cardsList" class="form-control" required name="cards" id="cards">
-                    <datalist id="cardsList">
-                      <?php foreach ($dbh->getCardsFromIdClient($_SESSION["userId"]) as $card) : ?>
-                        <option value="<?php echo $card["codice"]; ?>">
-                        <?php endforeach ?>
-                    </datalist>
-                  </div>
+              <label for="browser">Scegli la carta con cui pagare l'ordine:</label>
+              <div class="row">
+                <div class="col-8">
+                  <input list="cardsList" class="form-control" required name="cards" id="cards">
+                  <datalist id="cardsList">
+                    <?php foreach ($dbh->getCardsFromIdClient($_SESSION["userId"]) as $card) : ?>
+                      <option value="<?php echo $card["codice"]; ?>">
+                      <?php endforeach ?>
+                  </datalist>
                 </div>
+              </div>
             </div>
             <div class="row my-1">
               <div class="col-3">

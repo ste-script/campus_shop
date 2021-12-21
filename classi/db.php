@@ -218,7 +218,7 @@ class DatabaseHelper
         if ($result->num_rows > 0) {
             return password_verify($cvv, $result->fetch_assoc()['cvv']);
         }
-        return false;;
+        return false;
     }
 
     public function getCardsFromIdClient($idCliente)
@@ -627,6 +627,14 @@ class DatabaseHelper
     {
         $stmt = $this->db->prepare("DELETE FROM `carta` WHERE codice = ?");
         $stmt->bind_param("i", $cardCode);
+        $stmt->execute();
+    }
+
+    public function addNewCard($cardCode, $date, $id, $cvv)
+    {
+        $stmt = $this->db->prepare("INSERT INTO `carta` (`codice`, `scadenza`, `id_cliente`) 
+                                    VALUES (?, ?, ?);");
+        $stmt->bind_param("idi", $cardCode, $date, $id);
         $stmt->execute();
     }
 }

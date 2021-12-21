@@ -1,11 +1,10 @@
-<footer class="bg-dark text-center text-white ">
+<footer class="footer bg-dark text-center text-white mt-auto">
   <!-- Grid container -->
   <div class="container p-3 mb-1 ">
     <!-- Github -->
     <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button" title="Github link"><strong class="fab fa-github"></strong></a>
 
   </div>
-  <!-- Grid container -->
 
   <!-- Copyright -->
   <div class="text-center p-3 bg-secondary">

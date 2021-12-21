@@ -11,7 +11,7 @@ $gridTitle = $templateParams["gridTitle"];
       </h1>
     </div>
     <div class="col text-center p-5">
-      <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success">Ordina Carrello</input>
+      <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success">Ordina Carrello</button>
     </div>
   </div>
 
@@ -23,30 +23,31 @@ $gridTitle = $templateParams["gridTitle"];
           <h5 class="modal-title" id="staticBackdropLabel">Scegli carta</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <div class="row">
-            <form action="#" method="POST">
-              <label for="browser">Scegli la carta con cui pagare l'ordine:</label>
-              <div class="row">
-                <div class="col-8">
-                  <input list="cardsList" class="form-control" required name="cards" id="cards">
-                  <datalist id="cardsList">
-                    <?php foreach ($dbh->getCardsFromIdClient($_SESSION["userId"]) as $card) : ?>
-                      <option value="<?php echo $card["codice"]; ?>">
-                      <?php endforeach ?>
-                  </datalist>
+        
+        <form action="#" method="POST">
+          <div class="modal-body">
+            <div class="row">
+                <label for="browser">Scegli la carta con cui pagare l'ordine:</label>
+                <div class="row">
+                  <div class="col-8">
+                    <input list="cardsList" class="form-control" required name="cards" id="cards">
+                    <datalist id="cardsList">
+                      <?php foreach ($dbh->getCardsFromIdClient($_SESSION["userId"]) as $card) : ?>
+                        <option value="<?php echo $card["codice"]; ?>">
+                        <?php endforeach ?>
+                    </datalist>
+                  </div>
                 </div>
+            </div>
+            <div class="row my-1">
+              <div class="col-3">
+                <input type="text" class="form-control" size="3" required placeholder="CVV" name="cvv" id="cvv" pattern="[0-9]{3}">
               </div>
-          </div>
-          <div class="row my-1">
-            <div class="col-3">
-              <input type="text" class="form-control" size="3" required placeholder="CVV" name="cvv" id="cvv" pattern="[0-9]{3}">
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <input type="submit" class="btn btn-success" value="Conferma">
-        </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-success" value="Conferma">
+          </div>
         </form>
       </div>
     </div>

@@ -13,7 +13,6 @@ if (isset($_POST["removeProduct"]) && $_POST["removeProduct"] == 1) {
 } elseif (isset($_POST["removeProduct"]) && $_POST["removeProduct"] == 0) {
     $dbh->updateColloQuantity($_POST["quantity"], $dbh->getLastOrderIdByClientId($_SESSION['userId']), $_POST["productId"]);
 }
-
 if (isset($_POST["cards"]) && is_numeric($_POST["cards"]) && isset($_POST["cvv"])) {
     if ($dbh->cechCardCvv($_POST["cards"], $_POST["cvv"])) {
         $dbh->startOrder($dbh->getLastOrderIdByClientId($_SESSION['userId']), $_POST["cards"], $_SESSION['userId']);

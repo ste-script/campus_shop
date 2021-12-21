@@ -32,9 +32,9 @@ $gridTitle = $templateParams["gridTitle"];
                   <input list="cardsList" class="form-control" required name="cards" id="cards">
                   <datalist id="cardsList">
                     <?php foreach ($dbh->getCardsFromIdClient($_SESSION["userId"]) as $card) : ?>
-                      <option value="<?php echo $card["codice"] ?>">
+                      <option value="<?php echo $card["codice"]; ?>">
+                      <?php endforeach ?>
                   </datalist>
-                <?php endforeach ?>
                 </div>
               </div>
           </div>

@@ -1,4 +1,4 @@
-<div class="row my-5">
+<div class="row my-5 mx-0">
     <div class="col-6 mx-auto">
         <form action="#" method="POST">
             <div class="mb-3">
@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<div class="row my-5">
+<div class="row my-5 mx-0">
     <div class="col-6 mx-auto">
         <?php
         if (isset($templateParams["erroreLogin"])) {

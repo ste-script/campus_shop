@@ -44,7 +44,7 @@
                                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
                                     <?php echo $item["nome"]?>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-dark ">
+                                <ul class="dropdown-menu dropdown-menu-dark">
                                     <?php 
                                         foreach ($dbh->getCategories() as $category):?>
                                             <li><a class="dropdown-item text-capitalize" href="categoryGrid.php?categoryName=<?php echo $category["nome"];?>"> <?php echo $category["nome"];?></a></li>
@@ -52,7 +52,7 @@
                                 </ul>
                             </li>
                         <?php else: ?>
-                            <li class="nav-item">
+                            <li class="nav-item ms-2">
                                 <a class="nav-link" href="<?php echo $item["link"]; ?>"><?php echo $item["nome"]; ?></a>
                             </li>
                     <?php endif;?>

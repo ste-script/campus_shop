@@ -9,7 +9,10 @@
                 <label for="clientPassword" class="form-label">Password</label>
                 <input type="password" class="form-control" id="clientPassword" name="clientPassword" autocomplete="on">
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary">Accedi</button>
+        </form>
+        <form action="register.php" method="POST" class="py-5">
+            <button type="submit" class="btn btn-success">Registrati</button>
         </form>
     </div>
 </div>

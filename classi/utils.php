@@ -15,20 +15,20 @@ function getHeaderElements()
     if (isUserLoggedIn()) {
 
         return [
-            ['link' => '#', 'nome' => 'Categories'],
+            ['link' => '#', 'nome' => 'Categorie'],
             ['link' => 'cart.php', 'nome' => 'Carrello'],
-            ['link' => 'card.php', 'nome' => 'Card'],
-            ['link' => 'orders.php', 'nome' => 'Orders'],
-            ['link' => 'client.php', 'nome' => 'Account'],
-            ['link' => 'logout.php', 'nome' => 'Logout']
+            ['link' => 'card.php', 'nome' => 'Carte'],
+            ['link' => 'orders.php', 'nome' => 'Ordini'],
+            ['link' => 'client.php', 'nome' => 'Profilo'],
+            ['link' => 'logout.php', 'nome' => 'Esci']
         ];
     } else {
         return [
-            ['link' => '#', 'nome' => 'Categories'],
+            ['link' => '#', 'nome' => 'Categorie'],
             ['link' => 'login.php', 'nome' => 'Carrello'],
-            ['link' => 'login.php', 'nome' => 'Card'],
-            ['link' => 'login.php', 'nome' => 'Orders'],
-            ['link' => 'login.php', 'nome' => 'Login']
+            ['link' => 'login.php', 'nome' => 'Carte'],
+            ['link' => 'login.php', 'nome' => 'Ordini'],
+            ['link' => 'login.php', 'nome' => 'Accedi']
         ];
     }
 }

@@ -18,7 +18,7 @@ function getHeaderElements()
             ['link' => '#', 'nome' => 'Categories'],
             ['link' => 'cart.php', 'nome' => 'Carrello'],
             ['link' => 'card.php', 'nome' => 'Card'],
-            ['link' => '#', 'nome' => 'Orders'],
+            ['link' => 'orders.php', 'nome' => 'Orders'],
             ['link' => 'client.php', 'nome' => 'Account'],
             ['link' => 'logout.php', 'nome' => 'Logout']
         ];

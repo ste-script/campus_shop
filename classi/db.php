@@ -250,6 +250,21 @@ class DatabaseHelper
         return $result->fetch_assoc()["email"];
     }
 
+    public function getOrdersIdByClientId($clientId)
+    {
+        $stmt = $this->db->prepare("SELECT id 
+                                    FROM `ordine` 
+                                    WHERE id_cliente = ?");
+        $stmt->bind_param("i", $clientId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $cat = [];
+        foreach ($result as $order) {
+            array_push($cat, $order["id"]);
+        }
+        return $cat;
+    }
+
     public function getLastOrderIdByClientId($id)
     {
         $stmt = $this->db->prepare("SELECT id 
@@ -319,6 +334,24 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getShippingsFromOrder($orderId)
+    {
+        $stmt = $this->db->prepare("SELECT id_spedizione as id
+                                    FROM collo 
+                                    WHERE id_ordine = ? 
+                                    AND id_spedizione is not null
+                                    group by id_spedizione");
+        $stmt->bind_param("i", $orderId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $result->fetch_all(MYSQLI_ASSOC);
+        $cat = [];
+        foreach ($result as $shipping) {
+            array_push($cat, $shipping["id"]);
+        }
+        return $cat;
+    }
+
     public function getProductsFromShipping($shippingId)
     {
         $stmt = $this->db->prepare("SELECT prodotto.id, 
@@ -335,6 +368,18 @@ class DatabaseHelper
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getShippingStatus($shippingId)
+    {
+        $stmt = $this->db->prepare("SELECT stato
+                                    FROM `spedizione`
+                                    WHERE spedizione.id = ?");
+        $stmt->bind_param("i", $shippingId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_assoc()["stato"];
     }
 
     public function getProgressShippingFromVendorId($vendorId)

@@ -1,4 +1,17 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#clientPassword, #clientPasswordConfirm').on('keyup', function() {
+            if ($('#clientPassword').val() == $('#clientPasswordConfirm').val()) {
+                $('#message').html('Le password corrispondono').css('color', 'green');
+                $('#registrati').removeClass("disabled");
+            } else {
+                $('#message').html('Le password non corrispondono').css('color', 'red');
+                $('#registrati').addClass("disabled");
+            }
+        });
+    });
+</script>
+
 <div class="row my-5 mx-0">
     <div class="col-6 mx-auto">
         <form action="#" method="POST">
@@ -32,14 +45,3 @@
         ?>
     </div>
 </div>
-<script type="text/javascript">
-    $('#clientPassword, #clientPasswordConfirm').on('keyup', function() {
-        if ($('#clientPassword').val() == $('#clientPasswordConfirm').val()) {
-            $('#message').html('Le password corrispondono').css('color', 'green');
-            $('#registrati').removeClass("disabled");
-        } else {
-            $('#message').html('Le password non corrispondono').css('color', 'red');
-            $('#registrati').addClass("disabled");
-        }
-    });
-</script>

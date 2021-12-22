@@ -19,7 +19,7 @@ function getHeaderElements()
             ['link' => 'cart.php', 'nome' => 'Carrello'],
             ['link' => 'card.php', 'nome' => 'Carte'],
             ['link' => 'orders.php', 'nome' => 'Ordini'],
-            ['link' => 'client.php', 'nome' => 'Profilo'],
+            ['link' => 'account.php', 'nome' => 'Profilo'],
             ['link' => 'logout.php', 'nome' => 'Esci']
         ];
     } else {

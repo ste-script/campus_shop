@@ -4,7 +4,7 @@ $prod = $templateParams["products"];
 $gridTitle = $templateParams["gridTitle"];
 ?>
 
-<h4 class="text-capitalize my-4 mx-3"><?php echo $gridTitle; ?></h4>
+<div class="text-capitalize h2 my-4 mx-3"><?php echo $gridTitle; ?></div>
 
 <div class="container-xl">
   <?php while ($index < count($prod)) : ?>

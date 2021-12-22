@@ -39,7 +39,7 @@
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
                 <?php foreach ($templateParams["headerMenu"] as $item) :?>
-                    <?php if($item["nome"]=="Categories"):?>
+                    <?php if($item["nome"]=="Categorie"):?>
                             <li class="nav-item dropdown dropstart">
                                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
                                     <?php echo $item["nome"]?>

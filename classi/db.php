@@ -704,4 +704,16 @@ class DatabaseHelper
         }
         return false;
     }
+
+    public function registerClient($clientEmail, $password, $cf)
+    {
+        $stmt = $this->db->prepare("INSERT INTO `cliente` (`id`, `email`, `password`, `CF`) 
+        VALUES (NULL, ?, ?, ?)");
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        if (is_string($password)) {
+            $stmt->bind_param("sss", $clientEmail, $password, $cf);
+            return $stmt->execute();
+        }
+        return false;
+    }
 }

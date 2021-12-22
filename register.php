@@ -5,11 +5,11 @@ if (isUserLoggedIn()) {
     exit;
 }
 $templateParams["titolo"] = "Campus Shop - Registrazione";
-if (isset($_POST["clientEmail"]) && isset($_POST["clientPassword"])) {
-    $registerResult = $dbh->checkClientLogin($_POST["clientEmail"], $_POST["clientPassword"]);
+if (isset($_POST["clientEmail"]) && isset($_POST["clientPassword"]) && isset($_POST["cf"])) {
+    $registerResult = $dbh->registerClient($_POST["clientEmail"], $_POST["clientPassword"], $_POST["cf"]);
     if (!$registerResult) {
         //Login errato
-        $templateParams["erroreLogin"] = "Credenziali di accesso errate";
+        $templateParams["erroreLogin"] = "Errore nella registrazione";
     } else {
         registerLoggedClient($_POST["clientEmail"], $dbh->getClientId($_POST["clientEmail"]));
     }

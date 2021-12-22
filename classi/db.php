@@ -14,7 +14,7 @@ class DatabaseHelper
 
     //PRIVATE FUNCTIONS
 
-    private function newOrder($clientId)
+    public function newOrder($clientId)
     {
         $query = "INSERT INTO `ordine` (`id`, `id_cliente`) VALUES (NULL, ?)";
         $stmt = $this->db->prepare($query);

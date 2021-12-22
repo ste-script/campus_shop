@@ -12,6 +12,9 @@ if (isset($_POST["clientEmail"]) && isset($_POST["clientPassword"]) && isset($_P
         $templateParams["erroreLogin"] = "Errore nella registrazione";
     } else {
         registerLoggedClient($_POST["clientEmail"], $dbh->getClientId($_POST["clientEmail"]));
+        $dbh->newOrder($_SESSION["userId"]);
+        header("Location: index.php");
+        exit;
     }
 }
 

@@ -294,6 +294,19 @@ class DatabaseHelper
         }
         return false;
     }
+
+    public function checkVendorLogin($email, $password)
+    {
+        $stmt = $this->db->prepare("SELECT email, password FROM `venditore` WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            return password_verify($password, $result->fetch_assoc()['password']);
+        }
+        return false;
+    }
+
     public function getClientId($email)
     {
         $stmt = $this->db->prepare("SELECT id FROM `cliente` WHERE email = ?");
@@ -302,6 +315,16 @@ class DatabaseHelper
         $result = $stmt->get_result();
         return $result->fetch_assoc()['id'];
     }
+
+    public function getVendorId($email)
+    {
+        $stmt = $this->db->prepare("SELECT id FROM `venditore` WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc()['id'];
+    }
+
     public function getCategories()
     {
         $stmt = $this->db->prepare("SELECT id, nome FROM `categoria`, appartenenza_categorie WHERE appartenenza_categorie.id_categoria = categoria.id GROUP BY id");
@@ -476,7 +499,7 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getProductsFromVendor($name)
+    public function getProductsFromVendorName($name)
     {
         $stmt = $this->db->prepare("SELECT *
                                     FROM `prodotto`
@@ -485,6 +508,18 @@ class DatabaseHelper
                                                         FROM venditore 
                                                         WHERE nome=?)");
         $stmt->bind_param("s", $name);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getProductsFromVendorId($id)
+    {
+        $stmt = $this->db->prepare("SELECT *
+                                    FROM `prodotto`
+                                    WHERE id_venditore = ?");
+        $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
 

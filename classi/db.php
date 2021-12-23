@@ -401,14 +401,13 @@ class DatabaseHelper
         $stmt->bind_param("i", $shippingId);
         $stmt->execute();
         $result = $stmt->get_result();
-
         return $result->fetch_assoc()["stato"];
     }
 
     public function getProgressShippingFromVendorId($vendorId)
     {
         $stmt = $this->db->prepare("SELECT spedizione.id, incasso, 
-                                    data, stato, COUNT(prodotto.id) AS numero_prodotti 
+                                    data, stato
                                     FROM `spedizione`, collo, prodotto 
                                     WHERE collo.id_prodotto = prodotto.id 
                                     AND collo.id_spedizione = spedizione.id 
@@ -424,7 +423,7 @@ class DatabaseHelper
     public function getDeliveredShippingFromVendorId($vendorId)
     {
         $stmt = $this->db->prepare("SELECT spedizione.id, incasso, 
-                                    data, stato, COUNT(prodotto.id) AS numero_prodotti 
+                                    data, stato
                                     FROM `spedizione`, collo, prodotto 
                                     WHERE collo.id_prodotto = prodotto.id 
                                     AND collo.id_spedizione = spedizione.id 

@@ -39,7 +39,7 @@ function getHeaderElements()
 
         return [
             ['link' => '#', 'nome' => 'Prodotti'],
-            ['link' => 'vendor_orders.php', 'nome' => 'Ordini'],
+            ['link' => 'vendorOrder.php', 'nome' => 'Ordini'],
             ['link' => 'account.php', 'nome' => 'Profilo'],
             ['link' => 'logout.php', 'nome' => 'Esci']
         ];

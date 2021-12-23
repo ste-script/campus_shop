@@ -1,6 +1,13 @@
 <div class="row my-5 mx-0">
     <div class="col-6 mx-auto">
         <form action="#" method="POST">
+            <label for="loginType" class="form-label">Accedi come:</label>
+            <div class="mb-3">
+                <input type="radio" id="cliente" name="loginType" value="cliente" required checked>
+                <label for="cliente">Cliente</label><br>
+                <input type="radio" id="venditore" name="loginType" value="venditore">
+                <label for="cliente">Venditore</label><br>
+            </div>
             <div class="mb-3">
                 <label for="clientEmail" class="form-label">Email</label>
                 <input type="email" class="form-control" id="clientEmail" name="clientEmail">

@@ -2,7 +2,7 @@
     require_once("./bootstrap.php");
     $templateParams["titolo"] = "Campus Shop - ". ucfirst($_GET["vendorName"]);
     $templateParams['gridTitle'] = "Prodotti";
-    $templateParams['products'] = $dbh->getProductsFromVendor($_GET["vendorName"]);
+    $templateParams['products'] = $dbh->getProductsFromVendorName($_GET["vendorName"]);
 
     require('./layouts/headerCostumer.php');
 

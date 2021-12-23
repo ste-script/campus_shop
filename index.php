@@ -1,6 +1,9 @@
 <?php
 require_once("./bootstrap.php");
-
+if (isVendorLoggedIn()) {
+    header("Location: vendor.php");
+    exit;
+}
 $templateParams["titolo"] = "Campus Shop - Home";
 include("./layouts/headerCostumer.php");
 

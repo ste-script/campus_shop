@@ -29,7 +29,7 @@ foreach ($preparazione as $shipping) {
     $templateParams["shippingDate"] =  "Data ordine: " . $shipping["data"];
     $templateParams['products'] = $dbh->getProductsFromShipping($shipping["id"]);
 
-    include('.\cliente\shippinggrid.php');
+    include('.\venditore\shippinggrid.php');
 }
 if (!empty($spediti)) : ?>
     <div class="container-xl">
@@ -47,7 +47,7 @@ foreach ($spediti as $shipping) {
     $templateParams['gridTitle'] = "Spedizione n: " . $shipping["id"];
     $templateParams['shippingStatus'] = "Stato spedizione: " . $dbh->getShippingStatus($shipping["id"]);
     $templateParams['products'] = $dbh->getProductsFromShipping($shipping["id"]);
-    include('.\cliente\shippinggrid.php');
+    include('.\venditore\shippinggrid.php');
 }
 
 

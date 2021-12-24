@@ -47,6 +47,8 @@ foreach ($spediti as $shipping) {
     $templateParams['shippingId'] = $shipping["id"];
     $templateParams['shippingStatus'] = "Stato spedizione: " . $dbh->getShippingStatus($shipping["id"]);
     $templateParams['products'] = $dbh->getProductsFromShipping($shipping["id"]);
+    $templateParams["shippingIncome"] =  "Incasso: " . $shipping["incasso"];
+    $templateParams["shippingDate"] =  "Data ordine: " . $shipping["data"];
     include('.\venditore\shippinggrid.php');
 }
 

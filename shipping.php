@@ -21,18 +21,23 @@ include("layouts/header.php");
             </h3>
             <div class="bg-light border border-dark p-2">
                 <h4 class="text-start">
-                    <?php echo $shippingStatus; ?>
+                    Stato: <?php echo $shippingStatus; ?>
                 </h4>
                 <h5 class="text-start">
-                    <?php echo $shippingIncome; ?>
+                    Incasso: €<?php echo $shippingIncome; ?>
                 </h5>
                 <h5 class="text-start">
-                    <?php echo $shippingDate; ?>
+                    Data: <?php echo $shippingDate; ?>
                 </h5>
                 <h5 class="text-start">
-                    <?php echo "N. prodotti: " .  count($prod) ?>
+                    N. prodotti: <?php echo count($prod) ?>
                 </h5>
-                <a class="btn btn-primary" href="#">Spedisci</a>
+                <?php if ($shippingStatus == "preparazione") : ?>
+                    <form action="sendShipping.php" method="POST">
+                        <input type="submit" class="btn btn-primary" value="Spedisci">
+                        <input type="hidden" value="<?php echo $shippingId ?>" name="shippingId">
+                    </form>
+                <?php endif ?>
             </div>
         </div>
     </div>

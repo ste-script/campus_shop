@@ -4,7 +4,6 @@ $shippingId = $templateParams["shippingId"];
 $shippingStatus = $templateParams["shippingStatus"];
 $shippingIncome = $templateParams["shippingIncome"];
 $shippingDate = $templateParams["shippingDate"];
-$_SESSION["templateParams"] = $templateParams;
 ?>
 <div class="container-xl">
     <div class="row mx-0">

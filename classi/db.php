@@ -357,6 +357,16 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getNotifyFromClient($clientId)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM `notifica_cliente` WHERE id_cliente = ?");
+        $stmt->bind_param("i", $clientId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getShippingsFromOrder($orderId)
     {
         $stmt = $this->db->prepare("SELECT id_spedizione as id

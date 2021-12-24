@@ -22,14 +22,22 @@ if (isset($_POST["newMail"]) && is_string($_POST["newMail"]) && isset($_POST["ch
     }
 }
 
-if (isset($_POST["oldPassword"]) && is_string($_POST["oldPassword"]) && isset($_POST["password"]) && is_string($_POST["password"]) && isset($_POST["passwordConfirm"]) && $_POST["password"] == $_POST["passwordConfirm"]) {
-    if (isUserLoggedIn() && $dbh->checkClientLogin($_SESSION["clientEmail"], $_POST["oldPassword"]) ) {
-        if (!$dbh->changePasswordClient($_POST["password"], $_SESSION["userId"])) {
-            //return false
+if (isset($_POST["oldPassword"]) && is_string($_POST["oldPassword"]) && isset($_POST["newPassword"]) && is_string($_POST["newPassword"]) && isset($_POST["checkNewPassword"]) && is_string($_POST["newPassword"]) && $_POST["newPassword"] == $_POST["checkNewPassword"]) {
+    if (isUserLoggedIn()) {
+        if ($dbh->checkClientLogin($_SESSION["clientEmail"], $_POST["oldPassword"])) {
+            if ($dbh->changePasswordClient($_POST["newPassword"], $_SESSION["userId"])) {
+                $templateParams['erroreLogin'] = "Password Cambiata";
+            }
+        } else {
+            $templateParams['erroreLogin'] = "Password Errata";
         }
-    } elseif($dbh->checkVendorLogin($_SESSION["clientEmail"], $_POST["oldPassword"])) {
-        if (!$dbh->changePasswordVendor($_POST["password"], $_SESSION["userId"])) {
-            //return false
+    } else {
+        if ($dbh->checkVendorLogin($_SESSION["clientEmail"], $_POST["oldPassword"])) {
+            if ($dbh->changePasswordVendor($_POST["newPassword"], $_SESSION["userId"])) {
+                $templateParams['erroreLogin'] = "Password Cambiata";
+            }
+        } else {
+            $templateParams['erroreLogin'] = "Password Errata";
         }
     }
 }

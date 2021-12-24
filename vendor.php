@@ -5,7 +5,7 @@ if (!isVendorLoggedIn()) {
     exit;
 }
 $templateParams["titolo"] = "Campus Shop - Home";
-include("./layouts/headerCostumer.php");
+include("./layouts/header.php");
 
 
 

@@ -6,7 +6,7 @@ if (!isset($_GET["productId"]) || !is_numeric($_GET["productId"])) {
 }
 $prod = $dbh->getProductFromId($_GET["productId"]);
 $templateParams["titolo"] = "Campus Shop - " . $prod["nome"];
-include('./layouts/headerCostumer.php');
+include('./layouts/header.php');
 
 ?>
 <div class="row justify-content-center mx-0">
@@ -16,11 +16,11 @@ include('./layouts/headerCostumer.php');
     <div class="col-md-5 mt-5">
         <h1 class="display-5 fw-bolder"><?php echo $prod["nome"]; ?></h1>
         <div class="h3">
-        <?php foreach ($dbh->getProductCategories($prod['id']) as $category): ?>
-            <a class="text-capitalize text-decoration-none text-muted" href="categoryGrid.php?categoryName=<?php echo $category;?>"><?php echo $category;?>, <a>
+        <?php foreach ($dbh->getProductCategories($prod['id']) as $categoryId): ?>
+            <a class="text-capitalize text-decoration-none text-muted" href="categoryGrid.php?categoryId=<?php echo $categoryId;?>"><?php echo $dbh->getCategoryName($categoryId);?> </a>
         <?php endforeach;?>
         </div>
-        <a class="h3 text-capitalize text-decoration-none text-muted" href="vendorGrid.php?vendorName=<?php echo $dbh->getVendorName($prod['id_venditore']);?>"><?php echo $dbh->getVendorName($prod['id_venditore']);?><a>
+        <a class="h3 text-capitalize text-decoration-none text-muted" href="vendorGrid.php?vendorId=<?php echo $prod['id_venditore'];?>"><?php echo $dbh->getVendorName($prod['id_venditore']);?></a>
         
         <p class="lead my-2"><?php echo $prod['descrizione'] ?></p>
         <hr class="singleline">
@@ -32,7 +32,7 @@ include('./layouts/headerCostumer.php');
                     <span class="h3 fw-bold ms-5">€ <?php echo $prod['prezzo']; ?></span>
                 </div>
                 <div class="col-xs-2 my-2">
-                    <input type="submit" class="btn btn-primary" value="Aggiungi al carrello"></input>
+                    <input type="submit" class="btn btn-primary" value="Aggiungi al carrello">
                 </div>
                 <input type="hidden" value="<?php echo  $_GET["productId"]; ?>" name="productId">
             </form>

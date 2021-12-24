@@ -65,7 +65,7 @@ require_once("./bootstrap.php");
                 <input type="password" class="form-control" required placeholder="Nuova Password" name="newPassword" id="newPassword">
               </div>
               <div class="col-8 my-2">
-                <input type="password" class="form-control" required placeholder="Ripeti Nuova Password" name="checkNewPassword" id="newPassword">
+                <input type="password" class="form-control" required placeholder="Ripeti Nuova Password" name="checkNewPassword" id="checkNewPassword">
               </div>
             </div>
             <div class="modal-footer mt-3">

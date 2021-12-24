@@ -2,7 +2,7 @@
 require_once("./bootstrap.php");
 
 $templateParams["titolo"] = "Campus Shop - Profilo";
-include("./layouts/headerCostumer.php");
+include("./layouts/header.php");
 
 if (!isUserLoggedIn()) {
     header("Location: login.php");

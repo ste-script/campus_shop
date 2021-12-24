@@ -1,7 +1,7 @@
 <?php
 require_once 'bootstrap.php';
 $templateParams["titolo"] = "Campus Shop - Login";
-if (!isUserLoggedIn()) {
+if (!isUserLoggedIn() && !isVendorLoggedIn()) {
     header("Location: index.php");
     exit;
 }
@@ -10,13 +10,15 @@ require('./layouts/header.php');
 <script src="./classi/script.js"></script>
 <script>
     $(document).ready(function() {
-        setInterval(function() {
+        function carica() {
             $.getJSON("api-notifica.php", function(data) {
                 let articoli = generaNotifiche(data);
                 const main = $("#notifiche");
                 main.html(articoli);
             })
-        }, 2000);
+        }
+        carica();
+        setInterval(carica, 20000);
     });
 </script>
 

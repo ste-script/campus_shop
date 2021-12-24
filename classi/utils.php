@@ -33,6 +33,7 @@ function getHeaderElements()
             ['link' => 'card.php', 'nome' => 'Carte'],
             ['link' => 'orders.php', 'nome' => 'Ordini'],
             ['link' => 'account.php', 'nome' => 'Profilo'],
+            ['link' => 'notifiche.php', 'nome' => 'Notifiche'],
             ['link' => 'logout.php', 'nome' => 'Esci']
         ];
     } else if (isVendorLoggedIn()) {
@@ -41,6 +42,7 @@ function getHeaderElements()
             ['link' => '#', 'nome' => 'Prodotti'],
             ['link' => 'vendorOrder.php', 'nome' => 'Ordini'],
             ['link' => 'account.php', 'nome' => 'Profilo'],
+            ['link' => 'notifiche.php', 'nome' => 'Notifiche'],
             ['link' => 'logout.php', 'nome' => 'Esci']
         ];
     } else {

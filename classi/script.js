@@ -35,20 +35,27 @@ $(document).ready(function() {
 });
 
 function generaNotifiche(notifiche) {
-    let result = "";
+    let result = '<div class="container-xl">';
 
     for (let i = 0; i < notifiche.length; i++) {
         let articolo = `
-    
-            <section>
-            <h2>${notifiche[i]["id"]}</h2>
-
-            <p>${notifiche[i]["testo"]}</p>
-            <p>${notifiche[i]["data"]}</p>
-            </section>
-
-        `;
+                <div class="row mx-0">
+                    <div class="col py-4">
+                        <h3 class=" text-start pb-2">
+                        Notifica n: ${notifiche[i]["id"]}
+                        </h3>
+                        <div class="bg-light border border-dark p-2">
+                            <h4 class="text-start">
+                                ${notifiche[i]["data"]}
+                            </h4>
+                            <p class="text-start">
+                                ${notifiche[i]["testo"]}
+                            </p>
+                        </div>
+                    </div>
+                </div>`;
         result += articolo;
     }
+    result += "</div>";
     return result;
 }

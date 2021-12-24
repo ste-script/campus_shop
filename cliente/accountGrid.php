@@ -1,7 +1,7 @@
 <?php
 require_once("./bootstrap.php");
 ?>
-
+<script src="./classi/script.js"></script>
 <div class="container-xl">
 
 
@@ -37,9 +37,10 @@ require_once("./bootstrap.php");
               <div class="col-8 my-2">
                 <input type="text" class="form-control" required placeholder="Ripeti Nuova Mail" name="checkNewMail" id="checkNewMail">
               </div>
+              <span id='mailMessage'></span>
             </div>
             <div class="modal-footer mt-3">
-              <input type="submit" class="btn btn-success" value="Conferma">
+              <input type="submit" id="confirmMail" class="btn btn-success" value="Conferma">
             </div>
           </div>
         </form>
@@ -67,9 +68,10 @@ require_once("./bootstrap.php");
               <div class="col-8 my-2">
                 <input type="password" class="form-control" required placeholder="Ripeti Nuova Password" name="checkNewPassword" id="checkNewPassword">
               </div>
+              <span id='passwordMessage'></span>
             </div>
             <div class="modal-footer mt-3">
-              <input type="submit" class="btn btn-success" value="Conferma">
+              <input type="submit" id="confirmPassword" class="btn btn-success" value="Conferma">
             </div>
           </div>
         </form>

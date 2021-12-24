@@ -2,7 +2,7 @@
 require_once("./bootstrap.php");
 
 $templateParams["titolo"] = "Campus Shop - Ordini";
-include("./layouts/headerCostumer.php");
+include("./layouts/header.php");
 $preparazione = $dbh->getProgressShippingFromVendorId($_SESSION["userId"]);
 $spediti = $dbh->getDeliveredShippingFromVendorId($_SESSION["userId"]);
 if (!isVendorLoggedIn()) {

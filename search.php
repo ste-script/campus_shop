@@ -6,7 +6,7 @@ if (!isset($_GET["productName"]) || !is_string($_GET["productName"])) {
 }
 $prod = $dbh->getProductsByName($_GET["productName"]);
 $templateParams["titolo"] = "Ricerca di " . $_GET["productName"];
-include('./layouts/headerCostumer.php');
+include('./layouts/header.php');
 
 $templateParams["gridTitle"] = "Ricerca di " . $_GET["productName"];
 $templateParams["products"] = $prod;

@@ -241,10 +241,10 @@ class DatabaseHelper
         return $result->fetch_assoc()["nome"];
     }
 
-    public function getVendorContacts($vendorName)
+    public function getVendorContacts($vendorId)
     {
-        $stmt = $this->db->prepare("SELECT email FROM `venditore`WHERE nome = ?");
-        $stmt->bind_param("s", $vendorName);
+        $stmt = $this->db->prepare("SELECT email FROM `venditore`WHERE id = ?");
+        $stmt->bind_param("s", $vendorId);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_assoc()["email"];
@@ -342,7 +342,7 @@ class DatabaseHelper
         $result->fetch_all(MYSQLI_ASSOC);
         $cat = [];
         foreach ($result as $categoria) {
-            array_push($cat, $categoria["nome"]);
+            array_push($cat, $categoria["id"]);
         }
         return $cat;
     }
@@ -483,30 +483,28 @@ class DatabaseHelper
         return $categorie;
     }
 
-    public function getProductsFromCategories($categoryName)
+    public function getProductsFromCategories($categoryId)
     {
         $stmt = $this->db->prepare("SELECT  prodotto.id, prodotto.nome, prezzo, quantita_disponibile, visibile, foto, descrizione, id_venditore
                                     FROM prodotto, appartenenza_categorie, categoria 
                                     WHERE prodotto.visibile=1
-                                    AND categoria.nome = ?
+                                    AND categoria.id = ?
                                     AND categoria.id = appartenenza_categorie.id_categoria
                                     AND prodotto.id = appartenenza_categorie.id_prodotto");
-        $stmt->bind_param("s", $categoryName);
+        $stmt->bind_param("i", $categoryId);
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getProductsFromVendorName($name)
+    public function getVisibleProductsFromVendorId($vendorId)
     {
         $stmt = $this->db->prepare("SELECT *
                                     FROM `prodotto`
                                     WHERE prodotto.visibile=1
-                                    AND id_venditore = (SELECT id 
-                                                        FROM venditore 
-                                                        WHERE nome=?)");
-        $stmt->bind_param("s", $name);
+                                    AND id_venditore = ?");
+        $stmt->bind_param("i", $vendorId);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -749,5 +747,14 @@ class DatabaseHelper
             return $stmt->execute();
         }
         return false;
+    }
+
+    public function getCategoryName($categoryId)
+    {
+        $stmt = $this->db->prepare("SELECT nome FROM `categoria`WHERE id = ?");
+        $stmt->bind_param("i", $categoryId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc()["nome"];
     }
 }

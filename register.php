@@ -19,6 +19,6 @@ if (isset($_POST["clientEmail"]) && isset($_POST["clientPassword"]) && isset($_P
 }
 
 
-require('./layouts/headerCostumer.php');
+require('./layouts/header.php');
 require("./layouts/register-form.php");
 require('./layouts/footer.php');

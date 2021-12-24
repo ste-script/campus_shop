@@ -1,11 +1,12 @@
 <?php
     require_once("./bootstrap.php");
 
-    $templateParams["titolo"] = "Campus Shop - ". ucfirst($_GET["categoryName"]);
-    $templateParams['gridTitle'] = ucfirst($_GET["categoryName"]);
-    $templateParams['products'] = $dbh->getProductsFromCategories($_GET["categoryName"]);
+    $categoryName= $dbh->getCategoryName($_GET["categoryId"]);
+    $templateParams["titolo"] = "Campus Shop - ". ucfirst($categoryName);
+    $templateParams['gridTitle'] = ucfirst($categoryName);
+    $templateParams['products'] = $dbh->getProductsFromCategories($_GET["categoryId"]);
 
-    require('./layouts/headerCostumer.php');
+    require('./layouts/header.php');
     
     if (!empty($templateParams['products'])) {
         include('.\cliente\productgrid.php');

@@ -49,7 +49,7 @@
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <?php
                                 foreach ($dbh->getCategories() as $category) : ?>
-                                    <li><a class="dropdown-item text-capitalize" href="categoryGrid.php?categoryName=<?php echo $category["nome"]; ?>"> <?php echo $category["nome"]; ?></a></li>
+                                    <li><a class="dropdown-item text-capitalize" href="categoryGrid.php?categoryId=<?php echo $category["id"]; ?>"> <?php echo $category["nome"]; ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </li>

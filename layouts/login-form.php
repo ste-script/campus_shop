@@ -1,7 +1,7 @@
 <div class="row my-5 mx-0">
     <div class="col-6 mx-auto">
         <form action="#" method="POST">
-            <label for="loginType" class="form-label">Accedi come:</label>
+            <label class="form-label">Accedi come:</label>
             <div class="mb-3">
                 <input type="radio" id="cliente" name="loginType" value="cliente" required checked>
                 <label for="cliente">Cliente</label><br>

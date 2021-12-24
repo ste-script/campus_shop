@@ -5,12 +5,12 @@ if (isVendorLoggedIn()) {
     exit;
 }
 $templateParams["titolo"] = "Campus Shop - Home";
-include("./layouts/headerCostumer.php");
+include("./layouts/header.php");
 
 $categories = $dbh->getCategories();
 for ($categoryIndex = 0; $categoryIndex < 4 && $categoryIndex < count($categories); $categoryIndex++) {
     $templateParams['carouselTitle'] = $categories[$categoryIndex]['nome'];
-    $templateParams['products'] = $dbh->getProductsFromCategories($templateParams['carouselTitle']);
+    $templateParams['products'] = $dbh->getProductsFromCategories( $categories[$categoryIndex]['id']);
     include('.\cliente\carousel.php');
 }
 if (isUserLoggedIn()) {

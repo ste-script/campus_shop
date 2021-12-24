@@ -719,19 +719,37 @@ class DatabaseHelper
         return false;
     }
 
-    public function changeMail($mail, $clientId)
+    public function changeMailClient($mail, $clientId)
     {
         $stmt = $this->db->prepare("UPDATE `cliente` SET `email` = ? WHERE `cliente`.`id` = ?");
         $stmt->bind_param("si", $mail, $clientId);
         return $stmt->execute();
     }
 
-    public function changePassword($password, $clientId)
+    public function changePasswordClient($password, $clientId)
     {
         $stmt = $this->db->prepare("UPDATE `cliente` SET `password` = ? WHERE `cliente`.`id` = ?");
         $password = password_hash($password, PASSWORD_DEFAULT);
         if (is_string($password)) {
             $stmt->bind_param("si", $password, $clientId);
+            return $stmt->execute();
+        }
+        return false;
+    }
+
+    public function changeMailVendor($mail, $vendorId)
+    {
+        $stmt = $this->db->prepare("UPDATE `venditore` SET `email` = ? WHERE `venditore`.`id` = ?");
+        $stmt->bind_param("si", $mail, $vendorId);
+        return $stmt->execute();
+    }
+
+    public function changePasswordVendor($password, $vendorId)
+    {
+        $stmt = $this->db->prepare("UPDATE `venditore` SET `password` = ? WHERE `venditore`.`id` = ?");
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        if (is_string($password)) {
+            $stmt->bind_param("si", $password, $vendorId);
             return $stmt->execute();
         }
         return false;

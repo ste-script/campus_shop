@@ -375,6 +375,8 @@ class DatabaseHelper
         return $cat;
     }
 
+
+
     public function getProductsFromShipping($shippingId)
     {
         $stmt = $this->db->prepare("SELECT prodotto.id, 
@@ -418,6 +420,18 @@ class DatabaseHelper
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getShippingFromId($shippingId)
+    {
+        $stmt = $this->db->prepare("SELECT *
+                                    FROM `spedizione`
+                                    WHERE id = ?");
+        $stmt->bind_param("i", $shippingId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_assoc();
     }
 
     public function getDeliveredShippingFromVendorId($vendorId)

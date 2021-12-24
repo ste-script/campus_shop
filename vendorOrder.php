@@ -23,7 +23,7 @@ if (!empty($preparazione)) :
 <?php
 endif;
 foreach ($preparazione as $shipping) {
-    $templateParams['gridTitle'] = "Spedizione n: " . $shipping["id"];
+    $templateParams['shippingId'] = $shipping["id"];
     $templateParams['shippingStatus'] = "Stato spedizione: " . $dbh->getShippingStatus($shipping["id"]);
     $templateParams["shippingIncome"] =  "Incasso: " . $shipping["incasso"];
     $templateParams["shippingDate"] =  "Data ordine: " . $shipping["data"];
@@ -44,7 +44,7 @@ if (!empty($spediti)) : ?>
 <?php
 endif;
 foreach ($spediti as $shipping) {
-    $templateParams['gridTitle'] = "Spedizione n: " . $shipping["id"];
+    $templateParams['shippingId'] = $shipping["id"];
     $templateParams['shippingStatus'] = "Stato spedizione: " . $dbh->getShippingStatus($shipping["id"]);
     $templateParams['products'] = $dbh->getProductsFromShipping($shipping["id"]);
     include('.\venditore\shippinggrid.php');

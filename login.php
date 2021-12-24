@@ -32,6 +32,6 @@ if (isVendorLoggedIn()) {
     exit;
 }
 
-require('./layouts/headerCostumer.php');
-require("./layouts/header");
+require('./layouts/header.php');
+require("./layouts/login-form.php");
 require('./layouts/footer.php');

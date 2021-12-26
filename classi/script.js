@@ -51,6 +51,7 @@ function generaNotifiche(notifiche) {
                             <p class="text-start">
                                 ${notifiche[i]["testo"]}
                             </p>
+                            <button class="btn btn-danger id="notifica${notifiche[i]["id"]}" >Cancella notifica</button>
                         </div>
                     </div>
                 </div>`;
@@ -58,4 +59,8 @@ function generaNotifiche(notifiche) {
     }
     result += "</div>";
     return result;
+}
+
+function checkNotifiche(notifiche) {
+    return notifiche.length > 0 ? true : false;
 }

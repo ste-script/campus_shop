@@ -359,12 +359,26 @@ class DatabaseHelper
 
     public function getNotifyFromClient($clientId)
     {
-        $stmt = $this->db->prepare("SELECT * FROM `notifica_cliente` WHERE id_cliente = ?");
+        $stmt = $this->db->prepare("SELECT * FROM `notifica_cliente` WHERE id_cliente  = ?");
         $stmt->bind_param("i", $clientId);
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function deleteNotifyFromClient($notifyId)
+    {
+        $stmt = $this->db->prepare("DELETE FROM `notifica_cliente` WHERE id = ?");
+        $stmt->bind_param("i", $notifyId);
+        $stmt->execute();
+    }
+
+    public function deleteNotifyFromVendor($notifyId)
+    {
+        $stmt = $this->db->prepare("DELETE FROM `notifica_venditore` WHERE id = ?");
+        $stmt->bind_param("i", $notifyId);
+        $stmt->execute();
     }
 
     public function getShippingsFromOrder($orderId)

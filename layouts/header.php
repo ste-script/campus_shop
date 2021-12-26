@@ -13,8 +13,28 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./css/style.css">
+    <script src="./classi/script.js"></script>
 
 </head>
+
+<script>
+    $(document).ready(function() {
+        function carica() {
+            $.getJSON("api-notifica.php", function(data) {
+                let articoli = checkNotifiche(data);
+                if (articoli) {
+                    $("#notifyicon").css("color", "red");
+                    $("#menuicon").css("color", "red");
+                } else {
+                    $("#notifyicon").css("color", "white");
+                    $("#menuicon").css("color", "white");
+                }
+            })
+        }
+        carica();
+        setInterval(carica, 20000);
+    });
+</script>
 
 <body class="min-vh-100 d-flex flex-column">
     <!-- BAR-->
@@ -24,8 +44,8 @@
             <img id="logoImg" src="./img/logo.png" alt="HomePage">
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars" id="menuicon" style="color:#fff; font-size:28px;"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">

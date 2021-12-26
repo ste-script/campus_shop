@@ -7,7 +7,6 @@ if (!isUserLoggedIn() && !isVendorLoggedIn()) {
 }
 require('./layouts/header.php');
 ?>
-<script src="./classi/script.js"></script>
 <script>
     $(document).ready(function() {
         function carica() {
@@ -16,6 +15,18 @@ require('./layouts/header.php');
                 const main = $("#notifiche");
                 main.html(articoli);
             })
+        }
+
+        function elimina_notifica(id) {
+            $(".row").html = "ciao";
+            $.ajax({
+                url: 'removeNotify.php',
+                type: 'POST',
+                data: {
+                    id: deleteid
+                }
+            });
+            carica();
         }
         carica();
         setInterval(carica, 20000);

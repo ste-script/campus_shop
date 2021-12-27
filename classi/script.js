@@ -72,3 +72,7 @@ function generaNotifiche(notifiche) {
 function checkNotifiche(notifiche) {
     return notifiche.length > 0 ? true : false;
 }
+
+function generaOrdini(ordini){
+
+}

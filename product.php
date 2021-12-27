@@ -4,46 +4,28 @@ if (!isset($_GET["productId"]) || !is_numeric($_GET["productId"])) {
     header("Location: index.php");
     exit;
 }
+if (isVendorLoggedIn()) {
+    $buttonType = '<input type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success" value="Modifica Prodotto">';
+    $disable = "disabled";
+} else {
+    $buttonType = '<input type="submit" class="btn btn-primary" value="Aggiungi al Carrello">';
+    $disable = "";
+}
+
+if (isset($_POST["nomeProd"]) && is_string($_POST["nomeProd"]) && 
+    isset($_POST["categoriesProd"]) && is_string($_POST["categoriesProd"]) && 
+    isset($_POST["descriptionProd"]) && is_string($_POST["descriptionProd"]) && 
+    isset($_POST["priceProd"]) && is_numeric($_POST["priceProd"]) && 
+    isset($_POST["quantityProd"]) && is_numeric($_POST["quantityProd"]) && 
+    isset($_POST["imageProd"]) && is_string($_POST["imageProd"]) && 
+    isset($_POST["visibilityProd"]) && is_bool($_POST["visibilityProd"])) 
+    {
+        $dbh->updateProductFromId($_GET["productId"], $_POST["nomeProd"], $_POST["priceProd"], $_POST["quantityProd"], $_POST["visibilityProd"], $_POST["imageProd"], $_POST["quantityProd"]);
+}
+
 $prod = $dbh->getProductFromId($_GET["productId"]);
 $templateParams["titolo"] = "Campus Shop - " . $prod["nome"];
-include('./layouts/header.php');
 
-?>
-<div class="row justify-content-center mx-0">
-    <div class="col-md-5 p-5">
-        <?php echo $dbh->getImgFromId($prod['id']) . ">"; ?>
-    </div>
-    <div class="col-md-5 mt-5">
-        <h1 class="display-5 fw-bolder"><?php echo $prod["nome"]; ?></h1>
-        <div class="h3">
-        <?php foreach ($dbh->getProductCategories($prod['id']) as $categoryId): ?>
-            <a class="text-capitalize text-decoration-none text-muted" href="categoryGrid.php?categoryId=<?php echo $categoryId;?>"><?php echo $dbh->getCategoryName($categoryId);?> </a>
-        <?php endforeach;?>
-        </div>
-        <a class="h3 text-capitalize text-decoration-none text-muted" href="vendorGrid.php?vendorId=<?php echo $prod['id_venditore'];?>"><?php echo $dbh->getVendorName($prod['id_venditore']);?></a>
-        
-        <p class="lead my-2"><?php echo $prod['descrizione'] ?></p>
-        <hr class="singleline">
-        <div class="row">
-            <form action="addorder.php" method="POST">
-                <div class="my-3">
-                    <span class="h3">Quantita: </span> 
-                    <input type="number" required="required" name="quantity" min="1" value="1" max="<?php echo $prod["quantita_disponibile"]?>">
-                    <span class="h3 fw-bold ms-5">€ <?php echo $prod['prezzo']; ?></span>
-                </div>
-                <div class="col-xs-2 my-2">
-                    <input type="submit" class="btn btn-primary" value="Aggiungi al carrello">
-                </div>
-                <input type="hidden" value="<?php echo  $_GET["productId"]; ?>" name="productId">
-            </form>
-        </div>
-        <?php
-        if (isset($_GET["ordered"])) {
-            echo "<p class='text-success'> Prodotto aggiunto al carrello </p>";
-        }
-        ?>
-    </div>
-</div>
-<?php
+include('./layouts/header.php');
+include('./productShow.php');
 include('./layouts/footer.php');
-?>

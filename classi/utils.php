@@ -39,7 +39,7 @@ function getHeaderElements()
     } else if (isVendorLoggedIn()) {
 
         return [
-            ['link' => '#', 'nome' => 'Prodotti'],
+            ['link' => "vendorProducts.php?vendorId=" . $_SESSION["userId"], 'nome' => 'Prodotti'],
             ['link' => 'vendorOrder.php', 'nome' => 'Ordini'],
             ['link' => 'account.php', 'nome' => 'Profilo'],
             ['link' => 'notifiche.php', 'nome' => '<i id="notifyicon" class="fas fa-bell"></i>'],

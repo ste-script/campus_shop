@@ -3,13 +3,20 @@ require_once("./bootstrap.php");
 $index = 0;
 $prod = $templateParams["products"];
 $carouselTitle = $templateParams["carouselTitle"];
+
+if (isVendorLoggedIn()) {
+    $link = "vendorProducts.php?vendorId=" . $_SESSION["userId"];
+} else {
+
+    $link = "categoryGrid.php?categoryId=" . $categories[$categoryIndex]['id'];
+}
 ?>
 
 
 <!-- CAROUSEL BTN -->
 <div class="row mx-0">
     <div class="col mx-3 mt-4 mb-1 h-auto w-auto">
-        <a class="btn btn-outline-dark text-capitalize" href="categoryGrid.php?categoryId=<?php echo $categories[$categoryIndex]['id']; ?>">
+        <a class="btn btn-outline-dark text-capitalize" href="<?php echo $link ?>">
             <?php echo $carouselTitle; ?>
         </a>
     </div>

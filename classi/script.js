@@ -36,9 +36,9 @@ $(document).ready(function() {
 
 function generaNotifiche(notifiche) {
     let result = '<div class="container-xl">';
-
-    for (let i = 0; i < notifiche.length; i++) {
-        let articolo = `
+    if (notifiche.length > 0) {
+        for (let i = 0; i < notifiche.length; i++) {
+            let articolo = `
                 <div class="row mx-0">
                     <div class="col py-4">
                         <h3 class=" text-start pb-2">
@@ -51,11 +51,19 @@ function generaNotifiche(notifiche) {
                             <p class="text-start">
                                 ${notifiche[i]["testo"]}
                             </p>
-                            <button class="btn btn-danger id="notifica${notifiche[i]["id"]}" >Cancella notifica</button>
+                            <button class="btn btn-danger id="notifica${notifiche[i]["id"]} onclick="elimina_notifica(${notifiche[i]["id"]})" >Cancella notifica</button>
                         </div>
                     </div>
                 </div>`;
-        result += articolo;
+            result += articolo;
+        }
+    } else {
+        result += `<div class="row mx-0">
+            <div class="col py-4">
+                <h2 class=" text-center pb-2">
+                    Nessuna notifica
+                </h2>
+            </div>`
     }
     result += "</div>";
     return result;

@@ -1,12 +1,11 @@
 <?php
 require_once 'bootstrap.php';
-$id = 0;
-if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+if (isset($_POST['deleteId']) && is_numeric($_POST['deleteId'])) {
 
     if (isUserLoggedIn()) {
-        $notifiche = $dbh->deleteNotifyFromClient($_POST['id']);
+        $notifiche = $dbh->deleteNotifyFromClient($_POST['deleteId']);
     } else if (isVendorLoggedIn()) {
-        $notifiche = $dbh->deleteNotifyFromVendor($_POST['id']);
+        $notifiche = $dbh->deleteNotifyFromVendor($_POST['deleteId']);
     } else {
         $notifiche = "";
     }

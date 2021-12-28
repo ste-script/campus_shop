@@ -9,7 +9,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">Nuovo Prodotto</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="#" method="POST">
+                <form action="#" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <!-- Name -->
                         <div class="row mb-2">
@@ -59,7 +59,7 @@
                             <div class="col-3">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text mb-1">Immagine:</div>
-                                    <input type="file" id="imageProd" accept="image/*">
+                                    <input type="file" name="imageProd" accept="image/*">
                                 </div>
                             </div>
                         </div>

@@ -652,11 +652,12 @@ class DatabaseHelper
                     SET `nome` = ?, 
                     `prezzo` = ?,
                     `quantita_disponibile` = ?,
-                    `visibile` = ?, `foto` = ?, 
+                    `visibile` = ?, 
+                    `foto` = ?, 
                     `descrizione` = ? 
                     WHERE `prodotto`.`id` = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("sfiissi", $nome, $prezzo, $qta, $visible, $foto, $desc, $id);
+        $stmt->bind_param("sdiissi", $nome, $prezzo, $qta, $visible, $foto, $desc, $id);
         $stmt->execute();
     }
 
@@ -666,7 +667,7 @@ class DatabaseHelper
         (`id`, `nome`, `prezzo`, `quantita_disponibile`, `visibile`, `foto`, `descrizione`, `id_venditore`) 
         VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("sfiissi", $nome, $prezzo, $qta, $visible, $foto, $desc, $vendorId);
+        $stmt->bind_param("sdiissi", $nome, $prezzo, $qta, $visible, $foto, $desc, $vendorId);
         $stmt->execute();
     }
 

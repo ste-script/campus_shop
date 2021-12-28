@@ -10,24 +10,29 @@ if (!isVendorLoggedIn()) {
 <script>
     $(document).ready(function() {
         carica("spediti");
-        //carica("ordinati");
+        carica("preparazione");
         setInterval(carica, 20000, "spediti");
-       // setInterval(carica, 20000, "ordinati");
+        setInterval(carica, 20000, "preparazione");
     });
 
-    function carica($status) {
+    function carica(status) {
         $.getJSON("api-ordini.php", {
-            stato: $status
+            stato: status
         }, function(data) {
-            let articoli = generaOrdini(data);
-            const main = $("#ordini");
-            main.html(articoli);
+            let articoli = generaOrdini(data, status);
+            if (status == "spediti") {
+                $("#delivered_order").html(articoli);
+            } else if (status == "preparazione") {
+                $("#progress_order").html(articoli);
+            }
         })
     }
 </script>
 
 
-<div id="ordini" class="row mx-0">
+<div id="progress_order" class="row mx-0">
+</div>
+<div id="delivered_order" class="row mx-0">
 </div>
 <?php
 require('./layouts/footer.php');

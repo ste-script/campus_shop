@@ -349,7 +349,7 @@ class DatabaseHelper
 
     public function getNotifyFromVendor($vendorId)
     {
-        $stmt = $this->db->prepare("SELECT * FROM `notifica_venditore` WHERE id_venditore  = ?");
+        $stmt = $this->db->prepare("SELECT * FROM `notifica_venditore` WHERE id_venditore  = ? ORDER BY id DESC");
         $stmt->bind_param("i", $vendorId);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -359,7 +359,7 @@ class DatabaseHelper
 
     public function getNotifyFromClient($clientId)
     {
-        $stmt = $this->db->prepare("SELECT * FROM `notifica_cliente` WHERE id_cliente  = ?");
+        $stmt = $this->db->prepare("SELECT * FROM `notifica_cliente` WHERE id_cliente  = ? ORDER BY id DESC");
         $stmt->bind_param("i", $clientId);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -432,13 +432,18 @@ class DatabaseHelper
 
     public function getProgressShippingFromVendorId($vendorId)
     {
-        $stmt = $this->db->prepare("SELECT spedizione.id, incasso, 
-                                    data, stato, count(collo.id_prodotto) as n_prodotti
+        $stmt = $this->db->prepare("SELECT spedizione.id as sid, incasso, data , stato , 
+                                    ( SELECT COUNT(prodotto.id) FROM `spedizione`, prodotto, collo 
+                                        WHERE spedizione.id = sid 
+                                            AND collo.id_prodotto = prodotto.id 
+                                            AND collo.id_spedizione = spedizione.id ) 
+                                        AS n_prodotti 
                                     FROM `spedizione`, collo, prodotto 
                                     WHERE collo.id_prodotto = prodotto.id 
-                                    AND collo.id_spedizione = spedizione.id 
-                                    AND stato = 'preparazione' 
-                                    AND prodotto.id_venditore = ?");
+                                        AND collo.id_spedizione = spedizione.id 
+                                        AND stato = 'preparazione' 
+                                        AND prodotto.id_venditore = ? 
+                                    ORDER BY sid DESC");
         $stmt->bind_param("i", $vendorId);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -460,13 +465,18 @@ class DatabaseHelper
 
     public function getDeliveredShippingFromVendorId($vendorId)
     {
-        $stmt = $this->db->prepare("SELECT spedizione.id, incasso, 
-                                    data, stato, count(collo.id_prodotto) as n_prodotti
+        $stmt = $this->db->prepare("SELECT spedizione.id as sid, incasso, data , stato , 
+                                        ( SELECT COUNT(prodotto.id) FROM `spedizione`, prodotto, collo 
+                                        WHERE spedizione.id = sid 
+                                        AND collo.id_prodotto = prodotto.id 
+                                        AND collo.id_spedizione = spedizione.id ) 
+                                        AS n_prodotti 
                                     FROM `spedizione`, collo, prodotto 
                                     WHERE collo.id_prodotto = prodotto.id 
-                                    AND collo.id_spedizione = spedizione.id 
-                                    AND stato = 'spedito' 
-                                    AND prodotto.id_venditore = ?");
+                                        AND collo.id_spedizione = spedizione.id 
+                                        AND stato = 'spedito' 
+                                        AND prodotto.id_venditore = ? 
+                                    ORDER BY sid DESC");
         $stmt->bind_param("i", $vendorId);
         $stmt->execute();
         $result = $stmt->get_result();

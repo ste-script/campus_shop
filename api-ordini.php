@@ -1,6 +1,6 @@
 <?php
 require_once 'bootstrap.php';
-if (isVendorLoggedIn() && $_GET["stato"] == "ordinati") {
+if (isVendorLoggedIn() && $_GET["stato"] == "preparazione") {
     $orders = $dbh->getProgressShippingFromVendorId($_SESSION["userId"]);
 } else if (isVendorLoggedIn() && $_GET["stato"] == "spediti") {
     $orders = $dbh->getDeliveredShippingFromVendorId($_SESSION["userId"]);

@@ -73,15 +73,38 @@ function checkNotifiche(notifiche) {
     return notifiche.length > 0 ? true : false;
 }
 
-function generaOrdini(ordini) {
-    let result = '<div class="container-xl">';
+function generaOrdini(ordini, stato) {
+    let result = `
+    <div class="container-xl">
+        <div class="row mx-0">
+            <div class="col text-center">
+                <h2 class="text-capitalize pt-5 pb-2">`;
+    if (stato == "preparazione") {
+        if (ordini.length > 0) {
+            result += "Ordini in preparazione";
+        } else {
+            result += "Nessun ordine in preparazione";
+        }
+    } else if (stato == "spediti") {
+        if (ordini.length > 0) {
+            result += "Ordini spediti";
+        } else {
+            result += "Nessun ordine spedito";
+        }
+    }
+
+    result += ` </h2>
+            </div>
+        </div>
+    </div>
+    <div class="container-xl">`;
     if (ordini.length > 0) {
         for (let i = 0; i < ordini.length; i++) {
             let articolo = `
                 <div class="row mx-0">
                     <div class="col text-capitalize py-4">
                         <h3 class=" text-start pb-2">
-                            Spedizione n: ${ordini[i]["id"]} 
+                            Spedizione n: ${ordini[i]["sid"]} 
                         </h3>
                         <div class="bg-light border border-dark p-2">
                             <h4 class="text-start">
@@ -97,7 +120,7 @@ function generaOrdini(ordini) {
                                 N. prodotti: ${ordini[i]["n_prodotti"]} 
                             </h5>
             
-                            <a class="btn btn-primary" href="shipping.php?shippingId=${ordini[i]["id"]}">Dettagli</a>
+                            <a class="btn btn-primary" href="shipping.php?shippingId=${ordini[i]["sid"]}">Dettagli</a>
                         </div>
                     </div>
                 </div>`;

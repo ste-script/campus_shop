@@ -41,7 +41,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">Modifica <?php echo $prod["nome"]; ?></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="#" method="POST">
+                <form action="#" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <!-- Name -->
                         <div class="row mb-2">
@@ -91,10 +91,10 @@
                         </div>
                         <!-- Image -->
                         <div class="row mb-2">
-                            <div class="col-auto">
+                            <div class="col-3">
                                 <div class="input-group-prepend">
-                                    <div class="input-group-text mb-1">Scegli Immagine:</div>
-                                    <input type="file" id="imageProd" accept="image/*">
+                                    <div class="input-group-text mb-1">Immagine:</div>
+                                    <input type="file" name="imageProd" accept="image/*">
                                 </div>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">Visibile</div>
                                     </div>
-                                    <input type="checkbox" class="form-check-input h1 m-0" required value="<?php echo $prod['visibile']?> name="visibilityProd" id="visibilityProd">
+                                    <input type="checkbox" class="form-check-input h1 m-0" value="1" name=" visibilityProd" id="visibilityProd" <?php if($prod['visibile']==1){echo "checked";}?>>
                                 </div>
                             </div>
                         </div>

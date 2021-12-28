@@ -443,7 +443,7 @@ class DatabaseHelper
                                         AND collo.id_spedizione = spedizione.id 
                                         AND stato = 'preparazione' 
                                         AND prodotto.id_venditore = ? 
-                                    ORDER BY sid DESC");
+                                    GROUP BY sid DESC");
         $stmt->bind_param("i", $vendorId);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -476,7 +476,7 @@ class DatabaseHelper
                                         AND collo.id_spedizione = spedizione.id 
                                         AND stato = 'spedito' 
                                         AND prodotto.id_venditore = ? 
-                                    ORDER BY sid DESC");
+                                        GROUP BY sid DESC");
         $stmt->bind_param("i", $vendorId);
         $stmt->execute();
         $result = $stmt->get_result();

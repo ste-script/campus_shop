@@ -6,6 +6,8 @@ $carouselTitle = $templateParams["carouselTitle"];
 
 if (isVendorLoggedIn()) {
     $link = "vendorProducts.php?vendorId=" . $_SESSION["userId"];
+} elseif (isUserLoggedIn() && $carouselTitle == "Carrello") {
+    $link = "cart.php";
 } else {
 
     $link = "categoryGrid.php?categoryId=" . $categories[$categoryIndex]['id'];

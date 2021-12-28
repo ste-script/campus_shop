@@ -19,21 +19,22 @@
 
 <script>
     $(document).ready(function() {
-        function carica() {
-            $.getJSON("api-notifica.php", function(data) {
-                let articoli = checkNotifiche(data);
-                if (articoli) {
-                    $("#notifyicon").css("color", "red");
-                    $("#menuicon").css("color", "red");
-                } else {
-                    $("#notifyicon").css("color", "white");
-                    $("#menuicon").css("color", "white");
-                }
-            })
-        }
-        carica();
-        setInterval(carica, 20000);
+        updateHeader();
+        setInterval(updateHeader, 20000);
     });
+
+    function updateHeader() {
+        $.getJSON("api-notifica.php", function(data) {
+            let articoli = checkNotifiche(data);
+            if (articoli) {
+                $("#notifyicon").css("color", "red");
+                $("#menuicon").css("color", "red");
+            } else {
+                $("#notifyicon").css("color", "white");
+                $("#menuicon").css("color", "white");
+            }
+        })
+    }
 </script>
 
 <body class="min-vh-100 d-flex flex-column">
@@ -44,8 +45,8 @@
             <img id="logoImg" src="./img/logo.png" alt="HomePage">
         </a>
 
-        <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars" id="menuicon" style="color:#fff; font-size:28px;"></i>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars" id="menuicon" style="color:#fff; font-size:28px;"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">

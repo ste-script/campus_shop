@@ -31,6 +31,7 @@ require('./layouts/header.php');
             },
             success: function() {
                 carica();
+                updateHeader();
             }
         });
 

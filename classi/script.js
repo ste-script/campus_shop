@@ -73,6 +73,37 @@ function checkNotifiche(notifiche) {
     return notifiche.length > 0 ? true : false;
 }
 
-function generaOrdini(ordini){
-
+function generaOrdini(ordini) {
+    let result = '<div class="container-xl">';
+    if (ordini.length > 0) {
+        for (let i = 0; i < ordini.length; i++) {
+            let articolo = `
+                <div class="row mx-0">
+                    <div class="col text-capitalize py-4">
+                        <h3 class=" text-start pb-2">
+                            Spedizione n: ${ordini[i]["id"]} 
+                        </h3>
+                        <div class="bg-light border border-dark p-2">
+                            <h4 class="text-start">
+                                ${ordini[i]["stato"]} 
+                            </h4>
+                            <h5 class="text-start">
+                                ${ordini[i]["incasso"]} 
+                            </h5>
+                            <h5 class="text-start">
+                                ${ordini[i]["data"]} 
+                            </h5>
+                            <h5 class="text-start">
+                                N. prodotti: ${ordini[i]["n_prodotti"]} 
+                            </h5>
+            
+                            <a class="btn btn-primary" href="shipping.php?shippingId=${ordini[i]["id"]}">Dettagli</a>
+                        </div>
+                    </div>
+                </div>`;
+            result += articolo;
+        }
+    }
+    result += "</div>";
+    return result;
 }

@@ -433,7 +433,7 @@ class DatabaseHelper
     public function getProgressShippingFromVendorId($vendorId)
     {
         $stmt = $this->db->prepare("SELECT spedizione.id, incasso, 
-                                    data, stato
+                                    data, stato, count(collo.id_prodotto) as n_prodotti
                                     FROM `spedizione`, collo, prodotto 
                                     WHERE collo.id_prodotto = prodotto.id 
                                     AND collo.id_spedizione = spedizione.id 
@@ -461,7 +461,7 @@ class DatabaseHelper
     public function getDeliveredShippingFromVendorId($vendorId)
     {
         $stmt = $this->db->prepare("SELECT spedizione.id, incasso, 
-                                    data, stato
+                                    data, stato, count(collo.id_prodotto) as n_prodotti
                                     FROM `spedizione`, collo, prodotto 
                                     WHERE collo.id_prodotto = prodotto.id 
                                     AND collo.id_spedizione = spedizione.id 

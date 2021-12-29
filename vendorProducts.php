@@ -29,7 +29,7 @@ if (
             $fileName = round(microtime(true)) . $temp;
         } while (file_exists(UPLOAD_DIR . $fileName));
         if (move_uploaded_file($_FILES["imageProd"]["tmp_name"], UPLOAD_DIR . $fileName)) {
-            $dbh->insertNewProduct($_POST["nomeProd"], $_POST["priceProd"], $_POST["quantityProd"], $_POST["visibilityProd"], $fileName, $_POST["descriptionProd"], $_SESSION["userId"]);
+            $dbh->insertNewProduct(strtoupper($_POST["nomeProd"]), $_POST["priceProd"], $_POST["quantityProd"], $_POST["visibilityProd"], $fileName, $_POST["descriptionProd"], $_SESSION["userId"]);
         }
     }
 }

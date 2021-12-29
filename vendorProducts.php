@@ -1,6 +1,9 @@
 <?php
 require_once("./bootstrap.php");
-
+if (!isVendorLoggedIn() || $_GET["vendorId"] != $_SESSION["userId"]) {
+    header("Location: login.php");
+    exit;
+}
 $title = "I Tuoi Prodotti";
 $templateParams["titolo"] = "Campus Shop - " . $title;
 $templateParams['gridTitle'] = $title;
@@ -15,9 +18,19 @@ if (
 ) {
 
     isset($_POST["visibilityProd"]) ? $_POST["visibilityProd"] = 1 : $_POST["visibilityProd"] = 0;
-    $filePath = basename($_FILES["imageProd"]['name']);
-    if (move_uploaded_file($_FILES["imageProd"]["tmp_name"], "./img/" . $filePath)) {
-        $dbh->insertNewProduct($_POST["nomeProd"], $_POST["priceProd"], $_POST["quantityProd"], $_POST["visibilityProd"], $filePath, $_POST["descriptionProd"], $_SESSION["userId"]);
+    $temp = basename($_FILES["imageProd"]['name']);
+    $ext = strtolower(substr($temp, strrpos($temp, '.') + 1));
+    if (!(($ext == "jpg" || $ext == "png") && ($_FILES["imageProd"]["type"] == "image/jpeg" || $_FILES["imageProd"]["type"] == "image/png") &&
+        ($_FILES["imageProd"]["size"] < 2120000))) {
+        header("Location: vendorProducts.php");
+        exit;
+    } else {
+        do {
+            $fileName = round(microtime(true)) . $temp;
+        } while (file_exists(UPLOAD_DIR . $fileName));
+        if (move_uploaded_file($_FILES["imageProd"]["tmp_name"], UPLOAD_DIR . $fileName)) {
+            $dbh->insertNewProduct($_POST["nomeProd"], $_POST["priceProd"], $_POST["quantityProd"], $_POST["visibilityProd"], $fileName, $_POST["descriptionProd"], $_SESSION["userId"]);
+        }
     }
 }
 

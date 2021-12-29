@@ -56,21 +56,22 @@
                         </div>
                         <!-- Image -->
                         <div class="row mb-2">
-                            <div class="col-3">
+                            <div class="col-auto">
                                 <div class="input-group-prepend">
-                                    <div class="input-group-text mb-1">Immagine:</div>
+                                    <div class="input-group-text mb-1">Immagine: (1024x1024 px .jpg)</div>
                                     <input type="file" name="imageProd" accept="image/*">
                                 </div>
                             </div>
                         </div>
                         <!-- Visible -->
                         <div class="row mb-2">
-                            <div class="col-5">
+                            <div class="col-12">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">Visibile</div>
                                     </div>
-                                    <input type="checkbox" class="form-check-input h1 m-0" name=" visibilityProd" id="visibilityProd">
+                                    <link rel="stylesheet" href="./css/style.css">
+                                    <input type="checkbox" class="form-check-input m-0 big-checkbox " name=" visibilityProd" id="visibilityProd">
                                 </div>
                             </div>
                         </div>

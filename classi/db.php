@@ -254,7 +254,7 @@ class DatabaseHelper
     {
         $stmt = $this->db->prepare("SELECT id 
                                     FROM `ordine` 
-                                    WHERE id_cliente = ?");
+                                    WHERE id_cliente = ? ORDER BY id DESC");
         $stmt->bind_param("i", $clientId);
         $stmt->execute();
         $result = $stmt->get_result();

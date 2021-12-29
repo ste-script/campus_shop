@@ -1,16 +1,22 @@
-#logoImg{
-    width:50px;
+#logoImg {
+    width: 50px;
 }
 
-.btn.btn-default.align-top{
+.btn.btn-default.align-top {
     max-height: 20%;
     max-width: 20%;
 }
 
-.btn.btn-default.align-top>img, .btn.btn-default>img{
+.btn.btn-default.align-top>img,
+.btn.btn-default>img {
     width: 70%;
 }
 
-.btn.btn-outline-dark.text-capitalize{
-    font-size:2vmax;
+.btn.btn-outline-dark.text-capitalize {
+    font-size: 2vmax;
+}
+
+.big-checkbox {
+    width: 38px!important;
+    height: 38px!important;
 }

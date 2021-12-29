@@ -1,5 +1,6 @@
 <?php
 require('bootstrap.php');
+
 if (!isset($_GET["productId"]) || !is_numeric($_GET["productId"])) {
     header("Location: index.php");
     exit;
@@ -16,19 +17,23 @@ if (isVendorLoggedIn()) {
     $disable = "";
 }
 
+$oldProd = $dbh->getProductFromId($_GET["productId"]);
 
 if (
     isset($_POST["nomeProd"]) && is_string($_POST["nomeProd"]) &&
     isset($_POST["descriptionProd"]) && is_string($_POST["descriptionProd"]) &&
     isset($_POST["priceProd"]) && is_numeric($_POST["priceProd"]) &&
-    isset($_POST["quantityProd"]) && is_numeric($_POST["quantityProd"]) &&
-    isset($_FILES["imageProd"]) && is_string($_FILES["imageProd"]["tmp_name"])
+    isset($_POST["quantityProd"]) && is_numeric($_POST["quantityProd"])
 ) {
     isset($_POST["visibilityProd"]) ? $_POST["visibilityProd"] = 1 : $_POST["visibilityProd"] = 0;
     isset($_POST["category"]) ? $dbh->manageCategory($_GET["productId"], $_POST["category"]) : $dbh->deleteAllCategories($_GET["productId"]);
     $filePath = basename($_FILES["imageProd"]['name']);
-    if (move_uploaded_file($_FILES["imageProd"]["tmp_name"], "./img/" . $filePath)) {
+    if (isset($_FILES["imageProd"]["tmp_name"]) && move_uploaded_file($_FILES["imageProd"]["tmp_name"], "./img/" . $filePath)) {
         $dbh->updateProductFromId($_GET["productId"], strtoupper($_POST["nomeProd"]), $_POST["priceProd"], $_POST["quantityProd"], $_POST["visibilityProd"], $filePath, $_POST["descriptionProd"]);
+    }
+    else{
+        $dbh->updateProductFromId($_GET["productId"], strtoupper($_POST["nomeProd"]), $_POST["priceProd"], $_POST["quantityProd"], $_POST["visibilityProd"], $oldProd["foto"], $_POST["descriptionProd"]);
+    
     }
 }
 

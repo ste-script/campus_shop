@@ -73,11 +73,11 @@
                                 <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown">
                                     Nuova Categoria
                                 </a>
-                                <div class="dropdown-menu ">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Nome" form="addNewCategoryForm">
+                                <div class="dropdown-menu p-3 ">
+                                    <div class=" form-group">
+                                        <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Nome" form="addNewCategoryForm" required>
                                     </div>
-                                    <button type="submit" class="btn btn-primary" form="addNewCategoryForm">Sign in</button>
+                                    <button type="submit" class="btn btn-primary mt-1" form="addNewCategoryForm">Aggiungi </button>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                         <div class="col-3">
                             <div class="input-group-prepend">
                                 <div class="input-group-text mb-1">Immagine:</div>
-                                <input type="file" name="imageProd" accept="image/*" form="mainForm">
+                                <input type="file" name="imageProd" accept="image/*" form="mainForm" value="<?php echo $prod["foto"]; ?>">
                             </div>
                         </div>
                     </div>

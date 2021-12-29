@@ -52,14 +52,23 @@
                         <!-- Categories -->
                         <div class="row mb-2">
                             <div class="col-auto">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">Categorie</div>
+                                <div class="nav-item dropdown">
+                                    <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                                        Categorie
+                                    </a>
+                                    <div class="dropdown-menu ">
+                                        <?php
+                                        foreach ($dbh->getCategories() as $category) : ?>
+                                            <div class="custom-control custom-checkbox fs-5 text-capitalize">
+                                                <input type="checkbox" class="custom-control-input dropdown-checkbox ms-1" name="category[]" value="<?php echo $category["id"]; ?>" <?php if (in_array($category["id"], $dbh->getProductCategories($prod['id']))) {
+                                                                                                                                                                            echo "checked";
+                                                                                                                                                                        } ?>>
+                                                <label class="custom-control-label" for="<?php echo $category["id"] ?>">
+                                                    <?php echo $category["nome"]; ?>
+                                                </label>
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
-                                    <input type="text" class="form-control" required name="categoriesProd" id="categoriesProd" value="<?php
-                                                                                                                                        foreach ($dbh->getProductCategories($prod['id']) as $categoryId) {
-                                                                                                                                            echo ucfirst($dbh->getCategoryName($categoryId)) . ", ";
-                                                                                                                                        } ?>">
                                 </div>
                             </div>
                         </div>
@@ -105,7 +114,9 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">Visibile</div>
                                     </div>
-                                    <input type="checkbox" class="form-check-input h1 m-0" value="1" name=" visibilityProd" id="visibilityProd" <?php if($prod['visibile']==1){echo "checked";}?>>
+                                    <input type="checkbox" class="form-check-input h1 m-0" value="1" name=" visibilityProd" id="visibilityProd" <?php if ($prod['visibile'] == 1) {
+                                                                                                                                                    echo "checked";
+                                                                                                                                                } ?>>
                                 </div>
                             </div>
                         </div>

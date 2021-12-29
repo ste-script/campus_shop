@@ -17,6 +17,11 @@
 }
 
 .big-checkbox {
-    width: 38px!important;
-    height: 38px!important;
+    width: 38px;
+    height: 38px;
+}
+
+.dropdown-checkbox {
+    width: 25px;
+    height: 25px;
 }

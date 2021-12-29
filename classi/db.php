@@ -327,7 +327,7 @@ class DatabaseHelper
 
     public function getCategories()
     {
-        $stmt = $this->db->prepare("SELECT id, nome FROM `categoria`, appartenenza_categorie WHERE appartenenza_categorie.id_categoria = categoria.id GROUP BY id");
+        $stmt = $this->db->prepare("SELECT id, nome FROM `categoria`");
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -823,5 +823,37 @@ class DatabaseHelper
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_assoc()["nome"];
+    }
+
+    public function deleteAllCategories($prodId)
+    {
+        $stmt = $this->db->prepare("DELETE FROM `appartenenza_categorie` WHERE `id_prodotto` = ?");
+        $stmt->bind_param("i", $prodId);
+        return $stmt->execute();
+    }
+
+    public function addCategory($prodId)
+    {
+        $stmt = $this->db->prepare("DELETE FROM `appartenenza_categorie` WHERE `id_prodotto` = ?");
+        $stmt->bind_param("i", $prodId);
+        return $stmt->execute();
+    }
+
+    public function insertCategory($prodId, $categoryId)
+    {
+        $stmt = $this->db->prepare("INSERT INTO appartenenza_categorie (id_categoria, id_prodotto) VALUES (?, ?)");
+        $stmt->bind_param("ii", $categoryId, $prodId);
+        return $stmt->execute();
+    }
+
+
+
+    function manageCategory($prodId, $checkedCategories)
+    {
+        if ($this->deleteAllCategories($prodId) && !empty($checkedCategories)) {
+            foreach ($checkedCategories as $categoryId) {
+                $this->insertCategory($prodId, $categoryId);
+            }
+        }
     }
 }

@@ -20,11 +20,21 @@
                         <!-- Categories -->
                         <div class="row mb-2">
                             <div class="col-auto">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">Categorie</div>
+                                <div class="nav-item dropdown">
+                                    <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                                        Categorie
+                                    </a>
+                                    <div class="dropdown-menu ">
+                                        <?php
+                                        foreach ($dbh->getCategories() as $category) : ?>
+                                            <div class="custom-control custom-checkbox fs-5 text-capitalize">
+                                                <input type="checkbox" class="custom-control-input dropdown-checkbox ms-1" id="category <?php echo $category["id"] ?>">
+                                                <label class="custom-control-label" for="category <?php echo $category["id"] ?>">
+                                                    <?php echo $category["nome"]; ?>
+                                                </label>
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
-                                    <input type="text" class="form-control" required name="categoriesProd" id="categoriesProd" placeholder="Categorie Prodotto">
                                 </div>
                             </div>
                         </div>

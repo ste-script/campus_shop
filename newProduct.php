@@ -21,10 +21,13 @@
                         <div class="row mb-2">
                             <div class="col-auto">
                                 <div class="nav-item dropdown">
-                                    <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                                    <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdownCategories">
                                         Categorie
                                     </a>
-                                    <div class="dropdown-menu ">
+                                    <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdownInsert">
+                                        Nuova Categoria
+                                    </a>
+                                    <div class="dropdown-menu " id="dropdownCategories">
                                         <?php
                                         foreach ($dbh->getCategories() as $category) : ?>
                                             <div class="custom-control custom-checkbox fs-5 text-capitalize">
@@ -34,6 +37,9 @@
                                                 </label>
                                             </div>
                                         <?php endforeach; ?>
+                                    </div>
+                                    <div class="dropdown-menu " id="dropdownInsert">
+                                       
                                     </div>
                                 </div>
                             </div>

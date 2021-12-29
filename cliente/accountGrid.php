@@ -7,8 +7,8 @@ require_once("./bootstrap.php");
 
   <div class="row mx-0">
     <div class="col p-3 my-4 mx-3">
-      <h1 class="mb-2"><?php echo $templateParams['gridTitle']; ?></h1>
-      <h3><?php echo $_SESSION["clientEmail"] ?></h3>
+      <div class="mb-2 h1"><?php echo $templateParams['gridTitle']; ?></div>
+      <div class="h3"><?php echo $_SESSION["clientEmail"] ?></div>
     </div>
   </div>
   <div class="row mx-0 text-center">
@@ -32,9 +32,11 @@ require_once("./bootstrap.php");
           <div class="modal-body">
             <div class="row">
               <div class="col-8 my-2">
+                <label class="ps-1 fs-5" for="newMail">Inserire Nuova Mail </label>
                 <input type="text" class="form-control" required placeholder="Nuova Mail" name="newMail" id="newMail">
               </div>
               <div class="col-8 my-2">
+                <label class="ps-1 fs-5" for="checkNewMail">Conferma Nuova Mail </label>
                 <input type="text" class="form-control" required placeholder="Ripeti Nuova Mail" name="checkNewMail" id="checkNewMail">
               </div>
               <span id='mailMessage'></span>
@@ -60,12 +62,15 @@ require_once("./bootstrap.php");
           <div class="modal-body">
             <div class="row">
               <div class="col-8 my-2">
+                <label class="ps-1 fs-5" for="oldPassword">Inserire Password Attuale</label>
                 <input type="password" class="form-control" required placeholder="Password" name="oldPassword" id="oldPassword">
               </div>
               <div class="col-8 my-2">
+                <label class="ps-1 fs-5" for="newPassword">Inserire Nuova Password </label>
                 <input type="password" class="form-control" required placeholder="Nuova Password" name="newPassword" id="newPassword">
               </div>
               <div class="col-8 my-2">
+                <label class="ps-1 fs-5" for="checkNewPassword">Conferma Nuova Password </label>
                 <input type="password" class="form-control" required placeholder="Ripeti Nuova Password" name="checkNewPassword" id="checkNewPassword">
               </div>
               <span id='passwordMessage'></span>

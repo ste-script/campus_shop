@@ -3,7 +3,7 @@
         <?php echo $dbh->getImgFromId($prod['id']) . ">"; ?>
     </div>
     <div class="col-md-5 mt-5">
-        <h1 class="display-5 fw-bolder"><?php echo $prod["nome"]; ?></h1>
+        <div class="display-5 fw-bolder h1"><?php echo $prod["nome"]; ?></div>
         <div class="h3">
             <?php foreach ($dbh->getProductCategories($prod['id']) as $categoryId) : ?>
                 <a class="text-capitalize text-decoration-none text-muted" href="categoryGrid.php?categoryId=<?php echo $categoryId; ?>"><?php echo $dbh->getCategoryName($categoryId); ?> </a>
@@ -16,8 +16,8 @@
         <div class="row">
             <form action="addorder.php" method="POST">
                 <div class="my-3">
-                    <span class="h3">Quantita: </span>
-                    <input type="number" required="required" name="quantity" min="1" value="1" max="<?php echo $prod["quantita_disponibile"] . '"' . $disable ?>>
+                    <label class="h3" for="quantity">Quantita: </label>
+                    <input type="number" required="required" id="quantity" name="quantity" min="1" value="1" max="<?php echo $prod["quantita_disponibile"] . '"' . $disable ?>>
                     <span class=" h3 fw-bold ms-5">€ <?php echo $prod['prezzo']; ?></span>
                 </div>
                 <div class="col-xs-2 my-2">
@@ -47,7 +47,8 @@
                     <!-- Name -->
                     <div class="row mb-2">
                         <div class="col-8">
-                            <input type="text" class="form-control" required value="<?php echo $prod["nome"]; ?>" name="nomeProd" id="nomeProd" form="mainForm">
+                            <label class="ps-1 fs-5" for="nomeProd">Modifica Nome Prodotto</label>
+                            <input type="text" class="form-control" name="nomeProd" id="nomeProd" required value="<?php echo $prod["nome"]; ?>"  form="mainForm">
                         </div>
                     </div>
                     <!-- Categories -->
@@ -61,9 +62,9 @@
                                     <?php
                                     foreach ($dbh->getCategories() as $category) : ?>
                                         <div class="custom-control custom-checkbox fs-5 text-capitalize">
-                                            <input type="checkbox" class="custom-control-input dropdown-checkbox ms-1" name="category[]" value="<?php echo $category["id"]; ?>" form="mainForm" <?php if (in_array($category["id"], $dbh->getProductCategories($prod['id']))) {
-                                                                                                                                                                                                    echo "checked";
-                                                                                                                                                                                                } ?>>
+                                            <input type="checkbox" class="custom-control-input dropdown-checkbox ms-1" name="category[]" id="<?php echo $category["id"] ?>" value="<?php echo $category["id"]; ?>" form="mainForm" <?php if (in_array($category["id"], $dbh->getProductCategories($prod['id']))) {
+                                                                                                                                                                                                                                        echo "checked";
+                                                                                                                                                                                                                                    } ?>>
                                             <label class="custom-control-label" for="<?php echo $category["id"] ?>">
                                                 <?php echo $category["nome"]; ?>
                                             </label>
@@ -73,11 +74,12 @@
                                 <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown">
                                     Nuova Categoria
                                 </a>
-                                <div class="dropdown-menu p-3 ">
-                                    <div class=" form-group">
-                                        <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Nome" form="addNewCategoryForm" required>
+                                <div class="dropdown-menu p-3">
+                                    <div class="form-group">
+                                        <label class="ps-1 fs-5" for="categoryName">Inserisci Nome Categoria</label>
+                                        <input type="text" class="form-control mb-1" id="categoryName" name="categoryName" placeholder="Nome" form="addNewCategoryForm">
                                     </div>
-                                    <button type="submit" class="btn btn-primary mt-1" form="addNewCategoryForm">Aggiungi </button>
+                                    <button type="submit" class="btn btn-primary" form="addNewCategoryForm">Sign in</button>
                                 </div>
                             </div>
                         </div>
@@ -85,6 +87,7 @@
                     <!-- Description -->
                     <div class="row-auto mb-2">
                         <div class="col-auto">
+                            <label class="ps-1 fs-5" for="descriptionProd">Modifica Descrizione Prodotto</label>
                             <textarea type="text" class="form-control" required name="descriptionProd" id="descriptionProd" form="mainForm"><?php echo $prod['descrizione'] ?></textarea>
                         </div>
                     </div>
@@ -93,18 +96,18 @@
                         <div class="col-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <div class="input-group-text">€</div>
+                                    <label class="input-group-text" for="priceProd">€</label>
                                 </div>
-                                <input type="text" class="form-control" required value="<?php echo $prod["prezzo"]; ?>" name="priceProd" id="priceProd" form="mainForm">
+                                <input type="text" class="form-control" name="priceProd" id="priceProd" required value="<?php echo $prod["prezzo"]; ?>" form="mainForm">
                             </div>
                         </div>
                         <!-- Quantity -->
                         <div class="col-5">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <div class="input-group-text">Quantità</div>
+                                    <label class="input-group-text" for="quantityProd">Quantità</label>
                                 </div>
-                                <input type="text" class="form-control" required value="<?php echo $prod["quantita_disponibile"]; ?>" name="quantityProd" id="quantityProd" form="mainForm">
+                                <input type="text" class="form-control" name="quantityProd" id="quantityProd" required value="<?php echo $prod["quantita_disponibile"]; ?>"  form="mainForm">
                             </div>
                         </div>
                     </div>
@@ -112,8 +115,8 @@
                     <div class="row mb-2">
                         <div class="col-3">
                             <div class="input-group-prepend">
-                                <div class="input-group-text mb-1">Immagine:</div>
-                                <input type="file" name="imageProd" accept="image/*" form="mainForm" value="<?php echo $prod["foto"]; ?>">
+                                <label class="input-group-text mb-1" for="imageProd">Immagine:</label>
+                                <input type="file" name="imageProd" id="imageProd" accept="image/*" form="mainForm" value="<?php echo $prod["foto"]; ?>">
                             </div>
                         </div>
                     </div>
@@ -122,7 +125,7 @@
                         <div class="col-5">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <div class="input-group-text">Visibile</div>
+                                    <label class="input-group-text" for="visibilityProd">Visibile</label>
                                 </div>
                                 <input type="checkbox" class="form-check-input h1 m-0" value="1" name=" visibilityProd" id="visibilityProd" form="mainForm" <?php if ($prod['visibile'] == 1) {
                                                                                                                                                                 echo "checked";

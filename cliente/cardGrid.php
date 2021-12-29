@@ -24,14 +24,17 @@ require_once("./bootstrap.php");
           <div class="modal-body">
             <div class="row">
               <div class="col-8">
+                <label class="ps-1 fs-5" for="card">Inserire Numero Carta </label>
                 <input type="text" class="form-control" size="10" required placeholder="Numero Carta" name="card" id="card" pattern="[0-9]{10}">
               </div>
             </div>
             <div class="row my-1">
               <div class="col-6">
-                <input placeholder="Date" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" id="date" name="date">
+                <label class="ps-1 fs-5" for="date">Inserire Data Scadenza </label>
+                <input id="date" name="date" placeholder="Date" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" id="date" name="date">
               </div>
-              <div class="col-3 text-end">
+              <div class="col-6">
+                <label class="ps-1 fs-5" for="cvv">Codice di Sicurezza </label>
                 <input type="text" class="form-control" size="3" required placeholder="CVV" name="cvv" id="cvv" pattern="[0-9]{3}">
               </div>
             </div>

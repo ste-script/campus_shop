@@ -8,7 +8,6 @@ if (!isUserLoggedIn()) {
     header("Location: login.php");
     exit;
 }
-var_dump($_POST["card"], $_POST["date"], $_SESSION["userId"], $_POST["cvv"]);
 if (isset($_POST["card"]) && is_numeric($_POST["card"]) && isset($_POST["cvv"]) && is_numeric($_POST["cvv"]) && isset($_POST["date"])) {
     $dbh->addNewCard($_POST["card"], $_POST["date"], $_SESSION["userId"], $_POST["cvv"]);
 }

@@ -9,8 +9,8 @@
 
 ?>
 
-<h1 class="mx-5 mt-5"><?php echo $vendorName;?></h1>
-<h3 class="mx-5 mb-5 text-secondary"><?php echo $dbh->getVendorContacts($_GET["vendorId"])?></h3>
+<div class="mx-5 mt-5 h1"><?php echo $vendorName;?><div>
+<div class="mx-5 mb-5 text-secondary h3"><?php echo $dbh->getVendorContacts($_GET["vendorId"])?></div>
 <?php   
     if (!empty($templateParams['products'])) {
         include('.\cliente\productgrid.php');

@@ -6,9 +6,9 @@ $gridTitle = $templateParams["gridTitle"];
 <div class="container-xl">
   <div class="row mx-0">
     <div class="col text-center">
-      <h1 class="text-capitalize p-5">
+      <div class="text-capitalize p-5 h1">
         <?php echo $gridTitle; ?>
-      </h1>
+      </div>
     </div>
     <?php if (!empty($prod)) : ?>
       <div class="col text-center p-5">
@@ -54,6 +54,7 @@ $gridTitle = $templateParams["gridTitle"];
               </div>
               <div class="row my-1">
                 <div class="col-3">
+                  <label class="ps-1 fs-5" for="cvv">Codice di Sicurezza </label>
                   <input type="text" class="form-control" size="3" required placeholder="CVV" name="cvv" id="cvv" pattern="[0-9]{3}">
                 </div>
               </div>
@@ -78,9 +79,9 @@ $gridTitle = $templateParams["gridTitle"];
       <div class="col-3 align-top text-end">
         <form action="#" method="POST">
           <div class="col">
-            <span class="h3">Quantità: </span>
+            <label class="h3" for="quantity">Quantità: </label>
             <div class="col-xl-3 col-md-6 col-12 ms-auto">
-              <input type="number" class="form-control" required="required" name="quantity" min="1" value="<?php echo $p["quantita_prodotto"] ?>">
+              <input type="number" class="form-control" required="required" name="quantity" id="quantity" min="1" value="<?php echo $p["quantita_prodotto"] ?>">
             </div>
             <span class="h3 fw-bold">€ <?php echo $p['prezzo']; ?></span>
           </div>

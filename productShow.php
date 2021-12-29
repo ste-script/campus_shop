@@ -41,90 +41,99 @@
                     <h5 class="modal-title" id="staticBackdropLabel">Modifica <?php echo $prod["nome"]; ?></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="#" method="POST" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <!-- Name -->
-                        <div class="row mb-2">
-                            <div class="col-8">
-                                <input type="text" class="form-control" required value="<?php echo $prod["nome"]; ?>" name="nomeProd" id="nomeProd">
-                            </div>
+                <div class="modal-body">
+                    <form id="addNewCategoryForm" action="./addNewCategory.php" method="POST"></form>
+                    <form id="mainForm" action="#" method="POST" enctype="multipart/form-data"></form>
+                    <!-- Name -->
+                    <div class="row mb-2">
+                        <div class="col-8">
+                            <input type="text" class="form-control" required value="<?php echo $prod["nome"]; ?>" name="nomeProd" id="nomeProd" form="mainForm">
                         </div>
-                        <!-- Categories -->
-                        <div class="row mb-2">
-                            <div class="col-auto">
-                                <div class="nav-item dropdown">
-                                    <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                                        Categorie
-                                    </a>
-                                    <div class="dropdown-menu ">
-                                        <?php
-                                        foreach ($dbh->getCategories() as $category) : ?>
-                                            <div class="custom-control custom-checkbox fs-5 text-capitalize">
-                                                <input type="checkbox" class="custom-control-input dropdown-checkbox ms-1" name="category[]" value="<?php echo $category["id"]; ?>" <?php if (in_array($category["id"], $dbh->getProductCategories($prod['id']))) {
-                                                                                                                                                                            echo "checked";
-                                                                                                                                                                        } ?>>
-                                                <label class="custom-control-label" for="<?php echo $category["id"] ?>">
-                                                    <?php echo $category["nome"]; ?>
-                                                </label>
-                                            </div>
-                                        <?php endforeach; ?>
+                    </div>
+                    <!-- Categories -->
+                    <div class="row mb-2">
+                        <div class="col-auto">
+                            <div class="nav-item dropdown">
+                                <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                                    Categorie
+                                </a>
+                                <div class="dropdown-menu ">
+                                    <?php
+                                    foreach ($dbh->getCategories() as $category) : ?>
+                                        <div class="custom-control custom-checkbox fs-5 text-capitalize">
+                                            <input type="checkbox" class="custom-control-input dropdown-checkbox ms-1" name="category[]" value="<?php echo $category["id"]; ?>" form="mainForm" <?php if (in_array($category["id"], $dbh->getProductCategories($prod['id']))) {
+                                                                                                                                                                                                    echo "checked";
+                                                                                                                                                                                                } ?>>
+                                            <label class="custom-control-label" for="<?php echo $category["id"] ?>">
+                                                <?php echo $category["nome"]; ?>
+                                            </label>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                                <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                                    Nuova Categoria
+                                </a>
+                                <div class="dropdown-menu ">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Nome" form="addNewCategoryForm">
                                     </div>
+                                    <button type="submit" class="btn btn-primary" form="addNewCategoryForm">Sign in</button>
                                 </div>
                             </div>
                         </div>
-                        <!-- Description -->
-                        <div class="row-auto mb-2">
-                            <div class="col-auto">
-                                <textarea type="text" class="form-control" required name="descriptionProd" id="descriptionProd"><?php echo $prod['descrizione'] ?></textarea>
-                            </div>
+                    </div>
+                    <!-- Description -->
+                    <div class="row-auto mb-2">
+                        <div class="col-auto">
+                            <textarea type="text" class="form-control" required name="descriptionProd" id="descriptionProd" form="mainForm"><?php echo $prod['descrizione'] ?></textarea>
                         </div>
-                        <div class="row mb-2">
-                            <!-- Price -->
-                            <div class="col-4">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">€</div>
-                                    </div>
-                                    <input type="text" class="form-control" required value="<?php echo $prod["prezzo"]; ?>" name="priceProd" id="priceProd">
-                                </div>
-                            </div>
-                            <!-- Quantity -->
-                            <div class="col-5">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">Quantità</div>
-                                    </div>
-                                    <input type="text" class="form-control" required value="<?php echo $prod["quantita_disponibile"]; ?>" name="quantityProd" id="quantityProd">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Image -->
-                        <div class="row mb-2">
-                            <div class="col-3">
+                    </div>
+                    <div class="row mb-2">
+                        <!-- Price -->
+                        <div class="col-4">
+                            <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <div class="input-group-text mb-1">Immagine:</div>
-                                    <input type="file" name="imageProd" accept="image/*">
+                                    <div class="input-group-text">€</div>
                                 </div>
+                                <input type="text" class="form-control" required value="<?php echo $prod["prezzo"]; ?>" name="priceProd" id="priceProd" form="mainForm">
                             </div>
                         </div>
-                        <!-- Visible -->
-                        <div class="row mb-2">
-                            <div class="col-5">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">Visibile</div>
-                                    </div>
-                                    <input type="checkbox" class="form-check-input h1 m-0" value="1" name=" visibilityProd" id="visibilityProd" <?php if ($prod['visibile'] == 1) {
-                                                                                                                                                    echo "checked";
-                                                                                                                                                } ?>>
+                        <!-- Quantity -->
+                        <div class="col-5">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Quantità</div>
                                 </div>
+                                <input type="text" class="form-control" required value="<?php echo $prod["quantita_disponibile"]; ?>" name="quantityProd" id="quantityProd" form="mainForm">
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <input type="submit" class="btn btn-success" value="Conferma">
+                    <!-- Image -->
+                    <div class="row mb-2">
+                        <div class="col-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text mb-1">Immagine:</div>
+                                <input type="file" name="imageProd" accept="image/*" form="mainForm">
+                            </div>
+                        </div>
                     </div>
-                </form>
+                    <!-- Visible -->
+                    <div class="row mb-2">
+                        <div class="col-5">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Visibile</div>
+                                </div>
+                                <input type="checkbox" class="form-check-input h1 m-0" value="1" name=" visibilityProd" id="visibilityProd" form="mainForm" <?php if ($prod['visibile'] == 1) {
+                                                                                                                                                                echo "checked";
+                                                                                                                                                            } ?>>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-success" value="Conferma" form="mainForm">
+                </div>
             </div>
         </div>
     </div>

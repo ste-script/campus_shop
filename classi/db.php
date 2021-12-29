@@ -857,4 +857,12 @@ class DatabaseHelper
             }
         }
     }
+
+    public function newCategory($categoryName)
+    {
+        $query = "INSERT INTO `categoria` (`nome`) VALUES (?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $categoryName);
+        $stmt->execute();
+    }
 }

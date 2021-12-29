@@ -669,6 +669,7 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("sdiissi", $nome, $prezzo, $qta, $visible, $foto, $desc, $vendorId);
         $stmt->execute();
+        return $this->db->insert_id;
     }
 
     //0 hidden, 1 visible

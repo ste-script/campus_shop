@@ -21,25 +21,19 @@
                         <div class="row mb-2">
                             <div class="col-auto">
                                 <div class="nav-item dropdown">
-                                    <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdownCategories">
+                                    <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown">
                                         Categorie
                                     </a>
-                                    <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdownInsert">
-                                        Nuova Categoria
-                                    </a>
-                                    <div class="dropdown-menu " id="dropdownCategories">
+                                    <div class="dropdown-menu ">
                                         <?php
                                         foreach ($dbh->getCategories() as $category) : ?>
                                             <div class="custom-control custom-checkbox fs-5 text-capitalize">
-                                                <input type="checkbox" class="custom-control-input dropdown-checkbox ms-1" id="category <?php echo $category["id"] ?>">
+                                            <input type="checkbox" class="custom-control-input dropdown-checkbox ms-1" name="category[]" value="<?php echo $category["id"]; ?>">
                                                 <label class="custom-control-label" for="category <?php echo $category["id"] ?>">
                                                     <?php echo $category["nome"]; ?>
                                                 </label>
                                             </div>
                                         <?php endforeach; ?>
-                                    </div>
-                                    <div class="dropdown-menu " id="dropdownInsert">
-                                       
                                     </div>
                                 </div>
                             </div>

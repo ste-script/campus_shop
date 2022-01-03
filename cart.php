@@ -6,10 +6,6 @@ if (!isUserLoggedIn()) {
 }
 $templateParams["titolo"] = "Campus Shop - Carrello";
 include("./layouts/header.php");
-if (!isUserLoggedIn()) {
-    header("Location: login.php");
-    exit;
-}
 if (isset($_POST["removeProduct"]) && $_POST["removeProduct"] == 1) {
     $dbh->deleteCollo($dbh->getLastOrderIdByClientId($_SESSION['userId']), $_POST["productId"]);
 } elseif (isset($_POST["removeProduct"]) && $_POST["removeProduct"] == 0) {

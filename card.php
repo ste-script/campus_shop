@@ -1,13 +1,11 @@
 <?php
 require_once("./bootstrap.php");
-
-$templateParams["titolo"] = "Campus Shop - Carte";
-include("./layouts/header.php");
-
 if (!isUserLoggedIn()) {
     header("Location: login.php");
     exit;
 }
+$templateParams["titolo"] = "Campus Shop - Carte";
+include("./layouts/header.php");
 if (isset($_POST["card"]) && is_numeric($_POST["card"]) && isset($_POST["cvv"]) && is_numeric($_POST["cvv"]) && isset($_POST["date"])) {
     $dbh->addNewCard($_POST["card"], $_POST["date"], $_SESSION["userId"], $_POST["cvv"]);
 }

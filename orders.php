@@ -1,13 +1,11 @@
 <?php
 require_once("./bootstrap.php");
-
-$templateParams["titolo"] = "Campus Shop - Ordini";
-include("./layouts/header.php");
-
 if (!isUserLoggedIn()) {
     header("Location: login.php");
     exit;
 }
+$templateParams["titolo"] = "Campus Shop - Ordini";
+include("./layouts/header.php");
 ?>
 <div class="container-xl">
     <div class="row mx-0">

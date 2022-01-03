@@ -12,7 +12,7 @@ $cost = $templateParams["cost"];
       </div>
       <?php if (!empty($prod)) : ?>
         <div class="text-capitalize p-1 h4">
-          Totale: <?php echo $cost; ?>
+          Totale: €<?php echo $cost; ?>
         </div>
       <?php endif ?>
     </div>

@@ -145,16 +145,28 @@ function updateHeader() {
 }
 
 function generaLista(prodotti) {
-
+    result = '';
+    if (prodotti.length > 0) {
+        for (let i = 0; i < prodotti.length; i++) {
+            let articolo = `
+            <li><a class="dropdown-item" href="product.php?productId=${prodotti[i]["id"]}">${prodotti[i]["nome"]}</a></li>`;
+            result += articolo;
+        }
+    }
+    return result;
 }
 
-function searchProducts(name) {
+function searchProducts() {
     input = document.getElementById('productName');
     filter = input.value.toUpperCase();
-    $.getJSON("api-search.php", function(data) {
-        let lista = generaLista(data);
-
-    })
+    if (filter.length > 0) {
+        $.getJSON("api-search.php", {
+            productName: filter
+        }, function(data) {
+            let lista = generaLista(data);
+            $("#productList").html(lista);
+        })
+    }
 }
 
 function carica(status) {

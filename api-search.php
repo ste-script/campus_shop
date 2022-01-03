@@ -6,4 +6,4 @@ if (!is_string($_GET["productName"])) {
 }
 $prod = $dbh->getProductsNameByName($_GET["productName"]);
 header('Content-Type: application/json');
-echo json_encode($orders);
+echo json_encode($prod);

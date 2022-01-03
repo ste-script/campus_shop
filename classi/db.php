@@ -507,7 +507,7 @@ class DatabaseHelper
 
     public function getProductsNameByName($productName)
     {
-        $stmt = $this->db->prepare("SELECT  nome  FROM prodotto WHERE visibile=1 AND nome LIKE ? ");
+        $stmt = $this->db->prepare("SELECT  id , nome  FROM prodotto WHERE visibile=1 AND nome LIKE ? ");
         $productName = "%" . $productName . "%";
         $stmt->bind_param("s", $productName);
         $stmt->execute();

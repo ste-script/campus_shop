@@ -34,16 +34,19 @@
             <img id="logoImg" src="./img/logo.png" alt="HomePage">
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <div class="fas fa-bars" id="menuicon" style="color:#fff; font-size:28px;"></div>
-        </button>
+        <button class="navbar-toggler fas fa-bars" type="button" id="menuicon" style="color:#fff; font-size:28px;" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <form class="d-flex ms-auto" action="search.php" method="GET" role='search'>
                 <label for='productName'>
                     <span class='visually-hidden'>Cerca prodotto</span>
                 </label>
-                <input class="form-control me-2 w-auto" onkeyup="searchProducts()" aria-label="Cerca prodotti" type="search" placeholder="Cerca prodotti" id="productName" name="productName">
+                <div class="dropdown">
+                <input class="form-control me-2 w-auto dropdown-toggle" onkeyup="searchProducts()" autocomplete="off" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Cerca prodotti" type="search" placeholder="Cerca prodotti" id="productName" name="productName">
+                <ul class="dropdown-menu" aria-labelledby="productName" id="productList">
+                    
+                </ul>
+                </div>
                 <button class="btn " type="submit">
                     <span class="fa fa-search text-white"></span>
                 </button>

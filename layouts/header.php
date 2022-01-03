@@ -76,7 +76,7 @@
                         </li>
                     <?php else : ?>
                         <li class="nav-item ms-2">
-                            <a class="nav-link" href="<?php echo $item["link"]; ?>"><?php echo $item["nome"]; ?></a>
+                            <a class="nav-link" href="<?php echo $item["link"];?>" title="<?php echo $item["title"];?>"><?php echo $item["nome"]; ?></a>
                         </li>
                     <?php endif; ?>
                 <?php endforeach ?>

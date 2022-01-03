@@ -7,7 +7,7 @@ if (isVendorLoggedIn()) {
 $templateParams["titolo"] = "Campus Shop - Home";
 include("./layouts/header.php");
 ?>
-<h1 class="text-center my-5">Campus Shop</h1>
+<div class="text-center my-5 h1">Campus Shop</div>
 <?php
 $categories = $dbh->getCategories();
 for ($categoryIndex = 0; $categoryIndex < 4 && $categoryIndex < count($categories); $categoryIndex++) {

@@ -28,30 +28,30 @@ function getHeaderElements()
     if (isUserLoggedIn()) {
 
         return [
-            ['link' => '#', 'nome' => 'Categorie'],
-            ['link' => 'cart.php', 'nome' => 'Carrello'],
-            ['link' => 'card.php', 'nome' => 'Carte'],
-            ['link' => 'orders.php', 'nome' => 'Ordini'],
-            ['link' => 'account.php', 'nome' => 'Profilo'],
-            ['link' => 'notifiche.php', 'nome' => '<i id="notifyicon" class="fas fa-bell"></i>'],
-            ['link' => 'logout.php', 'nome' => 'Esci']
+            ['link' => '#', 'nome' => 'Categorie', 'title' => 'Categorie'],
+            ['link' => 'cart.php', 'nome' => 'Carrello', 'title' => 'Carrello'],
+            ['link' => 'card.php', 'nome' => 'Carte', 'title' => 'Carte'],
+            ['link' => 'orders.php', 'nome' => 'Ordini', 'title' => 'Ordini'],
+            ['link' => 'account.php', 'nome' => 'Profilo', 'title' => 'Profilo'],
+            ['link' => 'notifiche.php', 'nome' => '<span id="notifyicon" class="fas fa-bell"></span>', 'title' => 'Notifiche'],
+            ['link' => 'logout.php', 'nome' => 'Esci', 'title' => 'Esci']
         ];
     } else if (isVendorLoggedIn()) {
 
         return [
-            ['link' => "vendorProducts.php?vendorId=" . $_SESSION["userId"], 'nome' => 'Prodotti'],
-            ['link' => 'vendorOrder.php', 'nome' => 'Ordini'],
-            ['link' => 'account.php', 'nome' => 'Profilo'],
-            ['link' => 'notifiche.php', 'nome' => '<i id="notifyicon" class="fas fa-bell"></i>'],
-            ['link' => 'logout.php', 'nome' => 'Esci']
+            ['link' => "vendorProducts.php?vendorId=" . $_SESSION["userId"], 'nome' => 'Prodotti', 'title' => 'Prodotti'],
+            ['link' => 'vendorOrder.php', 'nome' => 'Ordini', 'title' => 'Ordini'],
+            ['link' => 'account.php', 'nome' => 'Profilo', 'title' => 'Profilo'],
+            ['link' => 'notifiche.php', 'nome' => '<span id="notifyicon" class="fas fa-bell"></span>', 'title' => 'Notifiche'],
+            ['link' => 'logout.php', 'nome' => 'Esci', 'title' => 'Esci']
         ];
     } else {
         return [
-            ['link' => '#', 'nome' => 'Categorie'],
-            ['link' => 'login.php', 'nome' => 'Carrello'],
-            ['link' => 'login.php', 'nome' => 'Carte'],
-            ['link' => 'login.php', 'nome' => 'Ordini'],
-            ['link' => 'login.php', 'nome' => 'Accedi']
+            ['link' => '#', 'nome' => 'Categorie', 'title' => 'Categorie'],
+            ['link' => 'login.php', 'nome' => 'Carrello', 'title' => 'Carrello'],
+            ['link' => 'login.php', 'nome' => 'Carte', 'title' => 'Carte'],
+            ['link' => 'login.php', 'nome' => 'Ordini', 'title' => 'Ordini'],
+            ['link' => 'login.php', 'nome' => 'Accedi', 'title' => 'Accedi']
         ];
     }
 }

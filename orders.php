@@ -12,9 +12,9 @@ if (!isUserLoggedIn()) {
 <div class="container-xl">
     <div class="row mx-0">
         <div class="col text-center">
-            <h1 class="text-capitalize pt-5 pb-2">
+            <div class="text-capitalize pt-5 pb-2 h1">
                 Ordini
-            </h1>
+            </div>
         </div>
     </div>
 </div>

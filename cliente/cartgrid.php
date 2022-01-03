@@ -2,6 +2,7 @@
 $index = 0;
 $prod = $templateParams["products"];
 $gridTitle = $templateParams["gridTitle"];
+$cost = $templateParams["cost"];
 ?>
 <div class="container-xl">
   <div class="row mx-0">
@@ -9,6 +10,11 @@ $gridTitle = $templateParams["gridTitle"];
       <div class="text-capitalize p-5 h1">
         <?php echo $gridTitle; ?>
       </div>
+      <?php if (!empty($prod)) : ?>
+        <div class="text-capitalize p-1 h4">
+          Totale: <?php echo $cost; ?>
+        </div>
+      <?php endif ?>
     </div>
     <?php if (!empty($prod)) : ?>
       <div class="col text-center p-5">

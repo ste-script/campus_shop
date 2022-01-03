@@ -14,19 +14,6 @@ if (!isVendorLoggedIn()) {
         setInterval(carica, 20000, "spediti");
         setInterval(carica, 20000, "preparazione");
     });
-
-    function carica(status) {
-        $.getJSON("api-ordini.php", {
-            stato: status
-        }, function(data) {
-            let articoli = generaOrdini(data, status);
-            if (status == "spediti") {
-                $("#delivered_order").html(articoli);
-            } else if (status == "preparazione") {
-                $("#progress_order").html(articoli);
-            }
-        })
-    }
 </script>
 
 

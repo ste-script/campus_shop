@@ -505,6 +505,17 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getProductsNameByName($productName)
+    {
+        $stmt = $this->db->prepare("SELECT  nome  FROM prodotto WHERE visibile=1 AND nome LIKE ? ");
+        $productName = "%" . $productName . "%";
+        $stmt->bind_param("s", $productName);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getImgFromId($id)
     {
         $stmt = $this->db->prepare("SELECT  nome, foto  FROM prodotto  WHERE id=?");

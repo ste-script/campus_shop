@@ -130,3 +130,65 @@ function generaOrdini(ordini, stato) {
     result += "</div>";
     return result;
 }
+
+function updateHeader() {
+    $.getJSON("api-notifica.php", function(data) {
+        let articoli = checkNotifiche(data);
+        if (articoli) {
+            $("#notifyicon").css("color", "red");
+            $("#menuicon").css("color", "red");
+        } else {
+            $("#notifyicon").css("color", "white");
+            $("#menuicon").css("color", "white");
+        }
+    })
+}
+
+function generaLista(prodotti) {
+
+}
+
+function searchProducts(name) {
+    input = document.getElementById('productName');
+    filter = input.value.toUpperCase();
+    $.getJSON("api-search.php", function(data) {
+        let lista = generaLista(data);
+
+    })
+}
+
+function carica(status) {
+    $.getJSON("api-ordini.php", {
+        stato: status
+    }, function(data) {
+        let articoli = generaOrdini(data, status);
+        if (status == "spediti") {
+            $("#delivered_order").html(articoli);
+        } else if (status == "preparazione") {
+            $("#progress_order").html(articoli);
+        }
+    })
+}
+
+function carica_notifica() {
+    $.getJSON("api-notifica.php", function(data) {
+        let articoli = generaNotifiche(data);
+        const main = $("#notifiche");
+        main.html(articoli);
+    })
+}
+
+function elimina_notifica(id) {
+    $(".row").html = "ciao";
+    $.ajax({
+        url: 'removeNotify.php',
+        type: 'POST',
+        data: {
+            deleteId: id
+        },
+        success: function() {
+            carica();
+            updateHeader();
+        }
+    })
+}

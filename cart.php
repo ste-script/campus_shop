@@ -1,9 +1,11 @@
 <?php
 require_once("./bootstrap.php");
-
+if (!isUserLoggedIn()) {
+    header("Location: login.php");
+    exit;
+}
 $templateParams["titolo"] = "Campus Shop - Carrello";
 include("./layouts/header.php");
-
 if (!isUserLoggedIn()) {
     header("Location: login.php");
     exit;

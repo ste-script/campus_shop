@@ -5,8 +5,8 @@ if (isUserLoggedIn()) {
     exit;
 }
 $templateParams["titolo"] = "Campus Shop - Registrazione";
-if (isset($_POST["clientEmail"]) && isset($_POST["clientPassword"]) && isset($_POST["cf"])) {
-    $registerResult = $dbh->registerClient($_POST["clientEmail"], $_POST["clientPassword"], $_POST["cf"]);
+if (isset($_POST["clientEmail"]) && isset($_POST["password"]) && isset($_POST["cf"])) {
+    $registerResult = $dbh->registerClient($_POST["clientEmail"], $_POST["password"], $_POST["cf"]);
     if (!$registerResult) {
         //Login errato
         $templateParams["erroreLogin"] = "Errore nella registrazione";

@@ -29,8 +29,8 @@ function getHeaderElements()
 
         return [
             ['link' => '#', 'nome' => 'Categorie', 'title' => 'Categorie'],
-            ['link' => 'cart.php', 'nome' => 'Carrello', 'title' => 'Carrello'],
-            ['link' => 'card.php', 'nome' => 'Carte', 'title' => 'Carte'],
+            ['link' => 'cart.php', 'nome' => "Carrello<span id='cardCount'><span>", 'title' => 'Carrello'],
+            ['link' => 'card.php', 'nome' => "Carte", 'title' => "Carte"],
             ['link' => 'orders.php', 'nome' => 'Ordini', 'title' => 'Ordini'],
             ['link' => 'account.php', 'nome' => 'Profilo', 'title' => 'Profilo'],
             ['link' => 'notifiche.php', 'nome' => '<span id="notifyicon" class="fas fa-bell"></span>', 'title' => 'Notifiche'],

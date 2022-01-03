@@ -14,6 +14,11 @@
         <p class="lead my-2"><?php echo $prod['descrizione'] ?></p>
         <hr class="singleline">
         <div class="row">
+        <?php
+        if (isset($_GET["ordered"])) {
+            echo "<p class='text-success'> Prodotto aggiunto al carrello </p>";
+        }
+        ?>
             <form action="addorder.php" method="POST">
                 <div class="my-3">
                     <label class="h3" for="quantity">Quantita: </label>
@@ -26,11 +31,7 @@
                 <input type="hidden" value="<?php echo  $_GET["productId"]; ?>" name="productId">
             </form>
         </div>
-        <?php
-        if (isset($_GET["ordered"])) {
-            echo "<p class='text-success'> Prodotto aggiunto al carrello </p>";
-        }
-        ?>
+        
     </div>
 
     <!-- Modal -->

@@ -29,7 +29,7 @@ function getHeaderElements()
 
         return [
             ['link' => '#', 'nome' => 'Categorie', 'title' => 'Categorie'],
-            ['link' => 'cart.php', 'nome' => "Carrello<span id='cardCount'><span>", 'title' => 'Carrello'],
+            ['link' => 'cart.php', 'nome' => "Carrello<span id='cartCount'><span>", 'title' => 'Carrello'],
             ['link' => 'card.php', 'nome' => "Carte", 'title' => "Carte"],
             ['link' => 'orders.php', 'nome' => 'Ordini', 'title' => 'Ordini'],
             ['link' => 'account.php', 'nome' => 'Profilo', 'title' => 'Profilo'],

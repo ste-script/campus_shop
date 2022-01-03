@@ -142,8 +142,8 @@ function updateHeader() {
             $("#menuicon").css("color", "white");
         }
     })
-    $.getJSON("api-cardcount.php", function(data) {
-        $("#cardCount").html("(" + data + ")");
+    $.getJSON("api-cartcount.php", function(data) {
+        $("#cartCount").html("(" + data + ")");
     })
 }
 

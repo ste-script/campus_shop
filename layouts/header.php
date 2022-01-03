@@ -15,27 +15,16 @@
     <link rel="stylesheet" href="./css/style.css">
     <script src="./classi/script.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            updateHeader();
+            setInterval(updateHeader, 20000);
+        });
+    </script>
+
 </head>
 
-<script>
-    $(document).ready(function() {
-        updateHeader();
-        setInterval(updateHeader, 20000);
-    });
 
-    function updateHeader() {
-        $.getJSON("api-notifica.php", function(data) {
-            let articoli = checkNotifiche(data);
-            if (articoli) {
-                $("#notifyicon").css("color", "red");
-                $("#menuicon").css("color", "red");
-            } else {
-                $("#notifyicon").css("color", "white");
-                $("#menuicon").css("color", "white");
-            }
-        })
-    }
-</script>
 
 <body class="min-vh-100 d-flex flex-column">
     <!-- BAR-->
@@ -54,7 +43,7 @@
                 <label for='productName'>
                     <span class='visually-hidden'>Cerca prodotto</span>
                 </label>
-                <input class="form-control me-2 w-auto" aria-label="Cerca prodotti" type="search" placeholder="Cerca prodotti" id="productName" name="productName">
+                <input class="form-control me-2 w-auto" onkeyup="searchProducts()" aria-label="Cerca prodotti" type="search" placeholder="Cerca prodotti" id="productName" name="productName">
                 <button class="btn " type="submit">
                     <span class="fa fa-search text-white"></span>
                 </button>
@@ -76,7 +65,7 @@
                         </li>
                     <?php else : ?>
                         <li class="nav-item ms-2">
-                            <a class="nav-link" href="<?php echo $item["link"];?>" title="<?php echo $item["title"];?>"><?php echo $item["nome"]; ?></a>
+                            <a class="nav-link" href="<?php echo $item["link"]; ?>" title="<?php echo $item["title"]; ?>"><?php echo $item["nome"]; ?></a>
                         </li>
                     <?php endif; ?>
                 <?php endforeach ?>
@@ -84,5 +73,4 @@
 
         </div>
     </nav>
-
     <!-- /BAR-->

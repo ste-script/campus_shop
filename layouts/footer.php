@@ -2,7 +2,7 @@
   <!-- Grid container -->
   <div class="container p-3 mb-1 ">
     <!-- Github -->
-    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button" title="Github link"><strong class="fab fa-github"></strong></a>
+    <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/ste-script/campus_shop" target="_blank" role="button" title="Github link"><strong class="fab fa-github"></strong></a>
 
   </div>
 

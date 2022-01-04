@@ -42,7 +42,7 @@
                     <span class='visually-hidden'>Cerca prodotto</span>
                 </label>
                 <div class="dropdown">
-                <input class="form-control me-2 w-auto dropdown-toggle" onkeyup="searchProducts()" autocomplete="off" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Cerca prodotti" type="search" placeholder="Cerca prodotti" id="productName" name="productName">
+                <input class="form-control me-2 w-auto dropdown-toggle" onkeyup="searchProducts()" autocomplete="off" data-bs-toggle="dropdown" aria-label="Cerca prodotti" type="search" placeholder="Cerca prodotti" id="productName" name="productName">
                 <ul class="dropdown-menu" aria-labelledby="productName" id="productList">
                     
                 </ul>

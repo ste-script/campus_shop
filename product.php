@@ -9,15 +9,20 @@ if (empty($dbh->getProductFromId($_GET["productId"]))) {
     header("Location: index.php");
     exit;
 }
-if (isVendorLoggedIn()) {
+$oldProd = $dbh->getProductFromId($_GET["productId"]);
+if (isVendorLoggedIn() && $oldProd['id_venditore'] == $_SESSION['userId']) {
     $buttonType = '<input type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success" value="Modifica Prodotto">';
     $disable = "disabled";
-} else {
+} elseif (isVendorLoggedIn()){
+    $buttonType = "";
+    $disable = "disabled";
+}
+else {
     $buttonType = '<input type="submit" class="btn btn-primary" value="Aggiungi al Carrello">';
     $disable = "";
 }
 
-$oldProd = $dbh->getProductFromId($_GET["productId"]);
+
 
 if (
     isset($_POST["nomeProd"]) && is_string($_POST["nomeProd"]) &&

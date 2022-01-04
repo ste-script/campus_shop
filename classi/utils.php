@@ -51,7 +51,8 @@ function getHeaderElements()
             ['link' => 'login.php', 'nome' => 'Carrello', 'title' => 'Carrello'],
             ['link' => 'login.php', 'nome' => 'Carte', 'title' => 'Carte'],
             ['link' => 'login.php', 'nome' => 'Ordini', 'title' => 'Ordini'],
-            ['link' => 'login.php', 'nome' => 'Accedi', 'title' => 'Accedi']
+            ['link' => 'login.php', 'nome' => 'Accedi', 'title' => 'Accedi'],
+            ['link' => 'register.php', 'nome' => 'Registrati', 'title' => 'Registrati']
         ];
     }
 }

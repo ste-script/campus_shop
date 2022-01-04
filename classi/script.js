@@ -207,3 +207,15 @@ function elimina_notifica(id) {
         }
     })
 }
+
+function showPwd() {
+    var input = document.getElementById('clientPassword');
+    var icon = document.getElementById('iconPwd');
+    if (input.type == "password") {
+        input.type = "text";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+        input.type = "password";
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+}

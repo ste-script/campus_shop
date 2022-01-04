@@ -5,9 +5,12 @@
                 <label for="clientEmail" class="h3">Inserire Email</label>
                 <input type="email" class="form-control" id="clientEmail" name="clientEmail" placeholder="Email">
             </div>
-            <div class="mb-3">
-                <label for="clientPassword" class="h3">Inserire Password</label>
-                <input type="password" class="form-control" id="clientPassword" name="clientPassword" placeholder="Password" autocomplete="on">
+            <label for="clientPassword" class="h3">Inserire Password</label>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control col-3" id="clientPassword" name="clientPassword" placeholder="Password" autocomplete="on">
+                <div class="input-group-append">
+                    <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd()" id="iconPwd"></button>
+                </div>
             </div>
             <fieldset class="mb-3">
                 <legend class="h3">Selezionare Tipo Utente:</legend>
@@ -19,9 +22,6 @@
             <div class="col text-start">
                 <button type="submit" class="btn btn-primary fs-5">Accedi</button>
             </div>
-        </form>
-        <form action="register.php" method="POST" class="py-2">
-            <button type="submit" class="btn btn-success fs-5">Registrati</button>
         </form>
     </div>
 </div>

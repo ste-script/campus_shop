@@ -13,11 +13,11 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" autocomplete="on">
+                <input type="password" class="form-control" id="password" minlength="4" name="password" autocomplete="on">
             </div>
             <div class="mb-3">
                 <label for="passwordConfirm" class="form-label">Conferma password</label>
-                <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" autocomplete="on">
+                <input type="password" class="form-control" id="passwordConfirm" minlength="4" name="passwordConfirm" autocomplete="on">
                 <span id='registerMessage'></span>
             </div>
             <button type="submit" id="registerButton" class="btn btn-success">Registrati</button>

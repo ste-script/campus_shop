@@ -841,6 +841,17 @@ class DatabaseHelper
         }
         return false;
     }
+    public function registerVendor($nome, $vendorEmail, $password, $pIva)
+    {
+        $stmt = $this->db->prepare("INSERT INTO `venditore` (`id`, `nome`, `password`, `email`, `pIva`) 
+        VALUES (NULL, ?, ?, ?, ?)");
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        if (is_string($password)) {
+            $stmt->bind_param("ssss", $nome, $password, $vendorEmail, $pIva);
+            return $stmt->execute();
+        }
+        return false;
+    }
 
     public function getCategoryName($categoryId)
     {

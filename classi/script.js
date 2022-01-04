@@ -1,5 +1,5 @@
-$(document).ready(function() {
-    $('#password, #passwordConfirm').on('keyup', function() {
+$(document).ready(function () {
+    $('#password, #passwordConfirm').on('keyup', function () {
         if ($('#password').val() == $('#passwordConfirm').val()) {
             $('#registerMessage').html('Le password corrispondono').css('color', 'green');
             $('#registerButton').removeClass("disabled");
@@ -10,8 +10,8 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
-    $('#newPassword, #checkNewPassword, #oldPassword').on('keyup', function() {
+$(document).ready(function () {
+    $('#newPassword, #checkNewPassword, #oldPassword').on('keyup', function () {
         if ($('#newPassword').val() == $('#checkNewPassword').val()) {
             $('#passwordMessage').html('Le password corrispondono').css('color', 'green');
             $('#confirmPassword').removeClass("disabled");
@@ -22,8 +22,8 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
-    $('#newMail, #checkNewMail').on('keyup', function() {
+$(document).ready(function () {
+    $('#newMail, #checkNewMail').on('keyup', function () {
         if ($('#newMail').val() == $('#checkNewMail').val()) {
             $('#mailMessage').html('Le mail corrispondono').css('color', 'green');
             $('#confirmMail').removeClass("disabled");
@@ -132,7 +132,7 @@ function generaOrdini(ordini, stato) {
 }
 
 function updateHeader() {
-    $.getJSON("api-notifica.php", function(data) {
+    $.getJSON("api-notifica.php", function (data) {
         let articoli = checkNotifiche(data);
         if (articoli) {
             $("#notifyicon").css("color", "red");
@@ -142,7 +142,7 @@ function updateHeader() {
             $("#menuicon").css("color", "white");
         }
     })
-    $.getJSON("api-cartcount.php", function(data) {
+    $.getJSON("api-cartcount.php", function (data) {
         $("#cartCount").html("(" + data + ")");
     })
 }
@@ -165,7 +165,7 @@ function searchProducts() {
     if (filter.length > 0) {
         $.getJSON("api-search.php", {
             productName: filter
-        }, function(data) {
+        }, function (data) {
             let lista = generaLista(data);
             $("#productList").html(lista);
         })
@@ -175,7 +175,7 @@ function searchProducts() {
 function carica(status) {
     $.getJSON("api-ordini.php", {
         stato: status
-    }, function(data) {
+    }, function (data) {
         let articoli = generaOrdini(data, status);
         if (status == "spediti") {
             $("#delivered_order").html(articoli);
@@ -186,7 +186,7 @@ function carica(status) {
 }
 
 function carica_notifica() {
-    $.getJSON("api-notifica.php", function(data) {
+    $.getJSON("api-notifica.php", function (data) {
         let articoli = generaNotifiche(data);
         const main = $("#notifiche");
         main.html(articoli);
@@ -201,7 +201,7 @@ function elimina_notifica(id) {
         data: {
             deleteId: id
         },
-        success: function() {
+        success: function () {
             carica();
             updateHeader();
         }
@@ -217,5 +217,19 @@ function showPwd() {
     } else {
         input.type = "password";
         icon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+}
+
+function changeRegisterForm() {
+    var label = document.getElementById('cfLabel');
+    var nameForm = document.getElementById('nameForm');
+    if (label.textContent == "Codice fiscale") {
+        label.innerText = "Partita Iva";
+        nameForm.classList.replace("d-none", "d-block");
+        nameForm.setAttribute("required", "");
+    } else {
+        label.innerText = "Codice fiscale";
+        nameForm.classList.replace("d-block", "d-none");
+        nameForm.removeAttribute("required");
     }
 }

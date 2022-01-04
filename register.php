@@ -5,17 +5,24 @@ if (isUserLoggedIn()) {
     exit;
 }
 $templateParams["titolo"] = "Campus Shop - Registrazione";
-if (isset($_POST["clientEmail"]) && isset($_POST["password"]) && isset($_POST["cf"])) {
-    $registerResult = $dbh->registerClient($_POST["clientEmail"], $_POST["password"], $_POST["cf"]);
-    if (!$registerResult) {
-        //Login errato
-        $templateParams["erroreLogin"] = "Errore nella registrazione";
-    } else {
-        registerLoggedClient($_POST["clientEmail"], $dbh->getClientId($_POST["clientEmail"]));
-        $dbh->newOrder($_SESSION["userId"]);
-        header("Location: index.php");
-        exit;
+if (isset($_POST["registerEmail"]) && isset($_POST["password"]) && isset($_POST["cf"]) && isset($_POST["registerType"])) {        
+    if ($_POST["registerType"] == "venditore" && isset($_POST["name"])) {
+        if ($dbh->registervendor($_POST["name"], $_POST["registerEmail"], $_POST["password"], $_POST["cf"])) {
+            registerLoggedVendor($_POST["registerEmail"], $dbh->getVendorId($_POST["registerEmail"]));
+
+            header("Location: index.php");
+            exit;
+        }
+    } elseif ($_POST["registerType"] == "cliente") {
+        if ($dbh->registerClient($_POST["registerEmail"], $_POST["password"], $_POST["cf"])) {
+            registerLoggedClient($_POST["registerEmail"], $dbh->getClientId($_POST["registerEmail"]));
+            $dbh->newOrder($_SESSION["userId"]);
+            header("Location: index.php");
+            exit;
+        }
     }
+    //Login errato
+    $templateParams["erroreLogin"] = "Errore nella registrazione";
 }
 
 

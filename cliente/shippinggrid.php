@@ -3,6 +3,7 @@ $index = 0;
 $prod = $templateParams["products"];
 $gridTitle = $templateParams["gridTitle"];
 $shippingStatus = $templateParams["shippingStatus"];
+$shippingCost = $templateParams['cost'];
 ?>
 <div class="container-xl">
     <div class="row mx-0">
@@ -13,6 +14,9 @@ $shippingStatus = $templateParams["shippingStatus"];
             <h4 class="text-start">
                 <?php echo $shippingStatus; ?>
             </h4>
+            <h5 class="text-start">
+                Totale: €<?php echo $shippingCost; ?>
+            </h5>
         </div>
     </div>
 </div>

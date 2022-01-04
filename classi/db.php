@@ -628,6 +628,20 @@ class DatabaseHelper
         return $result->fetch_assoc()["costo"];
     }
 
+    //passi idOrdine e prendi costo totale ordine
+    public function getShippingCost($shippingId)
+    {
+        $stmt = $this->db->prepare("SELECT SUM(prodotto.prezzo * collo.quantita_prodotto) 
+                                    as costo 
+                                    FROM `collo`, prodotto 
+                                    WHERE prodotto.id = collo.id_prodotto 
+                                    AND collo.id_spedizione = ?");
+        $stmt->bind_param("i", $shippingId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc()["costo"];
+    }
+
     public function getCollosFromVendorOrder($vendorId, $orderId)
     {
         $stmt = $this->db->prepare("SELECT collo.id,

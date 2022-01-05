@@ -22,8 +22,8 @@
             <form action="addorder.php" method="POST">
                 <div class="my-3">
                     <label class="h3" for="quantity">Quantita: </label>
-                    <?php echo $quantityForm;?>
-                    <span class=" h3 fw-bold ms-5">€ <?php echo $prod['prezzo']; ?></span>
+                    <input type="number" required id="quantity" name="quantity" onchange="priceCalculator(this,<?php echo $prod['prezzo']?>)" min="1" value="1">
+                    <span class=" h3 fw-bold ms-5" id="price">€ <?php echo $prod['prezzo']; ?></span>
                 </div>
                 <div class="col-xs-2 my-2">
                     <?php echo $buttonType ?>

@@ -250,3 +250,8 @@ function ccAddDot(input) {
         }
     }
 }
+
+function priceCalculator(qty, price){
+    priceLabel = document.getElementById('price');
+    priceLabel.textContent= "€ " + (qty.value*price);
+}

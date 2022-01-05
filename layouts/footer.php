@@ -10,6 +10,9 @@
   <div class="text-center p-3 bg-secondary">
     © 2021 Copyright:
     <a class="text-white" href='index.php'> CampusShop</a>
+    <br>
+    Credits:
+    <a class="text-white" href='https://www.instagram.com/jo_incucina' target="_blank"> jo_incucina</a>
   </div>
   <!-- Copyright -->
 </footer>

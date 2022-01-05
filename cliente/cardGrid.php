@@ -25,13 +25,26 @@ require_once("./bootstrap.php");
             <div class="row">
               <div class="col-8">
                 <label class="ps-1 fs-5" for="card">Inserire Numero Carta </label>
-                <input type="text" class="form-control" size="10" required placeholder="Numero Carta (es. 1234123412341234)" name="card" id="card" pattern="[0-9]{16}">
+                <input type="text" class="form-control" size="10" required placeholder="1234-1234-1234-1234" name="card" id="card" maxlength="19" pattern="[0-9,-]{19}" onkeypress="ccAddDot(this)">
               </div>
             </div>
             <div class="row my-1">
-              <div class="col-6">
-                <label class="ps-1 fs-5" for="date">Inserire Data Scadenza </label>
-                <input id="date" name="date" placeholder="Date" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" id="date" name="date">
+              <label class="ps-3 fs-5" for="date">Data di scadenza </label>
+              <div class="col-3" id="date">
+                <label class="ps-1 fs-5" for="month">Mese </label>
+                <select class=" form-select" id="month" name="month">
+                  <?php for ($i = 1; $i <= 12; $i++) {
+                    echo "<option>" . $i . "</option>";
+                  } ?>
+                </select>
+              </div>
+              <div class="col-3">
+                <label class="ps-1 fs-5" for="year">Anno </label>
+                <select class=" form-select" id="year" name="year">
+                  <?php for ($i = 2022; $i <= 2035; $i++) {
+                    echo "<option>" . $i . "</option>";
+                  } ?>
+                </select>
               </div>
               <div class="col-6">
                 <label class="ps-1 fs-5" for="cvv">Codice di Sicurezza </label>

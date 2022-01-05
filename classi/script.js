@@ -1,5 +1,5 @@
-$(document).ready(function() {
-    $('#password, #passwordConfirm').on('keyup', function() {
+$(document).ready(function () {
+    $('#password, #passwordConfirm').on('keyup', function () {
         if ($('#password').val() == $('#passwordConfirm').val()) {
             $('#registerMessage').html('Le password corrispondono').css('color', 'green');
             $('#registerButton').removeClass("disabled");
@@ -10,8 +10,8 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
-    $('#newPassword, #checkNewPassword, #oldPassword').on('keyup', function() {
+$(document).ready(function () {
+    $('#newPassword, #checkNewPassword, #oldPassword').on('keyup', function () {
         if ($('#newPassword').val() == $('#checkNewPassword').val()) {
             $('#passwordMessage').html('Le password corrispondono').css('color', 'green');
             $('#confirmPassword').removeClass("disabled");
@@ -22,8 +22,8 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
-    $('#newMail, #checkNewMail').on('keyup', function() {
+$(document).ready(function () {
+    $('#newMail, #checkNewMail').on('keyup', function () {
         if ($('#newMail').val() == $('#checkNewMail').val()) {
             $('#mailMessage').html('Le mail corrispondono').css('color', 'green');
             $('#confirmMail').removeClass("disabled");
@@ -138,7 +138,7 @@ function generaOrdini(ordini, stato) {
 }
 
 function updateHeader() {
-    $.getJSON("api-notifica.php", function(data) {
+    $.getJSON("api-notifica.php", function (data) {
         let articoli = checkNotifiche(data);
         if (articoli) {
             $("#notifyicon").css("color", "red");
@@ -148,7 +148,7 @@ function updateHeader() {
             $("#menuicon").css("color", "white");
         }
     })
-    $.getJSON("api-cartcount.php", function(data) {
+    $.getJSON("api-cartcount.php", function (data) {
         $("#cartCount").html("(" + data + ")");
     })
 }
@@ -171,7 +171,7 @@ function searchProducts() {
     if (filter.length > 0) {
         $.getJSON("api-search.php", {
             productName: filter
-        }, function(data) {
+        }, function (data) {
             let lista = generaLista(data);
             $("#productList").html(lista);
         })
@@ -181,7 +181,7 @@ function searchProducts() {
 function carica(status) {
     $.getJSON("api-ordini.php", {
         stato: status
-    }, function(data) {
+    }, function (data) {
         let articoli = generaOrdini(data, status);
         if (status == "spediti") {
             $("#shipped_order").html(articoli);
@@ -194,7 +194,7 @@ function carica(status) {
 }
 
 function carica_notifica() {
-    $.getJSON("api-notifica.php", function(data) {
+    $.getJSON("api-notifica.php", function (data) {
         let articoli = generaNotifiche(data);
         const main = $("#notifiche");
         main.html(articoli);
@@ -209,7 +209,7 @@ function elimina_notifica(id) {
         data: {
             deleteId: id
         },
-        success: function() {
+        success: function () {
             carica_notifica();
             updateHeader();
         }
@@ -230,7 +230,7 @@ function changeRegisterForm(userType) {
     var label = document.getElementById('cfLabel');
     var pIVA = document.getElementById('cf');
     var nameForm = document.getElementById('nameForm');
-    
+
     if (userType.value == "venditore") {
         label.innerText = "Partita Iva";
         pIVA.pattern = "[0-9]{11}$";
@@ -241,5 +241,12 @@ function changeRegisterForm(userType) {
         pIVA.setAttribute("pattern", "^[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]$");
         nameForm.classList.replace("d-block", "d-none");
         nameForm.removeAttribute("required");
+    }
+}
+function ccAddDot(input) {
+    if (input.value.length > 0 && input.value.length < 18) {
+        if (((input.value.length+1) % 5) == 0) {
+            input.value += "-";
+        }
     }
 }

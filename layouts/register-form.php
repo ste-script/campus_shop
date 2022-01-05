@@ -1,5 +1,5 @@
 <div class="row my-5 mx-0">
-    <div class="col-6 mx-auto">
+    <div class="col-4 mx-auto">
         <form action="#" method="POST">
             <fieldset class="mb-3">
                 <legend class="h3">Selezionare Tipo Utente:</legend>
@@ -22,11 +22,21 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" minlength="4" name="password" autocomplete="on">
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="password" minlength="4" name="password" autocomplete="on">
+                    <div class="input-group-append">
+                        <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('password'), this)" id="iconPwd"></button>
+                    </div>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="passwordConfirm" class="form-label">Conferma password</label>
-                <input type="password" class="form-control" id="passwordConfirm" minlength="4" name="passwordConfirm" autocomplete="on">
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="passwordConfirm" minlength="4" name="passwordConfirm" autocomplete="on">
+                    <div class="input-group-append">
+                        <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('passwordConfirm'), this)" id="iconPwd"></button>
+                    </div>
+                </div>
                 <span id='registerMessage'></span>
             </div>
 

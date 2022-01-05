@@ -63,15 +63,30 @@ require_once("./bootstrap.php");
             <div class="row">
               <div class="col-8 my-2">
                 <label class="ps-1 fs-5" for="oldPassword">Inserire Password Attuale</label>
-                <input type="password" class="form-control" required placeholder="Password" name="oldPassword" id="oldPassword">
+                <div class="input-group my-2">
+                  <input type="password" class="form-control" required placeholder="Password" name="oldPassword" id="oldPassword">
+                  <div class="input-group-append">
+                    <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('oldPassword'), this)" id="iconPwd"></button>
+                  </div>
+                </div>
               </div>
               <div class="col-8 my-2">
                 <label class="ps-1 fs-5" for="newPassword">Inserire Nuova Password </label>
-                <input type="password" class="form-control" required placeholder="Nuova Password" name="newPassword" id="newPassword">
+                <div class="input-group my-2">
+                  <input type="password" class="form-control" required placeholder="Nuova Password" name="newPassword" id="newPassword">
+                  <div class="input-group-append">
+                    <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('newPassword'), this)" id="iconPwd"></button>
+                  </div>
+                </div>
               </div>
               <div class="col-8 my-2">
                 <label class="ps-1 fs-5" for="checkNewPassword">Conferma Nuova Password </label>
-                <input type="password" class="form-control" required placeholder="Ripeti Nuova Password" name="checkNewPassword" id="checkNewPassword">
+                <div class="input-group my-2">
+                  <input type="password" class="form-control" required placeholder="Ripeti Nuova Password" name="checkNewPassword" id="checkNewPassword">
+                  <div class="input-group-append">
+                    <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('checkNewPassword'), this)" id="iconPwd"></button>
+                  </div>
+                </div>
               </div>
               <span id='passwordMessage'></span>
             </div>

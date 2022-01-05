@@ -1,5 +1,5 @@
 <div class="row my-5 mx-0">
-    <div class="col-5 mx-auto">
+    <div class="col-4 mx-auto">
         <form action="#" method="POST">
             <div class="mb-3">
                 <label for="clientEmail" class="h3">Inserire Email</label>
@@ -9,7 +9,7 @@
             <div class="input-group mb-3">
                 <input type="password" class="form-control col-3" id="clientPassword" name="clientPassword" placeholder="Password" autocomplete="on">
                 <div class="input-group-append">
-                    <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd()" id="iconPwd"></button>
+                    <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('clientPassword'),this)" id="iconPwd"></button>
                 </div>
             </div>
             <fieldset class="mb-3">

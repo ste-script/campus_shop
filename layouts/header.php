@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./css/style.css">
     <script src="./classi/script.js"></script>
+    <link rel="shortcut icon" href=<?php echo '"' . UPLOAD_DIR . 'favicon.ico"' ?> type="image/x-icon">
+    <link rel="icon" href=<?php echo '"' . UPLOAD_DIR . 'favicon.ico"' ?> type="image/x-icon">
 
     <script>
         $(document).ready(function() {
@@ -42,10 +44,10 @@
                     <span class='visually-hidden'>Cerca prodotto</span>
                 </label>
                 <div class="dropdown">
-                <input class="form-control me-2 w-auto dropdown-toggle" onkeyup="searchProducts()" autocomplete="off" data-bs-toggle="dropdown" aria-label="Cerca prodotti" type="search" placeholder="Cerca prodotti" id="productName" name="productName">
-                <ul class="dropdown-menu" aria-labelledby="productName" id="productList">
-                    
-                </ul>
+                    <input class="form-control me-2 w-auto dropdown-toggle" onkeyup="searchProducts()" autocomplete="off" data-bs-toggle="dropdown" aria-label="Cerca prodotti" type="search" placeholder="Cerca prodotti" id="productName" name="productName">
+                    <ul class="dropdown-menu" aria-labelledby="productName" id="productList">
+
+                    </ul>
                 </div>
                 <button class="btn " type="submit">
                     <span class="fa fa-search text-white"></span>

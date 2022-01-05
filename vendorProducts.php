@@ -41,7 +41,7 @@ require('./newProduct.php');
 
 $templateParams['products'] = $dbh->getProductsFromVendorId($_GET["vendorId"]);
 if (!empty($templateParams['products'])) {
-    include('.\cliente\productgrid.php');
+    include('./cliente/productgrid.php');
 }
 
 require('./layouts/footer.php');

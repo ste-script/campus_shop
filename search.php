@@ -11,7 +11,7 @@ include('./layouts/header.php');
 $templateParams["gridTitle"] = "Ricerca di " . $_GET["productName"];
 $templateParams["products"] = $prod;
 if (!empty($prod)) {
-    include('.\cliente\productgrid.php');
+    include('./cliente/productgrid.php');
 }
 
 include('./layouts/footer.php');

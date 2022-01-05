@@ -13,7 +13,7 @@
 <div class="mx-5 mb-5 text-secondary h3"><?php echo $dbh->getVendorContacts($_GET["vendorId"])?></div>
 <?php   
     if (!empty($templateParams['products'])) {
-        include('.\cliente\productgrid.php');
+        include('./cliente/productgrid.php');
     }
     
     require('./layouts/footer.php');

@@ -34,7 +34,7 @@ foreach ($orders as $order) {
         $templateParams['shippingStatus'] = "Stato spedizione: " . $dbh->getShippingStatus($shipping);
         $templateParams['products'] = $dbh->getProductsFromShipping($shipping);
         $templateParams['cost'] = $dbh->getShippingCost($shipping);
-        include('.\cliente\shippinggrid.php');
+        include('./cliente/shippinggrid.php');
     }
 }
 

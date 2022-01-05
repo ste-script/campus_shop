@@ -14,15 +14,19 @@
         <p class="lead my-2"><?php echo $prod['descrizione'] ?></p>
         <hr class="singleline">
         <div class="row">
-        <?php
-        if (isset($_GET["ordered"])) {
-            echo "<p class='text-success'> Prodotto aggiunto al carrello </p>";
-        }
-        ?>
+            <?php
+            if (isset($_GET["ordered"])) {
+                echo "<script type='text/javascript'>
+                        $(document).ready(function(){
+                        $('#orderModal').modal('show');
+                        });
+                    </script>";
+            }
+            ?>
             <form action="addorder.php" method="POST">
                 <div class="my-3">
                     <label class="h3" for="quantity">Quantita: </label>
-                    <input type="number" required id="quantity" name="quantity" onchange="priceCalculator(this,<?php echo $prod['prezzo']?>)" min="1" value="1">
+                    <?php echo $quantityForm ?>
                     <span class=" h3 fw-bold ms-5" id="price">€ <?php echo $prod['prezzo']; ?></span>
                 </div>
                 <div class="col-xs-2 my-2">
@@ -31,7 +35,7 @@
                 <input type="hidden" value="<?php echo  $_GET["productId"]; ?>" name="productId">
             </form>
         </div>
-        
+
     </div>
 
     <!-- Modal -->
@@ -49,7 +53,7 @@
                     <div class="row mb-2">
                         <div class="col-8">
                             <label class="ps-1 fs-5" for="nomeProd">Modifica Nome Prodotto</label>
-                            <input type="text" class="form-control" name="nomeProd" id="nomeProd" required value="<?php echo $prod["nome"]; ?>"  form="mainForm">
+                            <input type="text" class="form-control" name="nomeProd" id="nomeProd" required value="<?php echo $prod["nome"]; ?>" form="mainForm">
                         </div>
                     </div>
                     <!-- Categories -->
@@ -108,7 +112,7 @@
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="quantityProd">Quantità</label>
                                 </div>
-                                <input type="text" class="form-control" name="quantityProd" id="quantityProd" required value="<?php echo $prod["quantita_disponibile"]; ?>"  form="mainForm">
+                                <input type="text" class="form-control" name="quantityProd" id="quantityProd" required value="<?php echo $prod["quantita_disponibile"]; ?>" form="mainForm">
                             </div>
                         </div>
                     </div>
@@ -141,4 +145,21 @@
             </div>
         </div>
     </div>
+
+    <!-- Order Modal -->
+    <div class="modal fade" id="orderModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-success">Prodotto Aggiunto al Carrello</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <button onclick="history.go(-2)" class="btn btn-primary">Torna ai prodotti</button>
+                    <a type="button" href="./cart.php" class="btn btn-secondary">Vai al Carrello</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

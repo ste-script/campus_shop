@@ -174,7 +174,7 @@ class DatabaseHelper
         $stmt->execute();
     }
 
-    private function notifyClient($shippingId)
+    private function notifyClient($shippingId, $msg)
     {
         $query = "SELECT spedizione.id_cliente, ordine.id as numero_ordine, prodotto.nome as nome_prodotto, venditore.nome as nome_venditore 
                 FROM spedizione, collo, `ordine` , prodotto, venditore 
@@ -198,7 +198,7 @@ class DatabaseHelper
         VALUES (NULL, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $date = date('Y-m-d H:i:s');
-        $text = "Il venditore " . $nomeVenditore . " ha spedito i seguenti prodotti: " . $prodotti . " appartenenti al tuo ordine " . strval($numeroOrdine);
+        $text = "Il venditore " . $nomeVenditore . " ha ." . $msg . ". i seguenti prodotti: " . $prodotti . " appartenenti al tuo ordine " . strval($numeroOrdine);
         $stmt->bind_param("ssi", $text, $date, $clientId);
         $stmt->execute();
     }
@@ -463,7 +463,7 @@ class DatabaseHelper
         return $result->fetch_assoc();
     }
 
-    public function getDeliveredShippingFromVendorId($vendorId)
+    public function getShippedShippingFromVendorId($vendorId)
     {
         $stmt = $this->db->prepare("SELECT spedizione.id as sid, incasso, data , stato , 
                                         ( SELECT COUNT(prodotto.id) FROM `spedizione`, prodotto, collo 
@@ -475,6 +475,27 @@ class DatabaseHelper
                                     WHERE collo.id_prodotto = prodotto.id 
                                         AND collo.id_spedizione = spedizione.id 
                                         AND stato = 'spedito' 
+                                        AND prodotto.id_venditore = ? 
+                                        GROUP BY sid DESC");
+        $stmt->bind_param("i", $vendorId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getDeliveredShippingFromVendorId($vendorId)
+    {
+        $stmt = $this->db->prepare("SELECT spedizione.id as sid, incasso, data , stato , 
+                                        ( SELECT COUNT(prodotto.id) FROM `spedizione`, prodotto, collo 
+                                        WHERE spedizione.id = sid 
+                                        AND collo.id_prodotto = prodotto.id 
+                                        AND collo.id_spedizione = spedizione.id ) 
+                                        AS n_prodotti 
+                                    FROM `spedizione`, collo, prodotto 
+                                    WHERE collo.id_prodotto = prodotto.id 
+                                        AND collo.id_spedizione = spedizione.id 
+                                        AND stato = 'consegnato' 
                                         AND prodotto.id_venditore = ? 
                                         GROUP BY sid DESC");
         $stmt->bind_param("i", $vendorId);
@@ -668,7 +689,16 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i",  $shippingId);
         $stmt->execute();
-        $this->notifyClient($shippingId);
+        $this->notifyClient($shippingId, "spedito");
+    }
+
+    public function deliverShipping($shippingId)
+    {
+        $query = "UPDATE `spedizione` SET `stato` = 'consegnato' WHERE `spedizione`.`id` = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i",  $shippingId);
+        $stmt->execute();
+        $this->notifyClient($shippingId, "consegnato al campus");
     }
 
     public function updateProductFromId($id, $nome, $prezzo, $qta, $visible, $foto, $desc)

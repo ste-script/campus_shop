@@ -1,5 +1,5 @@
-$(document).ready(function () {
-    $('#password, #passwordConfirm').on('keyup', function () {
+$(document).ready(function() {
+    $('#password, #passwordConfirm').on('keyup', function() {
         if ($('#password').val() == $('#passwordConfirm').val()) {
             $('#registerMessage').html('Le password corrispondono').css('color', 'green');
             $('#registerButton').removeClass("disabled");
@@ -10,8 +10,8 @@ $(document).ready(function () {
     });
 });
 
-$(document).ready(function () {
-    $('#newPassword, #checkNewPassword, #oldPassword').on('keyup', function () {
+$(document).ready(function() {
+    $('#newPassword, #checkNewPassword, #oldPassword').on('keyup', function() {
         if ($('#newPassword').val() == $('#checkNewPassword').val()) {
             $('#passwordMessage').html('Le password corrispondono').css('color', 'green');
             $('#confirmPassword').removeClass("disabled");
@@ -22,8 +22,8 @@ $(document).ready(function () {
     });
 });
 
-$(document).ready(function () {
-    $('#newMail, #checkNewMail').on('keyup', function () {
+$(document).ready(function() {
+    $('#newMail, #checkNewMail').on('keyup', function() {
         if ($('#newMail').val() == $('#checkNewMail').val()) {
             $('#mailMessage').html('Le mail corrispondono').css('color', 'green');
             $('#confirmMail').removeClass("disabled");
@@ -91,8 +91,14 @@ function generaOrdini(ordini, stato) {
         } else {
             result += "Nessun ordine spedito";
         }
-    }
 
+    } else if (stato == "consegnato") {
+        if (ordini.length > 0) {
+            result += "Ordini consegnati";
+        } else {
+            result += "Nessun ordine spedito";
+        }
+    }
     result += ` </h2>
             </div>
         </div>
@@ -132,7 +138,7 @@ function generaOrdini(ordini, stato) {
 }
 
 function updateHeader() {
-    $.getJSON("api-notifica.php", function (data) {
+    $.getJSON("api-notifica.php", function(data) {
         let articoli = checkNotifiche(data);
         if (articoli) {
             $("#notifyicon").css("color", "red");
@@ -142,7 +148,7 @@ function updateHeader() {
             $("#menuicon").css("color", "white");
         }
     })
-    $.getJSON("api-cartcount.php", function (data) {
+    $.getJSON("api-cartcount.php", function(data) {
         $("#cartCount").html("(" + data + ")");
     })
 }
@@ -165,7 +171,7 @@ function searchProducts() {
     if (filter.length > 0) {
         $.getJSON("api-search.php", {
             productName: filter
-        }, function (data) {
+        }, function(data) {
             let lista = generaLista(data);
             $("#productList").html(lista);
         })
@@ -175,18 +181,20 @@ function searchProducts() {
 function carica(status) {
     $.getJSON("api-ordini.php", {
         stato: status
-    }, function (data) {
+    }, function(data) {
         let articoli = generaOrdini(data, status);
         if (status == "spediti") {
-            $("#delivered_order").html(articoli);
+            $("#shipped_order").html(articoli);
         } else if (status == "preparazione") {
             $("#progress_order").html(articoli);
+        } else if (status == "consegnato") {
+            $("#delivered_order").html(articoli);
         }
     })
 }
 
 function carica_notifica() {
-    $.getJSON("api-notifica.php", function (data) {
+    $.getJSON("api-notifica.php", function(data) {
         let articoli = generaNotifiche(data);
         const main = $("#notifiche");
         main.html(articoli);
@@ -201,8 +209,8 @@ function elimina_notifica(id) {
         data: {
             deleteId: id
         },
-        success: function () {
-            carica();
+        success: function() {
+            carica_notifica();
             updateHeader();
         }
     })

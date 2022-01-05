@@ -11,13 +11,17 @@ if (!isVendorLoggedIn()) {
     $(document).ready(function() {
         carica("spediti");
         carica("preparazione");
+        carica("consegnato");
         setInterval(carica, 20000, "spediti");
         setInterval(carica, 20000, "preparazione");
+        setInterval(carica, 20000, "consegnato");
     });
 </script>
 
 
 <div id="progress_order" class="row mx-0">
+</div>
+<div id="shipped_order" class="row mx-0">
 </div>
 <div id="delivered_order" class="row mx-0">
 </div>

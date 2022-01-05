@@ -38,6 +38,12 @@ include("layouts/header.php");
                         <input type="hidden" value="<?php echo $shippingId ?>" name="shippingId">
                     </form>
                 <?php endif ?>
+                <?php if ($shippingStatus == "spedito") : ?>
+                    <form action="deliveredShipping.php" method="POST">
+                        <input type="submit" class="btn btn-primary" value="Consegnato">
+                        <input type="hidden" value="<?php echo $shippingId ?>" name="shippingId">
+                    </form>
+                <?php endif ?>
             </div>
         </div>
     </div>

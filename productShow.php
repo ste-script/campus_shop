@@ -22,12 +22,7 @@
             <form action="addorder.php" method="POST">
                 <div class="my-3">
                     <label class="h3" for="quantity">Quantita: </label>
-                    <?php if(isVendorLoggedIn()){
-                        echo '<input class="col-2 text-center"type="text" id="quantity" name="quantity" value="'.$prod["quantita_disponibile"].'" disabled>';
-                    }else{
-                        echo '<input type="number" required id="quantity" name="quantity" min="1" value="1" max="'.$prod["quantita_disponibile"].'">';
-                    }
-                    ?>
+                    <?php echo $quantityForm;?>
                     <span class=" h3 fw-bold ms-5">€ <?php echo $prod['prezzo']; ?></span>
                 </div>
                 <div class="col-xs-2 my-2">

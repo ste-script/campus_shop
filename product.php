@@ -9,17 +9,15 @@ if (empty($dbh->getProductFromId($_GET["productId"]))) {
     header("Location: index.php");
     exit;
 }
+
 $oldProd = $dbh->getProductFromId($_GET["productId"]);
+
 if (isVendorLoggedIn() && $oldProd['id_venditore'] == $_SESSION['userId']) {
     $buttonType = '<input type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success" value="Modifica Prodotto">';
-    $disable = "disabled";
-} elseif (isVendorLoggedIn()){
+} elseif (isVendorLoggedIn()) {
     $buttonType = "";
-    $disable = "disabled";
-}
-else {
+} else {
     $buttonType = '<input type="submit" class="btn btn-primary" value="Aggiungi al Carrello">';
-    $disable = "";
 }
 
 
@@ -35,14 +33,17 @@ if (
     $filePath = basename($_FILES["imageProd"]['name']);
     if (isset($_FILES["imageProd"]["tmp_name"]) && move_uploaded_file($_FILES["imageProd"]["tmp_name"], "./img/" . $filePath)) {
         $dbh->updateProductFromId($_GET["productId"], strtoupper($_POST["nomeProd"]), $_POST["priceProd"], $_POST["quantityProd"], $_POST["visibilityProd"], $filePath, $_POST["descriptionProd"]);
-    }
-    else{
+    } else {
         $dbh->updateProductFromId($_GET["productId"], strtoupper($_POST["nomeProd"]), $_POST["priceProd"], $_POST["quantityProd"], $_POST["visibilityProd"], $oldProd["foto"], $_POST["descriptionProd"]);
-    
     }
 }
 
 $prod = $dbh->getProductFromId($_GET["productId"]);
+if (isVendorLoggedIn()) {
+    $quantityForm = '<input class="col-2 text-center"type="text" id="quantity" name="quantity" value="' . $prod["quantita_disponibile"] . '" disabled>';
+} else {
+    $quantityForm = '<input type="number" required id="quantity" name="quantity" min="1" value="1" max="' . $prod["quantita_disponibile"] . '">';
+}
 $templateParams["titolo"] = "Campus Shop - " . $prod["nome"];
 
 include('./layouts/header.php');

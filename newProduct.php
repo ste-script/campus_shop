@@ -64,7 +64,7 @@
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="priceProd">€</label>
                                 </div>
-                                <input type="text" class="form-control" required name="priceProd" id="priceProd" form="mainForm">
+                                <input type="text" class="form-control" required name="priceProd" id="priceProd" form="mainForm" pattern="[0-9]{1-3}$">
                             </div>
                         </div>
                         <!-- Quantity -->
@@ -73,7 +73,7 @@
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="quantityProd">Quantità</label>
                                 </div>
-                                <input type="text" class="form-control" required name="quantityProd" id="quantityProd" form="mainForm">
+                                <input type="text" class="form-control" required name="quantityProd" id="quantityProd" form="mainForm" pattern="[0-9]{1-3}$">
                             </div>
                         </div>
                     </div>

@@ -25,7 +25,6 @@ if (isset($_POST["registerEmail"]) && isset($_POST["password"]) && isset($_POST[
     $templateParams["erroreLogin"] = "Errore nella registrazione";
 }
 
-
 require('./layouts/header.php');
 require("./layouts/register-form.php");
 require('./layouts/footer.php');

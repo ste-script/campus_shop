@@ -226,11 +226,12 @@ function showPwd(input, icon) {
     }
 }
 
-function changeRegisterForm() {
+function changeRegisterForm(userType) {
     var label = document.getElementById('cfLabel');
     var pIVA = document.getElementById('cf');
     var nameForm = document.getElementById('nameForm');
-    if (label.textContent == "Codice fiscale") {
+    
+    if (userType.value == "venditore") {
         label.innerText = "Partita Iva";
         pIVA.pattern = "[0-9]{11}$";
         nameForm.classList.replace("d-none", "d-block");

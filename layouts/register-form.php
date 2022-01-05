@@ -3,9 +3,9 @@
         <form action="#" method="POST">
             <fieldset class="mb-3">
                 <legend class="h3">Selezionare Tipo Utente:</legend>
-                <input type="radio" id="cliente" name="registerType" value="cliente" onclick="changeRegisterForm()" required checked>
+                <input type="radio" id="cliente" name="registerType" value="cliente" onclick="changeRegisterForm(this)" required checked>
                 <label class="fs-5 ms-1" for="cliente">Cliente</label><br>
-                <input type="radio" id="venditore" name="registerType" value="venditore" onclick="changeRegisterForm()">
+                <input type="radio" id="venditore" name="registerType" value="venditore" onclick="changeRegisterForm(this)">
                 <label class="fs-5 ms-1" for="venditore">Venditore</label><br>
             </fieldset>
             <div class="mb-3 d-none" id="nameForm">

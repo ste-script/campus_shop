@@ -5,10 +5,6 @@ if (!isVendorLoggedIn()) {
     exit;
 }
 $templateParams["titolo"] = "Campus Shop - Home";
-include("./layouts/header.php");
-
-$templateParams['products'] = $dbh->getProductsFromVendorId($_SESSION["userId"]);
-$templateParams['products'] ? $templateParams['carouselTitle'] = "Prodotti" : $templateParams['gridTitle'] = "Nessun Prodotto";
 
 if (
     isset($_POST["nomeProd"]) && is_string($_POST["nomeProd"]) &&
@@ -37,6 +33,10 @@ if (
         $dbh->manageCategory($prodId, $_POST["category"]);
     }
 }
+include("./layouts/header.php");
+
+$templateParams['products'] = $dbh->getProductsFromVendorId($_SESSION["userId"]);
+$templateParams['products'] ? $templateParams['carouselTitle'] = "Prodotti" : $templateParams['gridTitle'] = "Nessun Prodotto";
 
 if (!empty($templateParams['products'])) {
     include('./cliente/carousel.php');

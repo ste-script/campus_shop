@@ -2,7 +2,11 @@
     <div class="col-7 col-md-4 mx-auto">
         <?php
         if (isset($templateParams["erroreLogin"])) {
-            echo "<p class='text-danger'>" . $templateParams["erroreLogin"] . "</p>";
+                echo "<script type='text/javascript'>
+                        $(document).ready(function(){
+                        $('#allertModal').modal('show');
+                        });
+                    </script>";
         }
         ?>
         <form action="#" method="POST">
@@ -28,5 +32,16 @@
                 <button type="submit" class="btn btn-primary fs-5">Accedi</button>
             </div>
         </form>
+    </div>
+    <!-- Allert Modal -->
+    <div class="modal fade" id="allertModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header p-3">
+                    <h5 class="modal-title text-danger">Errore Durante L'Inserimento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

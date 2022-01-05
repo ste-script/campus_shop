@@ -198,7 +198,7 @@ class DatabaseHelper
         VALUES (NULL, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $date = date('Y-m-d H:i:s');
-        $text = "Il venditore " . $nomeVenditore . " ha ." . $msg . ". i seguenti prodotti: " . $prodotti . " appartenenti al tuo ordine " . strval($numeroOrdine);
+        $text = "Il venditore " . $nomeVenditore . " ha " . $msg . " i seguenti prodotti: " . $prodotti . " appartenenti al tuo ordine " . strval($numeroOrdine);
         $stmt->bind_param("ssi", $text, $date, $clientId);
         $stmt->execute();
     }

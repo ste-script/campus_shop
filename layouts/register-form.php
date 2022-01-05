@@ -1,5 +1,5 @@
 <div class="row my-5 mx-0">
-    <div class="col-4 mx-auto">
+    <div class="col-7 col-md-4 mx-auto">
         <form action="#" method="POST">
             <fieldset class="mb-3">
                 <legend class="h3">Selezionare Tipo Utente:</legend>

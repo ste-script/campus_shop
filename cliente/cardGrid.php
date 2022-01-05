@@ -25,7 +25,7 @@ require_once("./bootstrap.php");
             <div class="row">
               <div class="col-8">
                 <label class="ps-1 fs-5" for="card">Inserire Numero Carta </label>
-                <input type="text" class="form-control" size="10" required placeholder="Numero Carta" name="card" id="card" pattern="[0-9]{10}">
+                <input type="text" class="form-control" size="10" required placeholder="Numero Carta" name="card" id="card" pattern="[0-9]{16}">
               </div>
             </div>
             <div class="row my-1">

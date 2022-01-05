@@ -1,5 +1,10 @@
 <div class="row my-5 mx-0">
     <div class="col-7 col-md-4 mx-auto">
+        <?php
+        if (isset($templateParams["erroreLogin"])) {
+            echo "<p class='text-danger'>" . $templateParams["erroreLogin"] . "</p>";
+        }
+        ?>
         <form action="#" method="POST">
             <div class="mb-3">
                 <label for="clientEmail" class="h3">Inserire Email</label>
@@ -23,15 +28,5 @@
                 <button type="submit" class="btn btn-primary fs-5">Accedi</button>
             </div>
         </form>
-    </div>
-</div>
-
-<div class="row my-5 mx-0">
-    <div class="col-6 mx-auto">
-        <?php
-        if (isset($templateParams["erroreLogin"])) {
-            echo "<p class='text-danger'>" . $templateParams["erroreLogin"] . "</p>";
-        }
-        ?>
     </div>
 </div>

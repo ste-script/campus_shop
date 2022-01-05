@@ -39,7 +39,7 @@ if (
 }
 
 if (!empty($templateParams['products'])) {
-    include('.\cliente\carousel.php');
+    include('./cliente/carousel.php');
 } else {
     require('./newProduct.php');
     include('./cliente/productGrid.php');

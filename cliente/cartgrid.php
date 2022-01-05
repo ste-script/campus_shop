@@ -70,7 +70,8 @@ $cost = $templateParams["cost"];
             </div>
           </form>
         <?php else : ?>
-          <p class="my-5 mx-auto"> Nessuna carta disponibile </p>
+          <p class="mt-5 mx-auto"> Nessuna carta disponibile </p>
+          <a class="btn btn-primary mx-auto mb-5" href="card.php">Gestisci carte</a>
         <?php endif ?>
       </div>
     </div>

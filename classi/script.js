@@ -222,13 +222,16 @@ function showPwd() {
 
 function changeRegisterForm() {
     var label = document.getElementById('cfLabel');
+    var pIVA = document.getElementById('cf');
     var nameForm = document.getElementById('nameForm');
     if (label.textContent == "Codice fiscale") {
         label.innerText = "Partita Iva";
+        pIVA.pattern = "[0-9]{11}$";
         nameForm.classList.replace("d-none", "d-block");
         nameForm.setAttribute("required", "");
     } else {
         label.innerText = "Codice fiscale";
+        pIVA.setAttribute("pattern", "^[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]$");
         nameForm.classList.replace("d-block", "d-none");
         nameForm.removeAttribute("required");
     }

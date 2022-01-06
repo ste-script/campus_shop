@@ -7,7 +7,7 @@ $cost = $templateParams["cost"];
 <div class="container-xl">
   <div class="row mx-0">
     <div class="col text-center">
-      <div class="text-capitalize p-5 h1">
+      <div class="text-capitalize my-3 p-3 h1">
         <?php echo $gridTitle; ?>
       </div>
       <?php if (!empty($prod)) : ?>
@@ -32,6 +32,8 @@ $cost = $templateParams["cost"];
     </div>
   <?php endif ?>
 
+  <hr class="solid my-5">
+  
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -79,18 +81,21 @@ $cost = $templateParams["cost"];
 
   <?php foreach ($prod as $p) : ?>
     <div class="row mx-0 my-5">
-      <div class="col-md-3 col-6 text-center">
+      <div class="col-6 text-center">
+        <div class="col-md-6">
         <?php echo $dbh->getImgFromId($p["id"]) . "/>"; ?>
         <h5> <?php echo  $p["nome"]; ?></h5>
+        </div>
       </div>
-      <div class="col-3 align-top text-end">
+      <div class="col-6 align-top text-end">
         <form action="#" method="POST">
           <div class="col">
             <label class="h3" for="quantity">Quantità: </label>
-            <div class="col-xl-3 col-md-6 col-12 ms-auto">
-              <input type="number" class="form-control" required="required" name="quantity" id="quantity" min="1" value="<?php echo $p["quantita_prodotto"] ?>">
-            </div>
-            <span class="h3 fw-bold">€ <?php echo $p['prezzo']; ?></span>
+            <div class="col-6 ms-auto mb-3 col-md-2">
+              <input type="number" class="form-control " required="required" name="quantity" id="quantity" min="1" value="<?php echo $p["quantita_prodotto"] ?>">
+              </div>
+              <div class="h4 fw-bold">TOT. € <?php echo $p['prezzo'] * $p['quantita_prodotto']; ?></div>
+              <div class="h6 fw-bold">CAD. € <?php echo $p['prezzo']; ?></div>
           </div>
           <div class="col my-2">
             <input type="submit" class="btn btn-primary" value="Modifica Quantit&agrave"></input>

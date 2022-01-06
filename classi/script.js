@@ -253,5 +253,5 @@ function ccAddDot(input) {
 
 function priceCalculator(qty, price){
     priceLabel = document.getElementById('price');
-    priceLabel.textContent= "€ " + (qty.value*price);
+    priceLabel.innerHTML= "€ " + (Math.round((qty.value*price) * 100) / 100).toFixed(2);
 }

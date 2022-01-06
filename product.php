@@ -42,7 +42,7 @@ $prod = $dbh->getProductFromId($_GET["productId"]);
 if (isVendorLoggedIn()) {
     $quantityForm = '<input class="col-2 text-center" type="text" id="quantity" name="quantity" value="' . $prod["quantita_disponibile"] . '" disabled>';
 } else {
-    $quantityForm = '<input type="number" required id="quantity" name="quantity" onchange="priceCalculator(this)" min="1" value="1" max="' . $prod["quantita_disponibile"] . '">';
+    $quantityForm = '<input type="number" required id="quantity" name="quantity" onchange="priceCalculator(this,' . $prod["prezzo"] . ')" onkeyup="priceCalculator(this,' . $prod["prezzo"] . ')" min="1" value="1" max="' . $prod["quantita_disponibile"] . '">';
 }
 $templateParams["titolo"] = "Campus Shop - " . $prod["nome"];
 

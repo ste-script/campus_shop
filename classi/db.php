@@ -387,7 +387,7 @@ class DatabaseHelper
                                     FROM collo 
                                     WHERE id_ordine = ? 
                                     AND id_spedizione is not null
-                                    group by id_spedizione");
+                                    GROUP BY id_spedizione");
         $stmt->bind_param("i", $orderId);
         $stmt->execute();
         $result = $stmt->get_result();

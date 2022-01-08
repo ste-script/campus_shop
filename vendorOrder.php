@@ -8,6 +8,7 @@ if (!isVendorLoggedIn()) {
     exit;
 } ?>
 <script>
+    //polling 20 sec
     $(document).ready(function() {
         carica("spediti");
         carica("preparazione");

@@ -10,16 +10,18 @@ include("./layouts/header.php");
 <div class="text-center my-5 h1">Campus Shop</div>
 <?php
 $categories = $dbh->getCategories();
+
 for ($categoryIndex = 0; $categoryIndex < 4 && $categoryIndex < count($categories); $categoryIndex++) {
     $templateParams['carouselTitle'] = $categories[$categoryIndex]['nome'];
     $templateParams['products'] = $dbh->getProductsFromCategories( $categories[$categoryIndex]['id']);
-    include('./cliente/carousel.php');
+    include('./user/carousel.php');
 }
+
 if (isUserLoggedIn()) {
     $templateParams['carouselTitle'] = 'Carrello';
     $templateParams['products'] = $dbh->getCartProductsByClientId($_SESSION['userId']);
     if (!empty($templateParams['products'])) {
-        include('./cliente/carousel.php');
+        include('./user/carousel.php');
     }
 }
 
@@ -27,7 +29,7 @@ if (isUserLoggedIn()) {
 $templateParams['gridTitle'] = 'Tutti i prodotti';
 $templateParams['products'] = $dbh->showProducts(50);
 if (!empty($templateParams['products'])) {
-    include('./cliente/productgrid.php');
+    include('./user/productGrid.php');
 }
 
 include("./layouts/footer.php");

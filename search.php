@@ -11,5 +11,5 @@ include('./layouts/header.php');
 $templateParams["products"] = $dbh->getProductsByName($_GET["productName"]);
 $templateParams['products'] ? $templateParams['gridTitle'] = "Ricerca di " . $_GET["productName"] : $templateParams['gridTitle'] = "Nessun Prodotto";
 
-include('./cliente/productgrid.php');
+include('./user/productGrid.php');
 include('./layouts/footer.php');

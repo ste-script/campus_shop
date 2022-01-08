@@ -1,7 +1,7 @@
 <?php
 require_once("./bootstrap.php");
 ?>
-<script src="./classi/script.js"></script>
+<script src="./class/script.js"></script>
 <div class="container-xl">
 
 

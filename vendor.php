@@ -39,10 +39,10 @@ $templateParams['products'] = $dbh->getProductsFromVendorId($_SESSION["userId"])
 $templateParams['products'] ? $templateParams['carouselTitle'] = "Prodotti" : $templateParams['gridTitle'] = "Nessun Prodotto";
 
 if (!empty($templateParams['products'])) {
-    include('./cliente/carousel.php');
+    include('./user/carousel.php');
 } else {
     require('./newProduct.php');
-    include('./cliente/productGrid.php');
+    include('./user/productGrid.php');
 }
 
 

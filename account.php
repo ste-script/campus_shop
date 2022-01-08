@@ -46,7 +46,7 @@ $templateParams['gridTitle'] = "Account";
 $templateParams['products'] = $dbh->getCardsFromIdClient($_SESSION["userId"]);
 
 
-include('./cliente/accountGrid.php');
+include('./user/accountGrid.php');
 
 
 include("./layouts/footer.php");

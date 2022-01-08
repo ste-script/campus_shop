@@ -23,7 +23,7 @@
                     </script>";
             }
             ?>
-            <form action="addorder.php" method="POST">
+            <form action="addOrder.php" method="POST">
                 <div class="my-3">
                 <?php echo $quantityLabel ?>
                     <?php echo $quantityForm ?>

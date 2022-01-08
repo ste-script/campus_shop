@@ -9,7 +9,7 @@
     require('./layouts/header.php');
     
     if (!empty($templateParams['products'])) {
-        include('./cliente/productgrid.php');
+        include('./user/productGrid.php');
     }
     
     require('./layouts/footer.php');

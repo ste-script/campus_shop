@@ -17,21 +17,25 @@ if (
 ) {
     isset($_POST["visibilityProd"]) ? $_POST["visibilityProd"] = 1 : $_POST["visibilityProd"] = 0;
 
+    //upload immagine
     $temp = basename($_FILES["imageProd"]['name']);
     $ext = strtolower(substr($temp, strrpos($temp, '.') + 1));
     if (!(($ext == "jpg" || $ext == "png") && ($_FILES["imageProd"]["type"] == "image/jpeg" || $_FILES["imageProd"]["type"] == "image/png") &&
         ($_FILES["imageProd"]["size"] < 2120000))) {
+        //Upload Fallito
         header("Location: vendorProducts.php");
         exit;
     } else {
+        //evita la sovrascrittura di due immagine con lo stesso nome
         do {
             $fileName = round(microtime(true)) . $temp;
         } while (file_exists(UPLOAD_DIR . $fileName));
+
         if (move_uploaded_file($_FILES["imageProd"]["tmp_name"], UPLOAD_DIR . $fileName)) {
             $prodId = $dbh->insertNewProduct(strtoupper($_POST["nomeProd"]), $_POST["priceProd"], $_POST["quantityProd"], $_POST["visibilityProd"], $fileName, $_POST["descriptionProd"], $_SESSION["userId"]);
         }
     }
-    if(isset($_POST["category"])){
+    if (isset($_POST["category"])) {
         $dbh->manageCategory($prodId, $_POST["category"]);
     }
 }
@@ -41,7 +45,7 @@ require('./newProduct.php');
 
 $templateParams['products'] = $dbh->getProductsFromVendorId($_GET["vendorId"]);
 if (!empty($templateParams['products'])) {
-    include('./cliente/productgrid.php');
+    include('./user/productGrid.php');
 }
 
 require('./layouts/footer.php');

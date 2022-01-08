@@ -8,6 +8,7 @@ if (!isUserLoggedIn() && !isVendorLoggedIn()) {
 require('./layouts/header.php');
 ?>
 <script>
+    //polling di 20 sec
     $(document).ready(function() {
         carica_notifica();
         setInterval(carica_notifica, 20000);

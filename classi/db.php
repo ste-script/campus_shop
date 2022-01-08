@@ -517,6 +517,7 @@ class DatabaseHelper
 
     public function getProductsByName($productName)
     {
+        if ($productName != ""){
         $stmt = $this->db->prepare("SELECT  *  FROM prodotto WHERE visibile=1 AND nome LIKE ? ");
         $productName = "%" . $productName . "%";
         $stmt->bind_param("s", $productName);
@@ -524,6 +525,8 @@ class DatabaseHelper
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
+        }
+        return [];
     }
 
     public function getProductsNameByName($productName)

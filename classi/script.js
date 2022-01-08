@@ -1,3 +1,4 @@
+//Passrword checker for register
 $(document).ready(function () {
     $('#password, #passwordConfirm').on('keyup', function () {
         if ($('#password').val() == $('#passwordConfirm').val()) {
@@ -10,6 +11,7 @@ $(document).ready(function () {
     });
 });
 
+//password checker for password update
 $(document).ready(function () {
     $('#newPassword, #checkNewPassword, #oldPassword').on('keyup', function () {
         if ($('#newPassword').val() == $('#checkNewPassword').val()) {
@@ -22,6 +24,8 @@ $(document).ready(function () {
     });
 });
 
+
+// mail checker for mail update
 $(document).ready(function () {
     $('#newMail, #checkNewMail').on('keyup', function () {
         if ($('#newMail').val() == $('#checkNewMail').val()) {
@@ -34,6 +38,8 @@ $(document).ready(function () {
     });
 });
 
+
+// genera le notifiche restituite via ajax
 function generaNotifiche(notifiche) {
     let result = '<div class="container-xl">';
     if (notifiche.length > 0) {
@@ -69,10 +75,13 @@ function generaNotifiche(notifiche) {
     return result;
 }
 
+// controlla se sono disponibili nuove notifiche
 function checkNotifiche(notifiche) {
     return notifiche.length > 0 ? true : false;
 }
 
+
+//genera e formatta gli ordini restituiti via ajax
 function generaOrdini(ordini, stato) {
     let result = `
     <div class="container-xl">
@@ -137,6 +146,8 @@ function generaOrdini(ordini, stato) {
     return result;
 }
 
+
+//aggiorna l'header dinamicamente in base alla presenza o meno di nuove notifiche e dei prodotti nel carrello
 function updateHeader() {
     $.getJSON("api-notifica.php", function (data) {
         let articoli = checkNotifiche(data);
@@ -153,6 +164,8 @@ function updateHeader() {
     })
 }
 
+
+//genera la lista di prodotti cercati da mettere nel dropdown
 function generaLista(prodotti) {
     result = '';
     if (prodotti.length > 0) {
@@ -165,6 +178,8 @@ function generaLista(prodotti) {
     return result;
 }
 
+
+//cerca prodotti dinamicamente via ajax per i suggerimenti nella searchbar
 function searchProducts() {
     input = document.getElementById('productName');
     filter = input.value.toUpperCase();
@@ -178,6 +193,8 @@ function searchProducts() {
     }
 }
 
+
+//funzione chiamata con polling di 20 secondi per caricare i nuovi ordini di ogni venditore via ajax
 function carica(status) {
     $.getJSON("api-ordini.php", {
         stato: status
@@ -193,6 +210,8 @@ function carica(status) {
     })
 }
 
+
+//funzione che carica nuove notifiche con polling di 20 secondi
 function carica_notifica() {
     $.getJSON("api-notifica.php", function (data) {
         let articoli = generaNotifiche(data);
@@ -201,6 +220,8 @@ function carica_notifica() {
     })
 }
 
+
+//elimina una notifica via ajax
 function elimina_notifica(id) {
     $(".row").html = "ciao";
     $.ajax({
@@ -216,6 +237,8 @@ function elimina_notifica(id) {
     })
 }
 
+
+//funzione utilizzata nei input form password
 function showPwd(input, icon) {
     if (input.type == "password") {
         input.type = "text";
@@ -226,6 +249,8 @@ function showPwd(input, icon) {
     }
 }
 
+
+//cambia dinamicamente il form per la registrazione
 function changeRegisterForm(userType) {
     var label = document.getElementById('cfLabel');
     var pIVA = document.getElementById('cf');
@@ -243,6 +268,8 @@ function changeRegisterForm(userType) {
         nameForm.removeAttribute("required");
     }
 }
+
+//aggiunge i trattini all'inserimento del codice di carta di credito
 function ccAddDot(input) {
     if (input.value.length > 0 && input.value.length < 18) {
         if (((input.value.length+1) % 5) == 0) {
@@ -251,6 +278,8 @@ function ccAddDot(input) {
     }
 }
 
+
+//calcola dinamicamente il costo totale del collo
 function priceCalculator(qty, price){
     priceLabel = document.getElementById('price');
     priceLabel.innerHTML= "€ " + (Math.round((qty.value*price) * 100) / 100).toFixed(2);

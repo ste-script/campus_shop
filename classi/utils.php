@@ -23,6 +23,7 @@ function isVendorLoggedIn()
     return !empty($_SESSION['clientEmail']) && $_SESSION["loginType"] == "vendor";
 }
 
+//definisce gli elementi della navbar al contesto
 function getHeaderElements()
 {
     if (isUserLoggedIn()) {

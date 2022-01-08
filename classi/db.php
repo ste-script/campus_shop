@@ -14,13 +14,6 @@ class DatabaseHelper
 
     //PRIVATE FUNCTIONS
 
-    public function newOrder($clientId)
-    {
-        $query = "INSERT INTO `ordine` (`id`, `id_cliente`) VALUES (NULL, ?)";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param("i", $clientId);
-        $stmt->execute();
-    }
     private function checkProductQuantity($id, $quantity)
     {
         $stmt = $this->db->prepare("SELECT  quantita_disponibile
@@ -119,6 +112,7 @@ class DatabaseHelper
         return $r;
     }
 
+    //insert a new shipping
     private function insertShipping($incasso, $vendorId, $clientId)
     {
         $query = "INSERT INTO `spedizione` (`id`, `data`, `stato`, `incasso`, `id_venditore`, `id_cliente`) 
@@ -153,6 +147,7 @@ class DatabaseHelper
         }
     }
 
+    //check if a order si already paid
     private function checkPaid($orderId)
     {
         $query = "SELECT * FROM pagamento WHERE id_ordine = ?";
@@ -685,6 +680,14 @@ class DatabaseHelper
     }
 
     //UPDATE OR INSERT
+
+    public function newOrder($clientId)
+    {
+        $query = "INSERT INTO `ordine` (`id`, `id_cliente`) VALUES (NULL, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $clientId);
+        $stmt->execute();
+    }
 
     public function sendShipping($shippingId)
     {

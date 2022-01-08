@@ -66,7 +66,7 @@ require_once("./bootstrap.php");
                 <div class="input-group my-2">
                   <input type="password" class="form-control" required placeholder="Password" name="oldPassword" id="oldPassword">
                   <div class="input-group-append">
-                    <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('oldPassword'), this)" id="iconPwd"></button>
+                    <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('oldPassword'), this)" id="iconPwd1"></button>
                   </div>
                 </div>
               </div>
@@ -75,7 +75,7 @@ require_once("./bootstrap.php");
                 <div class="input-group my-2">
                   <input type="password" class="form-control" required placeholder="Nuova Password" name="newPassword" id="newPassword">
                   <div class="input-group-append">
-                    <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('newPassword'), this)" id="iconPwd"></button>
+                    <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('newPassword'), this)" id="iconPwd2"></button>
                   </div>
                 </div>
               </div>
@@ -84,7 +84,7 @@ require_once("./bootstrap.php");
                 <div class="input-group my-2">
                   <input type="password" class="form-control" required placeholder="Ripeti Nuova Password" name="checkNewPassword" id="checkNewPassword">
                   <div class="input-group-append">
-                    <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('checkNewPassword'), this)" id="iconPwd"></button>
+                    <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('checkNewPassword'), this)" id="iconPwd3"></button>
                   </div>
                 </div>
               </div>

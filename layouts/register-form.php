@@ -25,7 +25,7 @@
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" id="password" minlength="4" name="password" autocomplete="on" required>
                     <div class="input-group-append">
-                        <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('password'), this)" id="iconPwd"></button>
+                        <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('password'), this)" id="iconPwd1"></button>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" id="passwordConfirm" minlength="4" name="passwordConfirm" autocomplete="on" required>
                     <div class="input-group-append">
-                        <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('passwordConfirm'), this)" id="iconPwd"></button>
+                        <button class="btn btn-lg btn-outline-secondary fa fa-eye" type="button" onclick="showPwd(document.getElementById('passwordConfirm'), this)" id="iconPwd2"></button>
                     </div>
                 </div>
                 <span id='registerMessage'></span>

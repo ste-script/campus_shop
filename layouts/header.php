@@ -28,7 +28,7 @@
 
 
 
-<body class="min-vh-100 d-flex flex-column">
+<body class="min-vh-100 d-flex flex-column bg-light">
     <!-- BAR-->
     <nav class="navbar navbar-expand-lg sticky-top bg-dark navbar-dark">
         <!-- Toggler/collapsibe Button -->

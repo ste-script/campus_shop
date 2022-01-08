@@ -25,7 +25,7 @@
             ?>
             <form action="addorder.php" method="POST">
                 <div class="my-3">
-                    <label class="h3" for="quantity">Quantita: </label>
+                <?php echo $quantityLabel ?>
                     <?php echo $quantityForm ?>
                     <span class=" h3 fw-bold ms-5" id="price">€ <?php echo $prod['prezzo']; ?></span>
                 </div>

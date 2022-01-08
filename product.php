@@ -39,9 +39,14 @@ if (
 }
 
 $prod = $dbh->getProductFromId($_GET["productId"]);
-if (isVendorLoggedIn()) {
+if (isVendorLoggedIn() && $prod['id_venditore'] == $_SESSION['userId']) {
+    $quantityLabel = '<label class="h3" for="quantity">Quantita: </label>';
     $quantityForm = '<input class="col-2 text-center" type="text" id="quantity" name="quantity" value="' . $prod["quantita_disponibile"] . '" disabled>';
+} elseif (isVendorLoggedIn()) {
+    $quantityForm = '';
+    $quantityLabel = '';
 } else {
+    $quantityLabel = '<label class="h3" for="quantity">Quantita: </label>';
     $quantityForm = '<input type="number" required id="quantity" name="quantity" onchange="priceCalculator(this,' . $prod["prezzo"] . ')" onkeyup="priceCalculator(this,' . $prod["prezzo"] . ')" min="1" value="1" max="' . $prod["quantita_disponibile"] . '">';
 }
 $templateParams["titolo"] = "Campus Shop - " . $prod["nome"];

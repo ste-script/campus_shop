@@ -39,7 +39,7 @@
         <button class="navbar-toggler fas fa-bars" type="button" id="menuicon" style="color:#fff; font-size:28px;" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="d-flex ms-auto" action="search.php" method="GET" role='search'>
+            <form class="d-flex ms-auto ps-2" action="search.php" method="GET" role='search'>
                 <label for='productName'>
                     <span class='visually-hidden'>Cerca prodotto</span>
                 </label>
@@ -54,7 +54,7 @@
                 </button>
             </form>
 
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ps-1">
                 <?php foreach ($templateParams["headerMenu"] as $item) : ?>
                     <?php if ($item["nome"] == "Categorie") : ?>
                         <li class="nav-item dropdown dropstart">
